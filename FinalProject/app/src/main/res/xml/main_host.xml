@@ -1,0 +1,343 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<hostlist>
+	<host>
+		<location>
+			<latitude>10.386946</latitude>
+			<longitude>105.4351</longitude>
+		</location>
+		<phone>0296 3857 903</phone>
+		<province_id>xsag</province_id>
+		<name>Công Ty TNHH MTV Xổ số kiến thiết An Giang</name>
+		<address>64C Nguyễn Thái Học, P. Mỹ Bình, Thành phố Long Xuyên, An Giang, Vietnam</address>
+	</host>
+	<host>
+		<location>
+			<latitude>13.7772384</latitude>
+			<longitude>109.227126</longitude>
+		</location>
+		<phone>0256 3822 242</phone>
+		<province_id>xsbd</province_id>
+		<name>Công ty xổ số kiến thiết tỉnh Bình Định</name>
+		<address>304 Phan Bội Châu, Trần Hưng Đạo, Thành phố Qui Nhơn, Bình Định, Vietnam</address>
+	</host>
+	<host>
+		<location>
+			<latitude>10.9836769</latitude>
+			<longitude>106.673483</longitude>
+		</location>
+		<phone>0274 3824 151</phone>
+		<province_id>xsbd</province_id>
+		<name>Công ty TNHH MTV Xổ số kiến thiết Bình Dương</name>
+		<address>01 Huỳnh Văn Nghệ, Phú Lợi, Thủ Dầu Một, Bình Dương</address>
+	</host>
+	<host>
+		<location>
+			<latitude>9.2863804</latitude>
+			<longitude>105.7243478</longitude>
+		</location>
+		<phone>0781 3822 354</phone>
+		<province_id>xsbl</province_id>
+		<name>Công Ty Xổ Số Kiến Thiết Bạc Liêu</name>
+		<address>7 Hai Bà Trưng, Phường 3, Bạc Liêu, Vietnam</address>
+	</host>
+	<host>
+		<location>
+			<latitude>11.5329038</latitude>
+			<longitude>106.8870937</longitude>
+		</location>
+		<phone>0271 3870 296</phone>
+		<province_id>xsbp</province_id>
+		<name>Công ty TNHH MTV Xổ số kiến thiết và DVTH Bình Phước</name>
+		<address>725 QL14, Tân Bình, Đồng Xoài, Bình Phước, Vietnam</address>
+	</host>
+	<host>
+		<location>
+			<latitude>10.9295817</latitude>
+			<longitude>108.1060063</longitude>
+		</location>
+		<phone>0252 3822 568</phone>
+		<province_id>xsbth</province_id>
+		<name>Công Ty Xổ Số Kiến Thiết Tỉnh Bình Thuận</name>
+		<address>01 Nguyễn Tất Thành, Bình Hưng, Thành phố Phan Thiết, Bình Thuận, Vietnam</address>
+	</host>
+	<host>
+		<location>
+			<latitude>10.2528607</latitude>
+			<longitude>106.3697208</longitude>
+		</location>
+		<phone>0275 3829 422</phone>
+		<province_id>xsbtr</province_id>
+		<name>Công Ty TNHH MTV Xổ Số Kiến Thiết Tỉnh Bến Tre</name>
+		<address>303A4 Đoàn Hoàng Minh, P. Phú Khương, Bến Tre, Vietnam</address>
+	</host>
+	<host>
+		<location>
+			<latitude>9.1693438</latitude>
+			<longitude>105.1460663</longitude>
+		</location>
+		<phone>0290 3831 787</phone>
+		<province_id>xscm</province_id>
+		<name>Công Ty Xổ Số Kiến Thiết Tỉnh Cà Mau</name>
+		<address>130 Nguyễn Tất Thành, Phường 8, Thành phố Cà Mau, Cà Mau, Vietnam</address>
+	</host>
+	<host>
+		<location>
+			<latitude>10.046781</latitude>
+			<longitude>105.7784918</longitude>
+		</location>
+		<phone>0292 3812 217</phone>
+		<province_id>xsct</province_id>
+		<name>Công ty TNHH NN MTV XSKT Cần Thơ</name>
+		<address>29 Cách Mạng Tháng 8, Thới Bình, Ninh Kiều, Cần Thơ</address>
+	</host>
+	<host>
+		<location>
+			<latitude>11.9381238</latitude>
+			<longitude>108.4425498</longitude>
+		</location>
+		<phone>0263 3822 111</phone>
+		<province_id>xsdl</province_id>
+		<name>Công Ty Tnhh Mtv Xổ Số Kiến Thiết Lâm Đồng</name>
+		<address>4 Hồ Tùng Mậu, Phường 1, Thành phố Đà Lạt, Lâm Đồng, Vietnam</address>
+	</host>
+	<host>
+		<location>
+			<latitude>12.682659</latitude>
+			<longitude>108.0466276</longitude>
+		</location>
+		<phone>0262 3843 701</phone>
+		<province_id>xsdlk</province_id>
+		<name>Công Ty Xổ Số Kiến Thiết Đăk Lăk</name>
+		<address>3 Lê Thánh Tông, Tp Buôn Ma Thuột, Tỉnh Đăk Lăk, Vietnam</address>
+	</host>
+	<host>
+		<location>
+			<latitude>10.9564673</latitude>
+			<longitude>106.8156147</longitude>
+		</location>
+		<phone>0251 3810 639</phone>
+		<province_id>xsdn</province_id>
+		<name>Công ty xổ số kiến thiết Đồng Nai</name>
+		<address>3 Nguyễn Ái Quốc, Quang Vinh, Thành phố Biên Hòa, Đồng Nai</address>
+	</host>
+	<host>
+		<location>
+			<latitude>16.04377</latitude>
+			<longitude>108.2227852</longitude>
+		</location>
+		<phone>0236 3621 909</phone>
+		<province_id>xsdna</province_id>
+		<name>Công ty Xổ số Kiến thiết và Dịch vụ In Đà Nẵng</name>
+		<address>308 đường 2 Tháng 9, Hoà Cường Bắc, Hải Châu, Hoà Cường Bắc Hải Châu Đà Nẵng</address>
+	</host>
+	<host>
+		<location>
+			<latitude>12.0065703</latitude>
+			<longitude>107.6848394</longitude>
+		</location>
+		<phone>0261 3544 832</phone>
+		<province_id>xsdno</province_id>
+		<name>Công Ty TNHH MTV Xổ Số Kiến Thiết Tỉnh Đak Nông</name>
+		<address>136 Lý Thường Kiệt, Thị Xã Gia Nghĩa, Tỉnh Đak Nông, Phường Nghĩa Thành, Gia Nghĩa, Đăk Nông, Vietnam</address>
+	</host>
+	<host>
+		<location>
+			<latitude>10.30076</latitude>
+			<longitude>105.765701</longitude>
+		</location>
+		<phone>0277 3861 748</phone>
+		<province_id>xsdt</province_id>
+		<name>Công Ty Xổ Số Kiến Thiết Đồng Tháp</name>
+		<address>Thị Xã Sa Đéc, Tỉnh Đồng Tháp, Vietnam</address>
+	</host>
+	<host>
+		<location>
+			<latitude>13.9782714</latitude>
+			<longitude>108.0022046</longitude>
+		</location>
+		<phone>0269 3824 119</phone>
+		<province_id>xsgl</province_id>
+		<name>Công Ty Tnhh Xổ Số Kiến Thiết Gia Lai</name>
+		<address>60 Trần Phú, P.Tây Sơn, Thành phố Pleiku, Gia Lai 600000, Vietnam</address>
+	</host>
+	<host>
+		<location>
+			<latitude>10.7605286</latitude>
+			<longitude>106.6748512</longitude>
+		</location>
+		<phone>0283 8394 254</phone>
+		<province_id>xshcm</province_id>
+		<name>Công Ty TNHH MTV Xổ Số Kiến Thiết Thành phố Hồ Chí Minh</name>
+		<address>77 Trần Nhân Tôn, Phường 9, Quận 5, Hồ Chí Minh</address>
+	</host>
+	<host>
+		<location>
+			<latitude>10.0150961</latitude>
+			<longitude>105.7629011</longitude>
+		</location>
+		<phone>0292 3820 049</phone>
+		<province_id>xshg</province_id>
+		<name>Công Ty Xổ Số Kiến Thiết Tỉnh Hậu Giang</name>
+		<address>168 đường 30 Tháng 4, Hưng Lợi, Ninh Kiều, Cần Thơ, Vietnam</address>
+	</host>
+	<host>
+		<location>
+			<latitude>10.015109</latitude>
+			<longitude>105.0817233</longitude>
+		</location>
+		<phone>0297 3920 614</phone>
+		<province_id>xskg</province_id>
+		<name>Công Ty Tnhh Mtv Xổ Số Kiến Thiết Kiên Giang</name>
+		<address>52 Trần Phú, Vĩnh Thanh, Rạch Giá, tỉnh Kiên Giang, Vietnam</address>
+	</host>
+	<host>
+		<location>
+			<latitude>12.253121</latitude>
+			<longitude>109.195851</longitude>
+		</location>
+		<phone>0258 3822 909</phone>
+		<province_id>xskh</province_id>
+		<name>Công ty Xổ số kiến thiết Khánh Hòa</name>
+		<address>03 Pasteur, Xương Huân, Thành phố Nha Trang, Khánh Hòa, Vietnam</address>
+	</host>
+	<host>
+		<location>
+			<latitude>14.3553067</latitude>
+			<longitude>108.0036353</longitude>
+		</location>
+		<phone>0260 3862 323</phone>
+		<province_id>xskt</province_id>
+		<name>Công Ty Xổ Số Kiến Thiết Kon Tum</name>
+		<address>198 Bà Triệu, Quang Trung, Kon Tum, Vietnam</address>
+	</host>
+	<host>
+		<location>
+			<latitude>11.5658232</latitude>
+			<longitude>108.9935857</longitude>
+		</location>
+		<phone>0259 3830 155</phone>
+		<province_id>xsnt</province_id>
+		<name>Công ty xổ số kiến thiết tỉnh Ninh Thuận</name>
+		<address>32 Mười Sáu Tháng Tư, Tấn Tài, Phan Rang-Tháp Chàm, Ninh Thuận, Vietnam</address>
+	</host>
+	<host>
+		<location>
+			<latitude>13.0865195</latitude>
+			<longitude>109.3065579</longitude>
+		</location>
+		<phone>0257 3823 468</phone>
+		<province_id>xspy</province_id>
+		<name>Công ty Xổ số Kiến thiết Phú Yên</name>
+		<address>204 Trần Hưng Đạo, Phường 4, Tuy Hòa, Phú Yên, Vietnam</address>
+	</host>
+	<host>
+		<location>
+			<latitude>17.462166</latitude>
+			<longitude>106.6271129</longitude>
+		</location>
+		<phone>0232 3822 378</phone>
+		<province_id>xsqb</province_id>
+		<name>Công Ty Xổ Số Kiến Thiết Quảng Bình</name>
+		<address>8a - Đường Hương Giang - Phường Hải Đình Thành Phố Đồng Hới, Hải Đình, Đồng Hới, Quảng Bình, Vietnam</address>
+	</host>
+	<host>
+		<location>
+			<latitude>15.5780424</latitude>
+			<longitude>108.4733</longitude>
+		</location>
+		<phone>0235 3812 987</phone>
+		<province_id>xsqna</province_id>
+		<name>CÔNG TY TNHH MỘT THÀNH VIÊN XỔ SỐ KIẾN THIẾT QUẢNG NAM</name>
+		<address>04 Trần Phú, Phường Tân Thạnh, Thành phố Tam Kỳ, Quảng Nam, Vietnam</address>
+	</host>
+	<host>
+		<location>
+			<latitude>15.1199688</latitude>
+			<longitude>108.8022047</longitude>
+		</location>
+		<phone>0255 3710 494</phone>
+		<province_id>xsqng</province_id>
+		<name>Công ty TNHH MTV XSKT Quảng Ngãi</name>
+		<address>Phan Đình Phùng, Nguyễn Ngiêm, Quảng Ngãi</address>
+	</host>
+	<host>
+		<location>
+			<latitude>16.8222161</latitude>
+			<longitude>107.1007186</longitude>
+		</location>
+		<phone>0233 3553 378</phone>
+		<province_id>xsqt</province_id>
+		<name>Công Ty Xổ Số Kiến Thiết Tỉnh Quảng Trị</name>
+		<address>2 Huyền Trân Công Chúa, Phường 1, Đông Hà, Quảng Trị, Vietnam</address>
+	</host>
+	<host>
+		<location>
+			<latitude>9.5988393</latitude>
+			<longitude>105.9719914</longitude>
+		</location>
+		<phone>0299 3822 602</phone>
+		<province_id>xsst</province_id>
+		<name>Công ty xổ số kiến thiết tỉnh Sóc Trăng</name>
+		<address>16 Trần Hưng Đạo, Phường 3, Thành phố Sóc Trăng, Sóc Trăng</address>
+	</host>
+	<host>
+		<location>
+			<latitude>10.3560865</latitude>
+			<longitude>106.3664105</longitude>
+		</location>
+		<phone>0273 3872 489</phone>
+		<province_id>xstg</province_id>
+		<name>Công ty xổ số kiến thiết tỉnh Tiền Giang</name>
+		<address>5 Thủ Khoa Huân, Phường 1, Mỹ Tho, Tiền Giang</address>
+	</host>
+	<host>
+		<location>
+			<latitude>11.3244823</latitude>
+			<longitude>106.1008822</longitude>
+		</location>
+		<phone>0276 3822 327</phone>
+		<province_id>xstn</province_id>
+		<name>Công ty TNHH MTV xổ số kiến thiết Tây Ninh</name>
+		<address>315A Trần Hưng Đạo, Khu phố 1, Tây Ninh, Vietnam</address>
+	</host>
+	<host>
+		<location>
+			<latitude>16.4636564</latitude>
+			<longitude>107.6011169</longitude>
+		</location>
+		<phone>0234 3834 599</phone>
+		<province_id>xstth</province_id>
+		<name>Công ty xổ số kiến thiết Thừa Thiên Huế</name>
+		<address>Tố Hữu, Xuân Phú, Thành phố Huế, Huế, Vietnam</address>
+	</host>
+	<host>
+		<location>
+			<latitude>9.9392078</latitude>
+			<longitude>106.3385663</longitude>
+		</location>
+		<phone>0283 9256 262</phone>
+		<province_id>xstv</province_id>
+		<name>Công Ty Tnhh Mtv Xổ Số Kiến Thiết Tỉnh Trà Vinh</name>
+		<address>54 Phạm Ngũ Lão, Phường 1, Trà Vinh, Vietnam</address>
+	</host>
+	<host>
+		<location>
+			<latitude>10.237353</latitude>
+			<longitude>105.958154</longitude>
+		</location>
+		<phone>0270 3822 664</phone>
+		<province_id>xsvl</province_id>
+		<name>CÔNG TY TNHH MTV XỔ SỐ KIẾN THIẾT VĨNH LONG</name>
+		<address>51E Nguyễn Trung Trực, Phường 8, Vĩnh Long, Vietnam</address>
+	</host>
+	<host>
+		<location>
+			<latitude>10.3454904</latitude>
+			<longitude>107.0752726</longitude>
+		</location>
+		<phone>0254 3852 172</phone>
+		<province_id>xsvt</province_id>
+		<name>Công ty TNHH MTV Xổ Số Kiến Thiết tỉnh Bà Rịa Vũng Tàu</name>
+		<address>05 Thống Nhất, Phường 1, Thành phố Vũng Tầu, Bà Rịa - Vũng Tàu, Vietnam</address>
+	</host>
+</hostlist>

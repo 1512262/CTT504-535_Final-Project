@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hostlist>
+    <host>
+        <province_id>ttmb</province_id>
+        <name>Xổ số kiến thiết Miền Bắc</name>
+        <address>Phòng A6, Cư xá Công ty Xây dựng dân dụng Công nghiệp Số 1, Khu phố 6, Phường Tân Tiến, Thành phố Biên Hoà, Tỉnh Đồng Nai, Việt Nam</address>
+        <phone>01299656823</phone>
+        <location>
+            <latitude>10.964772</latitude>
+            <longitude>106.853990</longitude>
+        </location>
+    </host>
+    <host>
+        <province_id>ttmt</province_id>
+        <name>Xổ số kiến thiết miền Trung</name>
+        <address>331 Trần Bình Trọng, Phường 4, Quận 5, Thành phố Hồ Chí Minh, Việt Nam</address>
+        <phone>01653534159</phone>
+        <location>
+            <latitude>10.763157</latitude>
+            <longitude>106.678870</longitude>
+        </location>
+    </host>
+    <host>
+        <province_id>ttmn</province_id>
+        <name>Xổ số kiến thiết miền Nam</name>
+        <address>808/6 Cách Mạng Tháng Tám, Quận Tân Bình, Thành phố Hồ Chí Minh, Việt Nam</address>
+        <phone>01648733588</phone>
+        <location>
+            <latitude>10.787218</latitude>
+            <longitude>106.664377</longitude>
+        </location>
+    </host>
+</hostlist>

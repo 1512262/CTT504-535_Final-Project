@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">Xổ số tự động</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Xổ số tự động</string>
+    <string name="nav_header_subtitle">Đồ án cuối kỳ</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_home_fragment">Hello home fragment</string>
+    <string name="hello_history_fragment">Hello history fragment</string>
+    <string name="hello_map_fragment">Hello map fragment</string>
+    <string name="hello_list_fragment">Hello list fragment</string>
+    <string name="hello_about_fragment">Hello about fragment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="title_activity_intro">Intro</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="homescreen">Màn hình chính</string>
+    <string name="history">Lịch sử</string>
+    <string name="map">Bản đồ</string>
+    <string name="list">Danh sách đại lý</string>
+    <string name="aboutus">Thông tin về chúng tôi</string>
+
+
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_result">Kết quả mới nhất</string>
+    <string name="title_result_table">Thông tin thêm</string>
+    <string name="title_list_company">Danh sách đại lý</string>
+    <string name="title_list_center">Danh sách trung tâm</string>
+    <string name="title_map">Bản đồ</string>
+    <string name="lottery">Lottery</string>
+    <string name="result_table">Result Table</string>
+    <string name="my_result">My Result</string>
+    <string name="mymap">map</string>
+    <string name="google_map_api_key">AIzaSyDQiTva6--a7Lo1xGbxmodLyPT7HG-UZ2s</string>
+    <string name="input_lottery_info">Nhập thông tin của vé số</string>
+    <string name="lottery_code">Số vé số</string>
+    <string name="lottery_date">Ngày mở thưởng</string>
+    <string name="lottery_company_name">Công ty xổ số kiến thiết</string>
+    <string name="check">Kiểm tra</string>
+    <string name="auto_fill">Nhập tự động từ ảnh</string>
+    <string name="mynewresult">Kết quả mới nhất</string>
+    <string name="moreinfo">Thông tin thêm</string>
+    <string name="lotterycompanylist">Danh sách Đại lý xổ số các tỉnh</string>
+    <string name="lotterycenterlist">Danh sách Trung tâm đổi vé số 3 miền</string>
+    <string name="mapfragment">Bản đồ</string>
+
+
+</resources>
