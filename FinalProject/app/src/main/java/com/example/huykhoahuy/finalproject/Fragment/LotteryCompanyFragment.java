@@ -14,6 +14,8 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.example.huykhoahuy.finalproject.Adapter.LotteryCompanyAdapter;
 import com.example.huykhoahuy.finalproject.Class.LotteryCompany;
@@ -86,8 +88,9 @@ public class LotteryCompanyFragment extends Fragment {
             }
         });
 
-
+        createSearchView();
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,4 +138,23 @@ public class LotteryCompanyFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    // Cài đặt SearchView
+    private void createSearchView() {
+        SearchView searchView = (SearchView)mView.findViewById(R.id.searchView_LotteryCompany);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                adapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+    }
+    // Kết thúc cài đặt SearchView
 }

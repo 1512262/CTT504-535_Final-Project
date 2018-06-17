@@ -5,14 +5,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.huykhoahuy.finalproject.Class.LotteryCompany;
 import com.example.huykhoahuy.finalproject.R;
 
 import java.util.ArrayList;
 
-public class LotteryCompanyAdapter extends  RecyclerView.Adapter<LotteryCompanyAdapter.ViewHolder>{
+public class LotteryCompanyAdapter extends RecyclerView.Adapter<LotteryCompanyAdapter.ViewHolder> implements Filterable {
 
     private ArrayList<LotteryCompany>lotteryCompanies;
     private ArrayList<LotteryCompany>lotteryCompaniesFiltered;
@@ -26,6 +29,7 @@ public class LotteryCompanyAdapter extends  RecyclerView.Adapter<LotteryCompanyA
     public LotteryCompanyAdapter(ArrayList<LotteryCompany> lotteryCompanies, Context context) {
         this.lotteryCompanies = lotteryCompanies;
         this.context = context;
+        this.lotteryCompaniesFiltered = lotteryCompanies; // Khởi tạo cho lotteryCompaniesFiltered
     }
 
     @Override
@@ -37,7 +41,7 @@ public class LotteryCompanyAdapter extends  RecyclerView.Adapter<LotteryCompanyA
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        LotteryCompany company = lotteryCompanies.get(position);
+        LotteryCompany company = lotteryCompaniesFiltered.get(position); // Chọn lotteryCompaniesFiltered thay cho lotteryCompanies để nhận kết quả search
         holder.tvName.setText(company.getName());
         holder.tvAddr.setText("Địa chỉ: "+company.getAddress());
         holder.tvPhone.setText("Điện thoại: "+company.getPhone());
@@ -46,7 +50,7 @@ public class LotteryCompanyAdapter extends  RecyclerView.Adapter<LotteryCompanyA
 
     @Override
     public int getItemCount() {
-        return lotteryCompanies.size();
+        return lotteryCompaniesFiltered.size(); // Chọn lotteryCompaniesFiltered thay cho lotteryCompanies để nhận kết quả search
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder
@@ -60,4 +64,37 @@ public class LotteryCompanyAdapter extends  RecyclerView.Adapter<LotteryCompanyA
         }
     }
 
+
+
+    // thêm getFilter, muốn có getFilter thì thêm implements Filterable
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String constraintString = constraint.toString();
+                if (constraintString.isEmpty()) {
+                    lotteryCompaniesFiltered = lotteryCompanies;
+                } else {
+                    ArrayList<LotteryCompany> filteredList = new ArrayList<>();
+                    for (LotteryCompany row : lotteryCompanies) {
+                        if (row.getName().toLowerCase().contains(constraintString.toLowerCase())) {
+                            filteredList.add(row);
+                        }
+                    }
+                    lotteryCompaniesFiltered = filteredList;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = lotteryCompaniesFiltered;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                lotteryCompaniesFiltered = (ArrayList<LotteryCompany>) results.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
+    // Kết thúc việc thêm getFilter
 }
