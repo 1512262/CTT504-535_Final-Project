@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.akexorcist.googledirection.DirectionCallback;
 import com.akexorcist.googledirection.GoogleDirection;
@@ -200,6 +201,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
                             moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
                                     DEFAULT_ZOOM);
 
+                            // chỉ đường cho lottery company
+                            if (target != null) {
+                                findWays(mMap, new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude()) , new LatLng(Float.valueOf(target.getLatitude()),Float.valueOf(target.getLongitude())));
+                                target = null;
+                            }
+                            // kết thúc chỉ đường cho lottery company
                         }else{
                         }
                     }
@@ -298,6 +305,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback{
         });
     }
 
+    LotteryCompany target = null;
+    public void FindWayToLotteryCompany(LotteryCompany lotteryCompany) {
+        target = lotteryCompany;
+    }
     // Kết thúc thêm các hàm mới
 
 }
