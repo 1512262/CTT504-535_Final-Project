@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.huykhoahuy.finalproject.Adapter.LotteryCompanyAdapter;
 import com.example.huykhoahuy.finalproject.Class.LotteryCompany;
 import com.example.huykhoahuy.finalproject.Class.ParseHostFile;
+import com.example.huykhoahuy.finalproject.Interface.ItemClickListener;
 import com.example.huykhoahuy.finalproject.Other.SwipeControllerActions;
 import com.example.huykhoahuy.finalproject.Other.SwipeController;
 import com.example.huykhoahuy.finalproject.R;
@@ -27,7 +28,7 @@ import com.example.huykhoahuy.finalproject.R;
 import java.util.ArrayList;
 
 
-public class LotteryCompanyFragment extends Fragment {
+public class LotteryCompanyFragment extends Fragment implements ItemClickListener {
     // TODO: Rename parameter arguments, choose names that match
 
 
@@ -36,6 +37,7 @@ public class LotteryCompanyFragment extends Fragment {
     View mView;
     private LotteryCompanyAdapter adapter;
     private SwipeController swipeController;
+    private Boolean shouldDraw = true;
     public LotteryCompanyFragment() {
     }
 
@@ -65,6 +67,8 @@ public class LotteryCompanyFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         LotteryCompanyAdapter lotteryCompanyAdapter = new LotteryCompanyAdapter(lotteryCompanies,mView.getContext());
         recyclerView.setAdapter(adapter);
+        adapter.setClickListener(this);
+
 
         swipeController = new SwipeController(new SwipeControllerActions() {
             @Override
@@ -88,7 +92,8 @@ public class LotteryCompanyFragment extends Fragment {
         recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
-                swipeController.onDraw(c);
+                if(shouldDraw)
+                    swipeController.onDraw(c);
             }
         });
 
@@ -137,6 +142,11 @@ public class LotteryCompanyFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onClick(View view, int position) {
+        shouldDraw=true;
+    }
+
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
@@ -150,12 +160,14 @@ public class LotteryCompanyFragment extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 adapter.getFilter().filter(query);
+                shouldDraw = true;
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
                 adapter.getFilter().filter(newText);
+                shouldDraw = false;
                 return false;
             }
 
