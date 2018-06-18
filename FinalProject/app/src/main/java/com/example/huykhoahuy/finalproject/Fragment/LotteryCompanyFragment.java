@@ -154,6 +154,7 @@ public class LotteryCompanyFragment extends Fragment {
                 adapter.getFilter().filter(newText);
                 return false;
             }
+
         });
     }
     // Kết thúc cài đặt SearchView
