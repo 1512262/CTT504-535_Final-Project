@@ -2,6 +2,7 @@ package com.example.huykhoahuy.finalproject.Class;
 
 import java.util.Date;
 
+// Lấy dữ liệu từ API và check
 public class LotterStatus {
     private String provice_id;
     private String yourcode;

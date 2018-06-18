@@ -19,10 +19,9 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.huykhoahuy.finalproject.Class.LotteryCompany;
-import com.example.huykhoahuy.finalproject.Class.ParseHostFile;
+import com.example.huykhoahuy.finalproject.Other.ParseHostFile;
 import com.example.huykhoahuy.finalproject.R;
 
 import java.util.ArrayList;

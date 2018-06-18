@@ -1,5 +1,6 @@
 package com.example.huykhoahuy.finalproject.Class;
 
+// 1 tờ vé số
 public class Lottery {
     private String LotteryCode;
     private String LotteryCompanyName;

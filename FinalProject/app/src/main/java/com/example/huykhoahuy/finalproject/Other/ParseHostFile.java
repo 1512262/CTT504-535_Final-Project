@@ -1,7 +1,9 @@
-package com.example.huykhoahuy.finalproject.Class;
+package com.example.huykhoahuy.finalproject.Other;
 
 import android.content.Context;
 import android.content.res.XmlResourceParser;
+
+import com.example.huykhoahuy.finalproject.Class.LotteryCompany;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;

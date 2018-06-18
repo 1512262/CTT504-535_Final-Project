@@ -1,10 +1,12 @@
-package com.example.huykhoahuy.finalproject.Class;
+package com.example.huykhoahuy.finalproject.Other;
 
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+
+import com.example.huykhoahuy.finalproject.Class.LotteryResult;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -13,14 +15,18 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
+public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
 
     private Exception exception;
     private ProgressBar progressBar;
-    private String province_id;
-    private Date date;
-    SimpleDateFormat ft = new SimpleDateFormat ("dd-MM-yyyy");
+    private String lottery_province_id;
+    private String lottery_date;
+    private LotteryResult lotteryResult;
 
+    public RetrieveLotteryResult(String lottery_province_id, String lottery_date) {
+        this.lottery_province_id = lottery_province_id;
+        this.lottery_date = lottery_date;
+    }
 
     static final String API_KEY = "5b0cf5d828e03";
     static final String API_URL = "https://laythongtin.net/mini-content/lottery-all-api.php?type=json";
@@ -35,7 +41,8 @@ public class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
         // Do some validation here
 
         try {
-            URL url = new URL(String.format(API_URL + "&key=" + API_KEY + "&location=" + province_id + "&date=" + ft.format(date)));
+            URL url = new URL(String.format(API_URL + "&key=" + API_KEY + "&location="
+                    + lottery_province_id+ "&date=" + lottery_date));
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             try {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
