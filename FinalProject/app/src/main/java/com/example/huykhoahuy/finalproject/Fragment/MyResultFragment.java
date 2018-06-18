@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import com.example.huykhoahuy.finalproject.Class.LotterStatus;
 import com.example.huykhoahuy.finalproject.Class.LotteryCompany;
 import com.example.huykhoahuy.finalproject.Other.ParseHostFile;
 import com.example.huykhoahuy.finalproject.R;
@@ -42,6 +43,7 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
     private View view;
     private ArrayList<LotteryCompany> lotteryCompanies;
     private  ArrayList<String> lotterycompanynames = new ArrayList<String>();
+    private LotterStatus lotterStatus = new LotterStatus();
     public MyResultFragment() {
     }
 
@@ -151,10 +153,21 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
             }
         });
 
+
+
         adapter = new ArrayAdapter<String>(view.getContext(),android.R.layout.simple_list_item_1,lotterycompanynames);
         tvLotteryCompany.setAdapter(adapter);
         tvLotteryCompany.setThreshold(1);
         mBuilder.setView(mView);
+
+        btnCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lotterStatus.setDate(etLotteryDate.getText().toString());
+                lotterStatus.setProvice_id();
+            }
+        });
+
         AlertDialog dialog = mBuilder.create();
         dialog.show();
         doKeepDialog(dialog);

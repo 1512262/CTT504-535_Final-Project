@@ -1,13 +1,15 @@
 package com.example.huykhoahuy.finalproject.Class;
 
-import java.util.Date;
 
 // Lấy dữ liệu từ API và check
 public class LotterStatus {
     private String provice_id;
     private String yourcode;
-    private Date date;
-    private Boolean yourresult;
+    private String date;
+    private Boolean yourresult = false;
+
+    public LotterStatus() {
+    }
 
     public String getProvice_id() {
         return provice_id;
@@ -25,13 +27,6 @@ public class LotterStatus {
         this.yourcode = yourcode;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
 
     public Boolean getYourresult() {
         return yourresult;
@@ -39,5 +34,13 @@ public class LotterStatus {
 
     public void setYourresult(Boolean yourresult) {
         this.yourresult = yourresult;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

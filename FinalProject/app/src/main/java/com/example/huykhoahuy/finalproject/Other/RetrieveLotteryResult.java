@@ -8,11 +8,15 @@ import android.widget.ProgressBar;
 
 import com.example.huykhoahuy.finalproject.Class.LotteryResult;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
@@ -65,6 +69,7 @@ public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
     }
 
     protected void onPostExecute(String response) {
+        ArrayList<String> ListResults = new ArrayList<String>();
         if(response == null) {
             response = "THERE WAS AN ERROR";
         }
@@ -72,6 +77,37 @@ public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
         Log.i("INFO", response);
         // TODO: check this.exception
         // TODO: do something with the feed
+        JSONObject reader = null;
+        try {
+            reader = new JSONObject(response);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
+        for (int i=0;i<18;i++)
+        {
+            JSONObject temp =null;
+            String result = null;
+            try {
+                temp = reader.getJSONObject(String.valueOf(i));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                result = temp.getString("result");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            ListResults.add(result);
+        }
+
+
+
+
+    }
+
+    public LotteryResult getLotteryResult() {
+        return lotteryResult;
     }
 }
