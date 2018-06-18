@@ -69,6 +69,10 @@ public class LotteryCompanyFragment extends Fragment {
         swipeController = new SwipeController(new SwipeControllerActions() {
             @Override
             public void onRightClicked(int position) {
+                // sửa chỗ chỉ đường
+                ListFragment listFragment = (ListFragment)getParentFragment();
+                listFragment.FindWayToLotteryCompany(lotteryCompanies.get(position));
+                // kết thúc sửa chỗ chỉ đường
             }
 
             @Override

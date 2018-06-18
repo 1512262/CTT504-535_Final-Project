@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.huykhoahuy.finalproject.Adapter.LotteryCompanyAdapter;
 import com.example.huykhoahuy.finalproject.Class.LotteryCompany;
@@ -34,7 +36,7 @@ import java.util.ArrayList;
  * Use the {@link LotteryCenterFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LotteryCenterFragment extends Fragment {
+public class LotteryCenterFragment extends Fragment{
 
     private OnFragmentInteractionListener mListener;
     private ArrayList<LotteryCompany> lotteryCenters;
@@ -115,6 +117,10 @@ public class LotteryCenterFragment extends Fragment {
         swipeController = new SwipeController(new SwipeControllerActions() {
             @Override
             public void onRightClicked(int position) {
+                // sửa chỗ chỉ đường
+                ListFragment listFragment = (ListFragment)getParentFragment();
+                listFragment.FindWayToLotteryCompany(lotteryCenters.get(position));
+                // kết thúc sửa chỗ chỉ đường
             }
 
             @Override
@@ -136,6 +142,7 @@ public class LotteryCenterFragment extends Fragment {
 
 
     }
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.huykhoahuy.finalproject.Class.LotteryCompany;
 import com.example.huykhoahuy.finalproject.R;
 
 
@@ -122,6 +123,12 @@ public class ListFragment extends Fragment implements
             MapFragment mapFragment = new MapFragment();
             transaction.replace(R.id.flContent_list,mapFragment).commit();
             getActivity().setTitle(getString(R.string.mapfragment));
+            // chỉ đường cho lottery company
+            if (target != null) {
+                mapFragment.FindWayToLotteryCompany(target);
+                target = null;
+            }
+            // kết thúc chỉ đường cho lottery company
         }
         return true;
     }
@@ -132,4 +139,13 @@ public class ListFragment extends Fragment implements
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    // chỉ đường cho lottery company
+    LotteryCompany target = null;
+    public void FindWayToLotteryCompany(LotteryCompany lotteryCompany) {
+        target = lotteryCompany;
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)getView().findViewById(R.id.navigation_list);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_map);
+    }
+    // kết thúc chỉ đường cho lottery company
 }
