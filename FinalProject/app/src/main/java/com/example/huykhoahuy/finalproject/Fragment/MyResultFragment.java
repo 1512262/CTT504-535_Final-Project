@@ -164,7 +164,6 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View v) {
                 lotterStatus.setDate(etLotteryDate.getText().toString());
-                lotterStatus.setProvice_id();
             }
         });
 

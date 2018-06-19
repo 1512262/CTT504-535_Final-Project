@@ -12,9 +12,4 @@ public class LotteryResult {
     public void setListResults(ArrayList<String> listResults) {
         ListResults = listResults;
     }
-
-    public Boolean checkResult(string lotteryCode){
-        return false;
-
-    }
 }
