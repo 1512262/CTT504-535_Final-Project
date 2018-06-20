@@ -19,14 +19,19 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import com.example.huykhoahuy.finalproject.Class.LotterStatus;
+import com.example.huykhoahuy.finalproject.Class.Lottery;
 import com.example.huykhoahuy.finalproject.Class.LotteryCompany;
+import com.example.huykhoahuy.finalproject.Class.LotteryResult;
 import com.example.huykhoahuy.finalproject.Other.ParseHostFile;
+import com.example.huykhoahuy.finalproject.Other.RetrieveLotteryResult;
 import com.example.huykhoahuy.finalproject.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -42,8 +47,11 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
     private FloatingActionButton fabCreate;
     private View view;
     private ArrayList<LotteryCompany> lotteryCompanies;
+    private Lottery lottery;
     private  ArrayList<String> lotterycompanynames = new ArrayList<String>();
-    private LotterStatus lotterStatus = new LotterStatus();
+    private Map<String,String> map_name_id=new HashMap<String,String>();
+    private RetrieveLotteryResult retrieveLotteryResult;
+
     public MyResultFragment() {
     }
 
@@ -73,7 +81,12 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
         ParseHostFile parseHostFile = new ParseHostFile(getContext(),R.xml.main_host);
         lotteryCompanies = parseHostFile.lotteryCompanies;
         for(LotteryCompany company: lotteryCompanies)
+        {
             lotterycompanynames.add(company.getName());
+            map_name_id.put(company.getName(),company.getProvince_id());
+        }
+
+
     }
 
     @Override
@@ -123,9 +136,9 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
 
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(view.getContext());
         View mView = getLayoutInflater().inflate(R.layout.dialog_input_lottery_info,null);
-        EditText etLotteryCode = (EditText)mView.findViewById(R.id.et_lottery_code);
+        final EditText etLotteryCode = (EditText)mView.findViewById(R.id.et_lottery_code);
         final EditText etLotteryDate = (EditText) mView.findViewById(R.id.et_lottery_date);
-        AutoCompleteTextView tvLotteryCompany = (AutoCompleteTextView)mView.findViewById(R.id.tv_lottery_company);
+        final AutoCompleteTextView tvLotteryCompany = (AutoCompleteTextView)mView.findViewById(R.id.tv_lottery_company);
         ArrayAdapter<String> adapter;
 
         Button btnCheck = (Button)mView.findViewById(R.id.btn_check);
@@ -143,7 +156,7 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
                     public void onDateSet(DatePicker view, int year, int month, int day) {
                         String strDay = null;
                         String strMonth = null;
-                        strMonth = (month<10)?"0"+String.valueOf(month):String.valueOf(month);
+                        strMonth = (month<10)?"0"+String.valueOf(month+1):String.valueOf(month+1);
                         strDay = (day<10)?"0"+String.valueOf(day):String.valueOf(day);
                         String date = strDay +"-"+strMonth +"-"+String.valueOf(year);
                         etLotteryDate.setText(date);
@@ -163,7 +176,26 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
         btnCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                lotterStatus.setDate(etLotteryDate.getText().toString());
+                String lottery_date = etLotteryDate.getText().toString();
+                String lottery_company = tvLotteryCompany.getText().toString();
+                String lottery_code = etLotteryCode.getText().toString();
+                String lottery_province_id;
+                if(lottery_code.equals("") || lottery_date.equals("") || lottery_company.equals(""))
+                {
+                    Toast.makeText(getActivity(),"Vui lòng nhập đầy đủ",Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    lottery_province_id = map_name_id.get(lottery_company);
+                    retrieveLotteryResult = new RetrieveLotteryResult(lottery_province_id,lottery_date);
+                    retrieveLotteryResult.execute();
+                    lottery = new Lottery(lottery_code,lottery_company,lottery_date,lottery_province_id);
+//                    ArrayList<String> listResult = retrieveLotteryResult.ListResults;
+//                    lottery.checkResult(listResult);
+//                    Toast.makeText(view.getContext(),lottery.getPrize(),Toast.LENGTH_SHORT).show();
+
+                }
+
             }
         });
 

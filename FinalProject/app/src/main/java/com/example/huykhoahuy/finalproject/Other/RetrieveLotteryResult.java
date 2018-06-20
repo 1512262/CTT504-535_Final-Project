@@ -10,6 +10,7 @@ import com.example.huykhoahuy.finalproject.Class.LotteryResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -22,10 +23,10 @@ import java.util.Date;
 public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
 
     private Exception exception;
-    private ProgressBar progressBar;
+//    private ProgressBar progressBar;
     private String lottery_province_id;
     private String lottery_date;
-    private LotteryResult lotteryResult;
+    public ArrayList<String> ListResults = new ArrayList<String>();;
 
     public RetrieveLotteryResult(String lottery_province_id, String lottery_date) {
         this.lottery_province_id = lottery_province_id;
@@ -36,7 +37,7 @@ public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
     static final String API_URL = "https://laythongtin.net/mini-content/lottery-all-api.php?type=json";
 
     public void onPreExecute() {
-        progressBar.setVisibility(View.VISIBLE);
+//        progressBar.setVisibility(View.VISIBLE);
 //        responseView.setText("");
     }
 
@@ -46,7 +47,7 @@ public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
 
         try {
             URL url = new URL(String.format(API_URL + "&key=" + API_KEY + "&location="
-                    + lottery_province_id+ "&date=" + lottery_date));
+                    + lottery_province_id + "&date=" + lottery_date));
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             try {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
@@ -57,57 +58,47 @@ public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
                 }
                 bufferedReader.close();
                 return stringBuilder.toString();
-            }
-            finally{
+            } finally {
                 urlConnection.disconnect();
             }
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             Log.e("ERROR", e.getMessage(), e);
             return null;
         }
     }
 
     protected void onPostExecute(String response) {
-        ArrayList<String> ListResults = new ArrayList<String>();
-        if(response == null) {
+        if (response == null) {
             response = "THERE WAS AN ERROR";
+            Log.i("NOINFO", response);
         }
-        progressBar.setVisibility(View.GONE);
-        Log.i("INFO", response);
-        // TODO: check this.exception
-        // TODO: do something with the feed
-        JSONObject reader = null;
-        try {
-            reader = new JSONObject(response);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        for (int i=0;i<18;i++)
-        {
-            JSONObject temp =null;
-            String result = null;
+        else {
+            Log.i("INFO", response);
+            JSONObject reader = null;
             try {
-                temp = reader.getJSONObject(String.valueOf(i));
+                reader = (JSONObject) new JSONTokener(response).nextValue();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-            try {
-                result = temp.getString("result");
-            } catch (JSONException e) {
-                e.printStackTrace();
+            for (int i = 0; i < 18; i++) {
+                JSONObject temp = null;
+                String result = null;
+                try {
+                    temp = reader.getJSONObject(String.valueOf(i));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    result = temp.getString("result");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                ListResults.add(result);
             }
-            ListResults.add(result);
         }
 
 
-
-
-    }
-
-    public LotteryResult getLotteryResult() {
-        return lotteryResult;
     }
 }
