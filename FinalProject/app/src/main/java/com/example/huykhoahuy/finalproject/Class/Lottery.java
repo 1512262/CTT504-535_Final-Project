@@ -72,7 +72,7 @@ public class Lottery {
                     prize=1;
             }
             if(i==17){
-                if(Lottery_Code==result)
+                if(Lottery_Code.equals(result))
                 {
                     prize=0;
                     break;
