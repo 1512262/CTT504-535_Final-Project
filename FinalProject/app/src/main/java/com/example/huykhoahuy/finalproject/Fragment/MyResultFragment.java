@@ -187,12 +187,9 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
                 else
                 {
                     lottery_province_id = map_name_id.get(lottery_company);
-                    retrieveLotteryResult = new RetrieveLotteryResult(lottery_province_id,lottery_date);
-                    retrieveLotteryResult.execute();
                     lottery = new Lottery(lottery_code,lottery_company,lottery_date,lottery_province_id);
-//                    ArrayList<String> listResult = retrieveLotteryResult.ListResults;
-//                    lottery.checkResult(listResult);
-//                    Toast.makeText(view.getContext(),lottery.getPrize(),Toast.LENGTH_SHORT).show();
+                    retrieveLotteryResult = new RetrieveLotteryResult(lottery, view);
+                    retrieveLotteryResult.execute();
 
                 }
 

@@ -1,11 +1,14 @@
 package com.example.huykhoahuy.finalproject.Other;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.example.huykhoahuy.finalproject.Class.Lottery;
 import com.example.huykhoahuy.finalproject.Class.LotteryResult;
 
 import org.json.JSONException;
@@ -26,25 +29,32 @@ public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
 //    private ProgressBar progressBar;
     private String lottery_province_id;
     private String lottery_date;
-    public ArrayList<String> ListResults = new ArrayList<String>();;
+    private Lottery lottery;
+    private View view;
 
-    public RetrieveLotteryResult(String lottery_province_id, String lottery_date) {
-        this.lottery_province_id = lottery_province_id;
-        this.lottery_date = lottery_date;
+//    public RetrieveLotteryResult(String lottery_province_id, String lottery_date) {
+//        this.lottery_province_id = lottery_province_id;
+//        this.lottery_date = lottery_date;
+//    }
+
+    private static final String API_KEY = "5b0cf5d828e03";
+    private static final String API_URL = "https://laythongtin.net/mini-content/lottery-all-api.php?type=json";
+
+    public RetrieveLotteryResult(Lottery lottery, View view) {
+        this.lottery_province_id = lottery.getLottery_Province_ID();
+        this.lottery_date = lottery.getLotteryDateBegin();
+        this.lottery = lottery;
+        this.view = view;
     }
-
-    static final String API_KEY = "5b0cf5d828e03";
-    static final String API_URL = "https://laythongtin.net/mini-content/lottery-all-api.php?type=json";
 
     public void onPreExecute() {
 //        progressBar.setVisibility(View.VISIBLE);
 //        responseView.setText("");
     }
 
-    protected String doInBackground(Void... urls) {
+    public String doInBackground(Void... urls) {
 
         // Do some validation here
-
         try {
             URL url = new URL(String.format(API_URL + "&key=" + API_KEY + "&location="
                     + lottery_province_id + "&date=" + lottery_date));
@@ -67,7 +77,8 @@ public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
         }
     }
 
-    protected void onPostExecute(String response) {
+    public void onPostExecute(String response) {
+        ArrayList<String> listResults = new ArrayList<String>();
         if (response == null) {
             response = "THERE WAS AN ERROR";
             Log.i("NOINFO", response);
@@ -95,10 +106,17 @@ public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                ListResults.add(result);
+                listResults.add(result);
             }
         }
 
+        lottery.checkResult(listResults);
 
+        Context context = this.view.getContext();
+        int prize = lottery.getPrize();
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, String.valueOf(prize), duration);
+        toast.show();
     }
 }
