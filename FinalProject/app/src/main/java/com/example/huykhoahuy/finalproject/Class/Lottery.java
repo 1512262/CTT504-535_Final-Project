@@ -7,14 +7,30 @@ public class Lottery {
     private String Lottery_Code;
     private String Lottery_Company_Name;
     private String Lottery_Date_Begin;
-    private String Loterry_Province_ID;
+    private String Lottery_Province_ID;
     private int prize=-1;
 
-    public Lottery(String lottery_Code, String lottery_Company_Name, String lottery_Date_Begin, String loterry_Province_ID) {
+    public String getLotteryCode() {
+        return this.Lottery_Code;
+    }
+
+    public String getLotteryCompanyName() {
+        return this.Lottery_Company_Name;
+    }
+
+    public String getLotteryDateBegin() {
+        return this.Lottery_Date_Begin;
+    }
+
+    public String getLotteryProvinceID() {
+        return this.Lottery_Province_ID;
+    }
+
+    public Lottery(String lottery_Code, String lottery_Company_Name, String lottery_Date_Begin, String lottery_Province_ID) {
         Lottery_Code = lottery_Code;
         Lottery_Company_Name = lottery_Company_Name;
         Lottery_Date_Begin = lottery_Date_Begin;
-        Loterry_Province_ID = loterry_Province_ID;
+        Lottery_Province_ID = lottery_Province_ID;
     }
 
     public void checkResult(ArrayList<String> list_result) {
@@ -102,11 +118,11 @@ public class Lottery {
         Lottery_Code = lottery_Code;
     }
 
-    public String getLoterry_Province_ID() {
-        return Loterry_Province_ID;
+    public String getLottery_Province_ID() {
+        return Lottery_Province_ID;
     }
 
-    public void setLoterry_Province_ID(String loterry_Province_ID) {
-        Loterry_Province_ID = loterry_Province_ID;
+    public void setLottery_Province_ID(String lottery_Province_ID) {
+        Lottery_Province_ID = lottery_Province_ID;
     }
 }
