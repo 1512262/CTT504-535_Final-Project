@@ -171,6 +171,7 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
         adapter = new ArrayAdapter<String>(view.getContext(),android.R.layout.simple_list_item_1,lotterycompanynames);
         tvLotteryCompany.setAdapter(adapter);
         tvLotteryCompany.setThreshold(1);
+
         mBuilder.setView(mView);
 
         btnCheck.setOnClickListener(new View.OnClickListener() {

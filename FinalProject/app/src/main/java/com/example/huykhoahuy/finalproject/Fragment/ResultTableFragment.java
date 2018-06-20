@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,13 +13,20 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import com.example.huykhoahuy.finalproject.Class.LotteryCompany;
+import com.example.huykhoahuy.finalproject.Other.ParseHostFile;
 import com.example.huykhoahuy.finalproject.R;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -32,6 +40,9 @@ import java.util.Calendar;
 public class ResultTableFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     private View mView;
+    private Map<String,String> map_name_id=new HashMap<String,String>();
+    private ArrayList<LotteryCompany> lotteryCompanies;
+    private ArrayList<String> lotterycompanynames = new ArrayList<String>();
     public ResultTableFragment() {
     }
 
@@ -47,6 +58,18 @@ public class ResultTableFragment extends Fragment {
         super.onConfigurationChanged(newConfig);
     }
 
+    public void initData()
+    {
+        ParseHostFile parseHostFile = new ParseHostFile(getContext(),R.xml.main_host);
+        lotteryCompanies = parseHostFile.lotteryCompanies;
+        for(LotteryCompany company: lotteryCompanies)
+        {
+            lotterycompanynames.add(company.getName());
+            map_name_id.put(company.getName(),company.getProvince_id());
+        }
+
+
+    }
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -58,43 +81,47 @@ public class ResultTableFragment extends Fragment {
     }
 
     @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initData();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =inflater.inflate(R.layout.fragment_result_table, container, false);
-//        final EditText etMyLotteryDate = (EditText)mView.findViewById(R.id.et_my_lottery_date);
-//        etMyLotteryDate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                final Calendar calendar = Calendar.getInstance();
-//                int yy = calendar.get(Calendar.YEAR);
-//                int mm = calendar.get(Calendar.MONTH);
-//                int dd = calendar.get(Calendar.DAY_OF_MONTH);
-//                DatePickerDialog datePicker = new DatePickerDialog(mView.getContext(),new DatePickerDialog.OnDateSetListener() {
-//                    @Override
-//                    public void onDateSet(DatePicker view, int year, int month, int day) {
-//                        String strDay = null;
-//                        String strMonth = null;
-//                        strMonth = (month<10)?"0"+String.valueOf(month+1):String.valueOf(month+1);
-//                        strDay = (day<10)?"0"+String.valueOf(day):String.valueOf(day);
-//                        String date = strDay +"-"+strMonth +"-"+String.valueOf(year);
-//                        etMyLotteryDate.setText(date);
-//                    }
-//                }, yy, mm, dd);
-//                datePicker.show();
-//            }
-//        });
-//        mWebView = (WebView) view.findViewById(R.id.webview);
-//        mWebView.loadUrl("https://www.minhngoc.net/");
-//
-//        // Enable Javascript
-//        WebSettings webSettings = mWebView.getSettings();
-//        webSettings.setJavaScriptEnabled(true);
-//
-//        // Force links and redirects to open in the WebView instead of in a browser
-//        mWebView.setWebViewClient(new WebViewClient());
+        ArrayAdapter<String> adapter;
+        mView =inflater.inflate(R.layout.fragment_result_table, container, false);
+        final EditText etMyLotteryDate = (EditText)mView.findViewById(R.id.et_my_lottery_date);
+        final AutoCompleteTextView tvMyLotteryCompany = (AutoCompleteTextView)mView.findViewById(R.id.tv_my_lottery_company);
 
-        return view;
+        etMyLotteryDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar calendar = Calendar.getInstance();
+                int yy = calendar.get(Calendar.YEAR);
+                int mm = calendar.get(Calendar.MONTH);
+                int dd = calendar.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog datePicker = new DatePickerDialog(mView.getContext(),new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int day) {
+                        String strDay = null;
+                        String strMonth = null;
+                        strMonth = (month<10)?"0"+String.valueOf(month+1):String.valueOf(month+1);
+                        strDay = (day<10)?"0"+String.valueOf(day):String.valueOf(day);
+                        String date = strDay +"-"+strMonth +"-"+String.valueOf(year);
+                        etMyLotteryDate.setText(date);
+                    }
+                }, yy, mm, dd);
+                datePicker.show();
+            }
+        });
+
+        adapter = new ArrayAdapter<String>(mView.getContext(),android.R.layout.simple_list_item_1,lotterycompanynames);
+        tvMyLotteryCompany.setAdapter(adapter);
+        tvMyLotteryCompany.setThreshold(1);
+
+        return mView;
 
     }
 
