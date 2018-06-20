@@ -188,9 +188,8 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
                 {
                     lottery_province_id = map_name_id.get(lottery_company);
                     lottery = new Lottery(lottery_code,lottery_company,lottery_date,lottery_province_id);
-                    retrieveLotteryResult = new RetrieveLotteryResult(lottery);
-                    // retrieveLotteryResult = new RetrieveLotteryResult(lottery_province_id,lottery_date);
-                    retrieveLotteryResult.execute(view);
+                    retrieveLotteryResult = new RetrieveLotteryResult(lottery, view);
+                    retrieveLotteryResult.execute();
 
                 }
 

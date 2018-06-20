@@ -23,7 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class RetrieveLotteryResult extends AsyncTask<View, Void, String> {
+public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
 
     private Exception exception;
 //    private ProgressBar progressBar;
@@ -40,10 +40,11 @@ public class RetrieveLotteryResult extends AsyncTask<View, Void, String> {
     private static final String API_KEY = "5b0cf5d828e03";
     private static final String API_URL = "https://laythongtin.net/mini-content/lottery-all-api.php?type=json";
 
-    public RetrieveLotteryResult(Lottery lottery) {
+    public RetrieveLotteryResult(Lottery lottery, View view) {
         this.lottery_province_id = lottery.getLottery_Province_ID();
         this.lottery_date = lottery.getLotteryDateBegin();
         this.lottery = lottery;
+        this.view = view;
     }
 
     public void onPreExecute() {
@@ -51,10 +52,9 @@ public class RetrieveLotteryResult extends AsyncTask<View, Void, String> {
 //        responseView.setText("");
     }
 
-    public String doInBackground(View... view) {
+    public String doInBackground(Void... urls) {
 
         // Do some validation here
-        this.view = view[0];
         try {
             URL url = new URL(String.format(API_URL + "&key=" + API_KEY + "&location="
                     + lottery_province_id + "&date=" + lottery_date));
