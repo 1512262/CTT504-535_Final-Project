@@ -41,8 +41,8 @@ public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
     private static final String API_URL = "https://laythongtin.net/mini-content/lottery-all-api.php?type=json";
 
     public RetrieveLotteryResult(Lottery lottery, View view) {
-        this.lottery_province_id = lottery.getLottery_Province_ID();
-        this.lottery_date = lottery.getLotteryDateBegin();
+        this.lottery_province_id = lottery.getLoterry_Province_ID();
+        this.lottery_date = lottery.getLottery_Date();
         this.lottery = lottery;
         this.view = view;
     }
@@ -113,10 +113,10 @@ public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
         lottery.checkResult(listResults);
 
         Context context = this.view.getContext();
-        int prize = lottery.getPrize();
+        String prize = lottery.getLottery_Prize();
         int duration = Toast.LENGTH_SHORT;
 
-        Toast toast = Toast.makeText(context, String.valueOf(prize), duration);
+        Toast toast = Toast.makeText(context, prize, duration);
         toast.show();
     }
 }

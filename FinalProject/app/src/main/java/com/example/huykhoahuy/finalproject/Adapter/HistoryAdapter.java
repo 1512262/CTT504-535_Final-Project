@@ -5,8 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.huykhoahuy.finalproject.Class.Lottery;
 import com.example.huykhoahuy.finalproject.Class.LotteryCompany;
 import com.example.huykhoahuy.finalproject.R;
 
@@ -14,11 +17,11 @@ import java.util.ArrayList;
 
 public class HistoryAdapter extends  RecyclerView.Adapter<HistoryAdapter.ViewHolder>{
 
-    ArrayList<LotteryCompany>lotteryCompanies;
+    ArrayList<Lottery>lotteries;
     Context context;
 
-    public HistoryAdapter(ArrayList<LotteryCompany> lotteryCompanies, Context context) {
-        this.lotteryCompanies = lotteryCompanies;
+    public HistoryAdapter(ArrayList<Lottery> lotteries, Context context) {
+        this.lotteries = lotteries;
         this.context = context;
     }
 
@@ -31,26 +34,36 @@ public class HistoryAdapter extends  RecyclerView.Adapter<HistoryAdapter.ViewHol
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        LotteryCompany company = lotteryCompanies.get(position);
-        holder.tvName.setText(company.getName());
-        holder.tvAddr.setText("Địa chỉ: "+company.getAddress());
-        holder.tvPhone.setText("Điện thoại: "+company.getPhone());
+        Lottery lottery = lotteries.get(position);
+//        holder.ivLotteryImage.setImageDrawable();
+        holder.tvLotteryCode.setText(lottery.Lottery_Code);
+        holder.tvLotteryDate.setText(lottery.getLottery_Date());
+        holder.tvLotteryProvinceID.setText(lottery.getLoterry_Province_ID());
+        holder.tvLotteryPrize.setText(lottery.getLottery_Prize());
+        holder.tvCheckDate.setText(lottery.getLottery_Check_Date());
+        holder.tvCheckTime.setText(lottery.getLottery_Check_Time());
 
     }
 
     @Override
     public int getItemCount() {
-        return lotteryCompanies.size();
+        return lotteries.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder
     {
-        TextView tvName,tvAddr,tvPhone;
+        ImageView ivLotteryImage;
+        TextView tvLotteryCode,tvLotteryDate,tvLotteryProvinceID,tvLotteryPrize;
+        TextView tvCheckDate,tvCheckTime;
         public ViewHolder(View itemView) {
             super(itemView);
-            tvName = (TextView)itemView.findViewById(R.id.tv_lottery_company_name);
-            tvAddr = (TextView)itemView.findViewById(R.id.tv_lottery_company_addr);
-            tvPhone = (TextView)itemView.findViewById(R.id.tv_lottery_company_phone);
+            ivLotteryImage = (ImageView)itemView.findViewById(R.id.iv_lottery_image);
+            tvLotteryCode = (TextView)itemView.findViewById(R.id.tv_lottery_code);
+            tvLotteryDate = (TextView)itemView.findViewById(R.id.tv_lottery_date);
+            tvLotteryProvinceID = (TextView)itemView.findViewById(R.id.tv_lottery_province_id);
+            tvLotteryPrize = (TextView)itemView.findViewById(R.id.tv_lottery_prize);
+            tvCheckDate = (TextView)itemView.findViewById(R.id.tv_check_date);
+            tvCheckTime = (TextView)itemView.findViewById(R.id.tv_check_time);
         }
     }
 }

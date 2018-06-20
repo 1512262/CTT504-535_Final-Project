@@ -1,28 +1,35 @@
 package com.example.huykhoahuy.finalproject.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.huykhoahuy.finalproject.Adapter.HistoryAdapter;
+import com.example.huykhoahuy.finalproject.Adapter.LotteryCompanyAdapter;
+import com.example.huykhoahuy.finalproject.Class.Lottery;
+import com.example.huykhoahuy.finalproject.Other.ParseHostFile;
+import com.example.huykhoahuy.finalproject.Other.SwipeController;
+import com.example.huykhoahuy.finalproject.Other.SwipeControllerActions;
 import com.example.huykhoahuy.finalproject.R;
 
+import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link HistoryFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link HistoryFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class HistoryFragment extends Fragment {
-    private OnFragmentInteractionListener mListener;
 
+    private OnFragmentInteractionListener mListener;
+    private ArrayList<Lottery> lotteries;
+    private View mView;
+    private HistoryAdapter adapter;
     public HistoryFragment() {
     }
 
@@ -45,11 +52,22 @@ public class HistoryFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
     }
+    public void initList()
+    {
+        adapter = new HistoryAdapter(lotteries,mView.getContext());
+        RecyclerView recyclerView = (RecyclerView)mView.findViewById(R.id.history_list);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mView.getContext(),LinearLayoutManager.VERTICAL,false);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_history, container, false);
+        mView= inflater.inflate(R.layout.fragment_history, container, false);
+//        initList();
+        return mView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -76,16 +94,7 @@ public class HistoryFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
