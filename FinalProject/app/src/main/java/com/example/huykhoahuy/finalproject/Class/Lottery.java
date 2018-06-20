@@ -72,7 +72,7 @@ public class Lottery {
                             count++;
                         }
                     }
-                    if(count==4)
+                    if(count==5)
                         Lottery_Prize="Giải Khuyến Khích";
                 }
 
