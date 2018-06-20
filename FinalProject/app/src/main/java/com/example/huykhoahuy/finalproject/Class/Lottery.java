@@ -81,7 +81,7 @@ public class Lottery {
                     int count=0;
                     for(int j=0;j<result.length();j++)
                     {
-                        if(result.charAt(i)==Lottery_Code.charAt(i)) {
+                        if(result.charAt(j)==Lottery_Code.charAt(j)) {
                             count++;
                         }
                     }
