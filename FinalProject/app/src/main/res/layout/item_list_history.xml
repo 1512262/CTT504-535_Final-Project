@@ -74,7 +74,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:id="@+id/tv_lottery_date"
-                            android:text="23-06-2018"
+                            android:text="01-05-2018"
                             android:textStyle="bold"
                             android:textAlignment="center"/>
                     </LinearLayout>
@@ -88,7 +88,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:id="@+id/tv_lottery_code"
-                            android:text="999999"
+                            android:text="326813"
                             android:textSize="20dp"
                             android:textStyle="bold"
                             android:textColor="@color/colorAccent"

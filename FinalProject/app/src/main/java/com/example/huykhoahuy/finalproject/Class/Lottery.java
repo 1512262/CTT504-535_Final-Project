@@ -13,9 +13,9 @@ public class Lottery {
 
     private String Lottery_Prize = "Chúc bạn may mắn lần sau";
 
-    public Lottery(String lottery_Company_Name, String lottery_Date_Begin, String loterry_Province_ID, String lottery_Code) {
+    public Lottery(String lottery_Company_Name, String lottery_Date, String loterry_Province_ID, String lottery_Code) {
         Lottery_Company_Name = lottery_Company_Name;
-        Lottery_Date = lottery_Date_Begin;
+        Lottery_Date = lottery_Date;
         Loterry_Province_ID = loterry_Province_ID;
         Lottery_Code = lottery_Code;
     }
@@ -68,7 +68,7 @@ public class Lottery {
                     int count=0;
                     for(int j=0;j<result.length();j++)
                     {
-                        if(result.charAt(i)==Lottery_Code.charAt(i)) {
+                        if(result.charAt(j)==Lottery_Code.charAt(j)) {
                             count++;
                         }
                     }
