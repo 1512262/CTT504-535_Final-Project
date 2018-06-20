@@ -1,5 +1,6 @@
 package com.example.huykhoahuy.finalproject.Other;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
@@ -110,6 +111,12 @@ public class RetrieveLotteryResult extends AsyncTask<View, Void, String> {
         }
 
         lottery.checkResult(listResults);
-        Toast.makeText(this.view.getContext(),lottery.getPrize(),Toast.LENGTH_SHORT).show();
+
+        Context context = this.view.getContext();
+        int prize = lottery.getPrize();
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, String.valueOf(prize), duration);
+        toast.show();
     }
 }
