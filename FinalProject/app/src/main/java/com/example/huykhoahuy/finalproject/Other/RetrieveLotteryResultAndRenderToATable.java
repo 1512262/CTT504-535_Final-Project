@@ -33,7 +33,8 @@ public class RetrieveLotteryResultAndRenderToATable extends AsyncTask<Void, Void
     //    private ProgressBar progressBar;
     private String lottery_province_id;
     private String lottery_date;
-    private ArrayList<View> listOfRowViews;
+    private View view;
+    private ArrayList<Integer> listOfRowViews;
     private ArrayList<Integer> numberOfLotteryCodeInAPrize;
 
     private void initNumberOfLotteryCodeInAPrize() {
@@ -53,10 +54,12 @@ public class RetrieveLotteryResultAndRenderToATable extends AsyncTask<Void, Void
         return date.replace("/", "-");
     }
 
-    public RetrieveLotteryResultAndRenderToATable(String lottery_province_id, String lottery_date, ArrayList<View> listOfRowviews) {
+    public RetrieveLotteryResultAndRenderToATable(String lottery_province_id, String lottery_date,
+                                                  View view, ArrayList<Integer> listOfRowviews) {
         this.lottery_province_id = lottery_province_id;
         this.lottery_date = minorStringProcessing(lottery_date);
         this.listOfRowViews = listOfRowviews;
+        this.view = view;
         this.initNumberOfLotteryCodeInAPrize();
     }
 
@@ -153,10 +156,10 @@ public class RetrieveLotteryResultAndRenderToATable extends AsyncTask<Void, Void
     private void renderToATable(ArrayList<String> listResults) {
         // Do nothing for now
         for (int i = 0, k = 0; i < this.listOfRowViews.size(); ++i) {
-            TextView rowPrize = (TextView)(this.listOfRowViews.get(i));
+            final TextView rowPrize = (TextView)(this.view.findViewById(this.listOfRowViews.get(i)));
             StringBuilder prizeContent = new StringBuilder();
             for (int j = 0; j < this.numberOfLotteryCodeInAPrize.get(i); ++j, ++k) {
-                prizeContent.append(listResults.get(k));
+                prizeContent.append(listResults.get(17-k));
             }
             rowPrize.setText(prizeContent.toString());
         }

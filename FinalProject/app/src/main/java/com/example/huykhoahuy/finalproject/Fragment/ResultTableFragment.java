@@ -90,17 +90,17 @@ public class ResultTableFragment extends Fragment {
         initData();
     }
 
-    private ArrayList<View> getListOfRow() {
-        ArrayList<View> result = new ArrayList<View>();
-        result.add(mView.findViewById(R.id.tv_lottery_special_prize));
-        result.add(mView.findViewById(R.id.tv_lottery_1st_prize));
-        result.add(mView.findViewById(R.id.tv_lottery_2nd_prize));
-        result.add(mView.findViewById(R.id.tv_lottery_3rd_prize));
-        result.add(mView.findViewById(R.id.tv_lottery_4th_prize));
-        result.add(mView.findViewById(R.id.tv_lottery_5th_prize));
-        result.add(mView.findViewById(R.id.tv_lottery_6th_prize));
-        result.add(mView.findViewById(R.id.tv_lottery_7th_prize));
-        result.add(mView.findViewById(R.id.tv_lottery_8th_prize));
+    private ArrayList<Integer> getListOfRow() {
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        result.add(R.id.tv_lottery_special_prize);
+        result.add(R.id.tv_lottery_1st_prize);
+        result.add(R.id.tv_lottery_2nd_prize);
+        result.add(R.id.tv_lottery_3rd_prize);
+        result.add(R.id.tv_lottery_4th_prize);
+        result.add(R.id.tv_lottery_5th_prize);
+        result.add(R.id.tv_lottery_6th_prize);
+        result.add(R.id.tv_lottery_7th_prize);
+        result.add(R.id.tv_lottery_8th_prize);
         return result;
     }
 
@@ -117,9 +117,10 @@ public class ResultTableFragment extends Fragment {
         else
         {
             String lottery_province_id = map_name_id.get(lottery_company);
-            ArrayList<View> listOfRowViews = this.getListOfRow();
+            ArrayList<Integer> listOfRowViews = this.getListOfRow();
             RetrieveLotteryResultAndRenderToATable retrieveLotteryResultAndRenderToATable
-                    = new RetrieveLotteryResultAndRenderToATable(lottery_province_id, lottery_date, listOfRowViews);
+                    = new RetrieveLotteryResultAndRenderToATable(lottery_province_id, lottery_date,
+                        getView(), listOfRowViews);
 
             retrieveLotteryResultAndRenderToATable.execute();
         }
@@ -132,13 +133,16 @@ public class ResultTableFragment extends Fragment {
         ArrayAdapter<String> adapter;
         mView =inflater.inflate(R.layout.fragment_result_table, container, false);
         final EditText etMyLotteryDate = (EditText)mView.findViewById(R.id.et_my_lottery_date);
-        final AutoCompleteTextView tvMyLotteryCompany = (AutoCompleteTextView)mView.findViewById(R.id.tv_my_lottery_company);
+        final AutoCompleteTextView tvMyLotteryCompany = (AutoCompleteTextView       )mView.findViewById(R.id.tv_my_lottery_company);
 
         final Button btnQuery = (Button)mView.findViewById(R.id.btn_query);
         btnQuery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btnQueryOnClick(v);
+                final EditText test = (EditText) mView.findViewById(R.id.tv_lottery_8th_prize);
+                String text = "Hello world";
+                test.setText(text);
+                // btnQueryOnClick(v);
             }
         });
 
