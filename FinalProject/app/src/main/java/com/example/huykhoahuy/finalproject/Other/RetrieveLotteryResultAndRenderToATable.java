@@ -55,7 +55,8 @@ public class RetrieveLotteryResultAndRenderToATable extends AsyncTask<Void, Void
     }
 
     public RetrieveLotteryResultAndRenderToATable(String lottery_province_id, String lottery_date,
-                                                  View view, ArrayList<Integer> listOfRowviews,ProgressBar progressBar) {
+                                                  View view, ArrayList<Integer> listOfRowviews,
+                                                    ProgressBar progressBar) {
         this.lottery_province_id = lottery_province_id;
         this.lottery_date = minorStringProcessing(lottery_date);
         this.progressBar = progressBar;
@@ -68,7 +69,7 @@ public class RetrieveLotteryResultAndRenderToATable extends AsyncTask<Void, Void
     private static final String API_URL = "https://laythongtin.net/mini-content/lottery-all-api.php?type=json";
 
     public void onPreExecute() {
-        progressBar.setVisibility(View.VISIBLE);
+        this.progressBar.setVisibility(View.VISIBLE);
     }
 
     public String doInBackground(Void... urls) {
@@ -160,8 +161,13 @@ public class RetrieveLotteryResultAndRenderToATable extends AsyncTask<Void, Void
             final TextView rowPrize = (TextView)(this.view.findViewById(this.listOfRowViews.get(i)));
             StringBuilder prizeContent = new StringBuilder();
             for (int j = 0; j < this.numberOfLotteryCodeInAPrize.get(i); ++j, ++k) {
+                if (j > 0 && j%4 == 0)
+                    prizeContent.append("\n");
+
                 prizeContent.append(listResults.get(17-k));
+                prizeContent.append(" ");
             }
+            prizeContent.deleteCharAt(prizeContent.length()-1);
             rowPrize.setText(prizeContent.toString());
         }
     }
