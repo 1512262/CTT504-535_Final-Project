@@ -88,10 +88,12 @@ public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
 
     private JSONObject getTheIthJSON(JSONObject reader, int i) {
         JSONObject temp = null;
-        try {
-            temp = reader.getJSONObject(String.valueOf(i));
-        } catch (JSONException e) {
-            e.printStackTrace();
+        if (reader != null) {
+            try {
+                temp = reader.getJSONObject(String.valueOf(i));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
         return temp;
     }
@@ -99,10 +101,12 @@ public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
     private String getTheIthResult(JSONObject reader, int i) {
         JSONObject jsonObject = getTheIthJSON(reader, i);
         String result = null;
-        try {
-            result = jsonObject.getString("result");
-        } catch (JSONException e) {
-            e.printStackTrace();
+        if (jsonObject != null) {
+            try {
+                result = jsonObject.getString("result");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
         return result;
     }
@@ -116,7 +120,9 @@ public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
         int nPrizes = 18;
         for (int i = 0; i < nPrizes; i++) {
             String result = this.getTheIthResult(reader, i);
-            listResults.add(result);
+            if (result != null) {
+                listResults.add(result);
+            }
         }
         return listResults;
     }
