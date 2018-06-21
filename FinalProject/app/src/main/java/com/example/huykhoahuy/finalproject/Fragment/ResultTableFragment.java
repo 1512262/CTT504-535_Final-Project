@@ -90,6 +90,41 @@ public class ResultTableFragment extends Fragment {
         initData();
     }
 
+    private ArrayList<View> getListOfRow() {
+        ArrayList<View> result = new ArrayList<View>();
+        result.add(mView.findViewById(R.id.tv_lottery_special_prize));
+        result.add(mView.findViewById(R.id.tv_lottery_1st_prize));
+        result.add(mView.findViewById(R.id.tv_lottery_2nd_prize));
+        result.add(mView.findViewById(R.id.tv_lottery_3rd_prize));
+        result.add(mView.findViewById(R.id.tv_lottery_4th_prize));
+        result.add(mView.findViewById(R.id.tv_lottery_5th_prize));
+        result.add(mView.findViewById(R.id.tv_lottery_6th_prize));
+        result.add(mView.findViewById(R.id.tv_lottery_7th_prize));
+        result.add(mView.findViewById(R.id.tv_lottery_8th_prize));
+        return result;
+    }
+
+    private void btnQueryOnClick(View v) {
+        final EditText etMyLotteryDate = (EditText)mView.findViewById(R.id.et_my_lottery_date);
+        final AutoCompleteTextView tvMyLotteryCompany = (AutoCompleteTextView)mView.findViewById(R.id.tv_my_lottery_company);
+        String lottery_date = etMyLotteryDate.getText().toString();
+        String lottery_company = tvMyLotteryCompany.getText().toString();
+
+        if(lottery_date.equals("") || lottery_company.equals(""))
+        {
+            Toast.makeText(getActivity(),"Vui lòng nhập đầy đủ",Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            String lottery_province_id = map_name_id.get(lottery_company);
+            ArrayList<View> listOfRowViews = this.getListOfRow();
+            RetrieveLotteryResultAndRenderToATable retrieveLotteryResultAndRenderToATable
+                    = new RetrieveLotteryResultAndRenderToATable(lottery_province_id, lottery_date, listOfRowViews);
+
+            retrieveLotteryResultAndRenderToATable.execute();
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -103,22 +138,7 @@ public class ResultTableFragment extends Fragment {
         btnQuery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String lottery_date = etMyLotteryDate.getText().toString();
-                String lottery_company = tvMyLotteryCompany.getText().toString();
-
-                if(lottery_date.equals("") || lottery_company.equals(""))
-                {
-                    Toast.makeText(getActivity(),"Vui lòng nhập đầy đủ",Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    String lottery_province_id = map_name_id.get(lottery_company);
-                    RetrieveLotteryResultAndRenderToATable retrieveLotteryResultAndRenderToATable
-                            = new RetrieveLotteryResultAndRenderToATable(lottery_province_id, lottery_date, getView());
-
-                    retrieveLotteryResultAndRenderToATable.execute();
-                }
-                //
+                btnQueryOnClick(v);
             }
         });
 
