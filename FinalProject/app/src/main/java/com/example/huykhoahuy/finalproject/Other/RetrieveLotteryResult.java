@@ -26,7 +26,7 @@ import java.util.Date;
 public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
 
     private Exception exception;
-//    private ProgressBar progressBar;
+    private ProgressBar progressBar;
     private String lottery_province_id;
     private String lottery_date;
     private Lottery lottery;
@@ -39,16 +39,16 @@ public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
     private static final String API_KEY = "5b0cf5d828e03";
     private static final String API_URL = "https://laythongtin.net/mini-content/lottery-all-api.php?type=json";
 
-    public RetrieveLotteryResult(Lottery lottery, View view) {
+    public RetrieveLotteryResult(Lottery lottery, View view,ProgressBar progressBar) {
         this.lottery_province_id = lottery.getLoterry_Province_ID();
         this.lottery_date = this.minorStringProcessing(lottery.getLottery_Date());
         this.lottery = lottery;
+        this.progressBar=progressBar;
         this.view = view;
     }
 
     public void onPreExecute() {
-//        progressBar.setVisibility(View.VISIBLE);
-//        responseView.setText("");
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     public String doInBackground(Void... urls) {
@@ -122,6 +122,7 @@ public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
     }
 
     public void onPostExecute(String response) {
+        progressBar.setVisibility(View.GONE);
         ArrayList<String> listResults = new ArrayList<String>();
         if (response == null) {
             response = "THERE WAS AN ERROR";
