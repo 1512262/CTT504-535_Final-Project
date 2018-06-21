@@ -68,9 +68,7 @@ public class RetrieveLotteryResultAndRenderToATable extends AsyncTask<Void, Void
     private static final String API_URL = "https://laythongtin.net/mini-content/lottery-all-api.php?type=json";
 
     public void onPreExecute() {
-//        progressBar = (ProgressBar)view.findViewById(R.id.prb_loading);
         progressBar.setVisibility(View.VISIBLE);
-//        responseView.setText("");
     }
 
     public String doInBackground(Void... urls) {

@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,6 +20,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.huykhoahuy.finalproject.Class.Lottery;
@@ -136,10 +138,12 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
 
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(view.getContext());
         View mView = getLayoutInflater().inflate(R.layout.dialog_input_lottery_info,null);
+        final ProgressBar progressBarForm = (ProgressBar)mView.findViewById(R.id.prb_loading_form);
         final EditText etLotteryCode = (EditText)mView.findViewById(R.id.et_lottery_code);
         final EditText etLotteryDate = (EditText) mView.findViewById(R.id.et_lottery_date);
         final AutoCompleteTextView tvLotteryCompany = (AutoCompleteTextView)mView.findViewById(R.id.tv_lottery_company);
         ArrayAdapter<String> adapter;
+
 
         Button btnCheck = (Button)mView.findViewById(R.id.btn_check);
         Button btnAutoFill = (Button)mView.findViewById(R.id.btn_autofill);
@@ -189,7 +193,7 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
                 {
                     lottery_province_id = map_name_id.get(lottery_company);
                     lottery = new Lottery(lottery_company,lottery_date,lottery_province_id,lottery_code);
-                    retrieveLotteryResult = new RetrieveLotteryResult(lottery, getView());
+                    retrieveLotteryResult = new RetrieveLotteryResult(lottery, getView(),progressBarForm);
                     retrieveLotteryResult.execute();
                 }
 
