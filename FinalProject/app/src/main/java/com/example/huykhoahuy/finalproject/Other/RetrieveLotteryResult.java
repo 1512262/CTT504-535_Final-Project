@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.huykhoahuy.finalproject.Class.Lottery;
 import com.example.huykhoahuy.finalproject.Class.LotteryResult;
+import com.example.huykhoahuy.finalproject.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -131,9 +132,9 @@ public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
         progressBar.setVisibility(View.GONE);
         ArrayList<String> listResults = new ArrayList<String>();
         if (response == null) {
-            response = "THERE WAS AN ERROR";
+            response = "Có lỗi";
             Log.i("NOINFO", response);
-            Toast.makeText(this.view.getContext(), "Cannot retrieve the information!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this.view.getContext(), R.string.toast_error_info, Toast.LENGTH_SHORT).show();
         }
         else {
             Log.i("INFO", response);
@@ -142,7 +143,7 @@ public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
                 this.showToast(listResults);
             }
             else {
-                Toast.makeText(this.view.getContext(), "Cannot retrieve the information!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this.view.getContext(), R.string.toast_error_info, Toast.LENGTH_SHORT).show();
             }
         }
     }
