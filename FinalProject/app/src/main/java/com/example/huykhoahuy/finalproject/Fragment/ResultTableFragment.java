@@ -113,6 +113,7 @@ public class ResultTableFragment extends Fragment {
     private void btnQueryOnClick(View v) {
         final EditText etMyLotteryDate = (EditText)mView.findViewById(R.id.et_my_lottery_date);
         final AutoCompleteTextView tvMyLotteryCompany = (AutoCompleteTextView)mView.findViewById(R.id.tv_my_lottery_company);
+        final ProgressBar progressBar = (ProgressBar)mView.findViewById(R.id.prb_loading);
         String lottery_date = etMyLotteryDate.getText().toString();
         String lottery_company = tvMyLotteryCompany.getText().toString();
 
@@ -127,7 +128,7 @@ public class ResultTableFragment extends Fragment {
             int progressBarID = this.getProgressBarID();
             RetrieveLotteryResultAndRenderToATable retrieveLotteryResultAndRenderToATable
                     = new RetrieveLotteryResultAndRenderToATable(lottery_province_id, lottery_date,
-                        getView(), listOfRowViews, progressBarID);
+                        getView(), listOfRowViews, progressBar);
 
             retrieveLotteryResultAndRenderToATable.execute();
         }

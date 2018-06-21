@@ -30,13 +30,12 @@ import java.util.Date;
 public class RetrieveLotteryResultAndRenderToATable extends AsyncTask<Void, Void, String> {
 
     private Exception exception;
-    //    private ProgressBar progressBar;
+    private ProgressBar progressBar;
     private String lottery_province_id;
     private String lottery_date;
     private View view;
     private ArrayList<Integer> listOfRowViews;
     private ArrayList<Integer> numberOfLotteryCodeInAPrize;
-    private int progressBarID;
 
     private void initNumberOfLotteryCodeInAPrize() {
         numberOfLotteryCodeInAPrize = new ArrayList<Integer>();
@@ -57,20 +56,21 @@ public class RetrieveLotteryResultAndRenderToATable extends AsyncTask<Void, Void
 
     public RetrieveLotteryResultAndRenderToATable(String lottery_province_id, String lottery_date,
                                                   View view, ArrayList<Integer> listOfRowviews,
-                                                  int progressBarID) {
+                                                    ProgressBar progressBar) {
         this.lottery_province_id = lottery_province_id;
         this.lottery_date = minorStringProcessing(lottery_date);
+        this.progressBar = progressBar;
         this.listOfRowViews = listOfRowviews;
         this.view = view;
         this.initNumberOfLotteryCodeInAPrize();
-        this.progressBarID = progressBarID;
     }
 
     private static final String API_KEY = "5b0cf5d828e03";
     private static final String API_URL = "https://laythongtin.net/mini-content/lottery-all-api.php?type=json";
 
     public void onPreExecute() {
-//        progressBar.setVisibility(View.VISIBLE);
+//        progressBar = (ProgressBar)view.findViewById(R.id.prb_loading);
+        this.progressBar.setVisibility(View.VISIBLE);
 //        responseView.setText("");
     }
 
@@ -144,6 +144,7 @@ public class RetrieveLotteryResultAndRenderToATable extends AsyncTask<Void, Void
     }
 
     public void onPostExecute(String response) {
+        progressBar.setVisibility(View.GONE);
         ArrayList<String> listResults = new ArrayList<String>();
         if (response == null) {
             response = "THERE WAS AN ERROR";
