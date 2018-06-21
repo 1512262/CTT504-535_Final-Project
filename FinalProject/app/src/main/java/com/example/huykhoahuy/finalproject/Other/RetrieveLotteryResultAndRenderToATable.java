@@ -159,7 +159,7 @@ public class RetrieveLotteryResultAndRenderToATable extends AsyncTask<Void, Void
             final TextView rowPrize = (TextView)(this.view.findViewById(this.listOfRowViews.get(i)));
             StringBuilder prizeContent = new StringBuilder();
             for (int j = 0; j < this.numberOfLotteryCodeInAPrize.get(i); ++j, ++k) {
-                if (j >= 4)
+                if (j > 0 && j%4 == 0)
                     prizeContent.append("\n");
 
                 prizeContent.append(listResults.get(17-k));
