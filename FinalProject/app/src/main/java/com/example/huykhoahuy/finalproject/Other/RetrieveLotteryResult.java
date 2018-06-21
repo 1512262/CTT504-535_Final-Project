@@ -32,11 +32,6 @@ public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
     private Lottery lottery;
     private View view;
 
-//    public RetrieveLotteryResult(String lottery_province_id, String lottery_date) {
-//        this.lottery_province_id = lottery_province_id;
-//        this.lottery_date = lottery_date;
-//    }
-
     private String minorStringProcessing(String date) {
         return date.replace("/", "-");
     }
@@ -81,6 +76,51 @@ public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
         }
     }
 
+    private JSONObject getJSONTokener(String JSONResponse) {
+        JSONObject reader = null;
+        try {
+            reader = (JSONObject) new JSONTokener(JSONResponse).nextValue();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return reader;
+    }
+
+    private JSONObject getTheIthJSON(JSONObject reader, int i) {
+        JSONObject temp = null;
+        try {
+            temp = reader.getJSONObject(String.valueOf(i));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return temp;
+    }
+
+    private String getTheIthResult(JSONObject reader, int i) {
+        JSONObject jsonObject = getTheIthJSON(reader, i);
+        String result = null;
+        try {
+            result = jsonObject.getString("result");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    private ArrayList<String> extractResultListFromJSON(String JSONResponse) {
+        // Precondition: Suppose that JSONResponse != null
+
+        ArrayList<String> listResults = new ArrayList<String>();
+        JSONObject reader = this.getJSONTokener(JSONResponse);
+
+        int nPrizes = 18;
+        for (int i = 0; i < nPrizes; i++) {
+            String result = this.getTheIthResult(reader, i);
+            listResults.add(result);
+        }
+        return listResults;
+    }
+
     public void onPostExecute(String response) {
         ArrayList<String> listResults = new ArrayList<String>();
         if (response == null) {
@@ -89,32 +129,13 @@ public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
         }
         else {
             Log.i("INFO", response);
-            JSONObject reader = null;
-            try {
-                reader = (JSONObject) new JSONTokener(response).nextValue();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            for (int i = 0; i < 18; i++) {
-                JSONObject temp = null;
-                String result = null;
-                try {
-                    temp = reader.getJSONObject(String.valueOf(i));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    result = temp.getString("result");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                listResults.add(result);
-            }
+            listResults = this.extractResultListFromJSON(response);
+            this.showToast(listResults);
         }
+    }
 
-        lottery.checkResult(listResults);
+    private void showToast(ArrayList<String> listResults) {
+        this.lottery.checkResult(listResults);
 
         Context context = this.view.getContext();
         String prize = lottery.getLottery_Prize();

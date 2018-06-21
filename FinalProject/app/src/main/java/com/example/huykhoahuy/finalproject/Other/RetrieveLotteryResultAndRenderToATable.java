@@ -33,9 +33,13 @@ public class RetrieveLotteryResultAndRenderToATable extends AsyncTask<Void, Void
     private String lottery_date;
     private View view;
 
+    private String minorStringProcessing(String date) {
+        return date.replace("/", "-");
+    }
+
     public RetrieveLotteryResultAndRenderToATable(String lottery_province_id, String lottery_date, View view) {
         this.lottery_province_id = lottery_province_id;
-        this.lottery_date = lottery_date;
+        this.lottery_date = minorStringProcessing(lottery_date);
         this.view = view;
     }
 
@@ -48,7 +52,6 @@ public class RetrieveLotteryResultAndRenderToATable extends AsyncTask<Void, Void
     }
 
     public String doInBackground(Void... urls) {
-
         // Do some validation here
         try {
             URL url = new URL(String.format(API_URL + "&key=" + API_KEY + "&location="
