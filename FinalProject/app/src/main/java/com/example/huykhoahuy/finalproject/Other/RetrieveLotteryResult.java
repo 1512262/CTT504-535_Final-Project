@@ -127,11 +127,17 @@ public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
         if (response == null) {
             response = "THERE WAS AN ERROR";
             Log.i("NOINFO", response);
+            Toast.makeText(this.view.getContext(), "Cannot retrieve the information!", Toast.LENGTH_SHORT).show();
         }
         else {
             Log.i("INFO", response);
             listResults = this.extractResultListFromJSON(response);
-            this.showToast(listResults);
+            if (listResults != null && listResults.size() == 18) {
+                this.showToast(listResults);
+            }
+            else {
+                Toast.makeText(this.view.getContext(), "Cannot retrieve the information!", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

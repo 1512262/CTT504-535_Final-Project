@@ -147,11 +147,20 @@ public class RetrieveLotteryResultAndRenderToATable extends AsyncTask<Void, Void
         if (response == null) {
             response = "THERE WAS AN ERROR";
             Log.i("NOINFO", response);
+            Toast.makeText(this.view.getContext(), "Cannot retrieve the information!", Toast.LENGTH_SHORT).show();
         }
         else {
             Log.i("INFO", response);
             listResults = this.extractResultListFromJSON(response);
-            renderToATable(listResults);
+            if (listResults != null) {
+                if (listResults.size() == 18) {
+                    renderToATable(listResults);
+                } else {
+                    Toast.makeText(this.view.getContext(), "Cannot retrieve the information!", Toast.LENGTH_SHORT).show();
+                }
+            }
+            else
+                Toast.makeText(this.view.getContext(), "Cannot retrieve the information!", Toast.LENGTH_SHORT).show();
         }
     }
 
