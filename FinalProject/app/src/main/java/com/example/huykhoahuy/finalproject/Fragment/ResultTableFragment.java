@@ -18,9 +18,13 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.huykhoahuy.finalproject.Class.Lottery;
 import com.example.huykhoahuy.finalproject.Class.LotteryCompany;
 import com.example.huykhoahuy.finalproject.Other.ParseHostFile;
+import com.example.huykhoahuy.finalproject.Other.RetrieveLotteryResult;
+import com.example.huykhoahuy.finalproject.Other.RetrieveLotteryResultAndRenderToATable;
 import com.example.huykhoahuy.finalproject.R;
 
 import java.util.ArrayList;
@@ -86,6 +90,42 @@ public class ResultTableFragment extends Fragment {
         initData();
     }
 
+    private ArrayList<Integer> getListOfRow() {
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        result.add(R.id.tv_lottery_special_prize);
+        result.add(R.id.tv_lottery_1st_prize);
+        result.add(R.id.tv_lottery_2nd_prize);
+        result.add(R.id.tv_lottery_3rd_prize);
+        result.add(R.id.tv_lottery_4th_prize);
+        result.add(R.id.tv_lottery_5th_prize);
+        result.add(R.id.tv_lottery_6th_prize);
+        result.add(R.id.tv_lottery_7th_prize);
+        result.add(R.id.tv_lottery_8th_prize);
+        return result;
+    }
+
+    private void btnQueryOnClick(View v) {
+        final EditText etMyLotteryDate = (EditText)mView.findViewById(R.id.et_my_lottery_date);
+        final AutoCompleteTextView tvMyLotteryCompany = (AutoCompleteTextView)mView.findViewById(R.id.tv_my_lottery_company);
+        String lottery_date = etMyLotteryDate.getText().toString();
+        String lottery_company = tvMyLotteryCompany.getText().toString();
+
+        if(lottery_date.equals("") || lottery_company.equals(""))
+        {
+            Toast.makeText(getActivity(),"Vui lòng nhập đầy đủ",Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            String lottery_province_id = map_name_id.get(lottery_company);
+            ArrayList<Integer> listOfRowViews = this.getListOfRow();
+            RetrieveLotteryResultAndRenderToATable retrieveLotteryResultAndRenderToATable
+                    = new RetrieveLotteryResultAndRenderToATable(lottery_province_id, lottery_date,
+                        getView(), listOfRowViews);
+
+            retrieveLotteryResultAndRenderToATable.execute();
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -93,7 +133,18 @@ public class ResultTableFragment extends Fragment {
         ArrayAdapter<String> adapter;
         mView =inflater.inflate(R.layout.fragment_result_table, container, false);
         final EditText etMyLotteryDate = (EditText)mView.findViewById(R.id.et_my_lottery_date);
-        final AutoCompleteTextView tvMyLotteryCompany = (AutoCompleteTextView)mView.findViewById(R.id.tv_my_lottery_company);
+        final AutoCompleteTextView tvMyLotteryCompany = (AutoCompleteTextView       )mView.findViewById(R.id.tv_my_lottery_company);
+
+        final Button btnQuery = (Button)mView.findViewById(R.id.btn_query);
+        btnQuery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final EditText test = (EditText) mView.findViewById(R.id.tv_lottery_8th_prize);
+                String text = "Hello world";
+                test.setText(text);
+                // btnQueryOnClick(v);
+            }
+        });
 
         etMyLotteryDate.setOnClickListener(new View.OnClickListener() {
             @Override

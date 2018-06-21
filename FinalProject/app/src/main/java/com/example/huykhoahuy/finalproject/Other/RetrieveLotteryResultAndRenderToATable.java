@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.huykhoahuy.finalproject.Class.Lottery;
@@ -15,6 +16,7 @@ import com.example.huykhoahuy.finalproject.Class.LotteryResult;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -32,11 +34,33 @@ public class RetrieveLotteryResultAndRenderToATable extends AsyncTask<Void, Void
     private String lottery_province_id;
     private String lottery_date;
     private View view;
+    private ArrayList<Integer> listOfRowViews;
+    private ArrayList<Integer> numberOfLotteryCodeInAPrize;
 
-    public RetrieveLotteryResultAndRenderToATable(String lottery_province_id, String lottery_date, View view) {
+    private void initNumberOfLotteryCodeInAPrize() {
+        numberOfLotteryCodeInAPrize = new ArrayList<Integer>();
+        numberOfLotteryCodeInAPrize.add(1);
+        numberOfLotteryCodeInAPrize.add(1);
+        numberOfLotteryCodeInAPrize.add(1);
+        numberOfLotteryCodeInAPrize.add(2);
+        numberOfLotteryCodeInAPrize.add(7);
+        numberOfLotteryCodeInAPrize.add(1);
+        numberOfLotteryCodeInAPrize.add(3);
+        numberOfLotteryCodeInAPrize.add(1);
+        numberOfLotteryCodeInAPrize.add(1);
+    }
+
+    private String minorStringProcessing(String date) {
+        return date.replace("/", "-");
+    }
+
+    public RetrieveLotteryResultAndRenderToATable(String lottery_province_id, String lottery_date,
+                                                  View view, ArrayList<Integer> listOfRowviews) {
         this.lottery_province_id = lottery_province_id;
-        this.lottery_date = lottery_date;
+        this.lottery_date = minorStringProcessing(lottery_date);
+        this.listOfRowViews = listOfRowviews;
         this.view = view;
+        this.initNumberOfLotteryCodeInAPrize();
     }
 
     private static final String API_KEY = "5b0cf5d828e03";
@@ -48,7 +72,6 @@ public class RetrieveLotteryResultAndRenderToATable extends AsyncTask<Void, Void
     }
 
     public String doInBackground(Void... urls) {
-
         // Do some validation here
         try {
             URL url = new URL(String.format(API_URL + "&key=" + API_KEY + "&location="
@@ -132,5 +155,13 @@ public class RetrieveLotteryResultAndRenderToATable extends AsyncTask<Void, Void
 
     private void renderToATable(ArrayList<String> listResults) {
         // Do nothing for now
+        for (int i = 0, k = 0; i < this.listOfRowViews.size(); ++i) {
+            final TextView rowPrize = (TextView)(this.view.findViewById(this.listOfRowViews.get(i)));
+            StringBuilder prizeContent = new StringBuilder();
+            for (int j = 0; j < this.numberOfLotteryCodeInAPrize.get(i); ++j, ++k) {
+                prizeContent.append(listResults.get(17-k));
+            }
+            rowPrize.setText(prizeContent.toString());
+        }
     }
 }
