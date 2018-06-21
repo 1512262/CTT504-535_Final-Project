@@ -37,12 +37,16 @@ public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
 //        this.lottery_date = lottery_date;
 //    }
 
+    private String minorStringProcessing(String date) {
+        return date.replace("/", "-");
+    }
+
     private static final String API_KEY = "5b0cf5d828e03";
     private static final String API_URL = "https://laythongtin.net/mini-content/lottery-all-api.php?type=json";
 
     public RetrieveLotteryResult(Lottery lottery, View view) {
         this.lottery_province_id = lottery.getLoterry_Province_ID();
-        this.lottery_date = lottery.getLottery_Date();
+        this.lottery_date = this.minorStringProcessing(lottery.getLottery_Date());
         this.lottery = lottery;
         this.view = view;
     }
