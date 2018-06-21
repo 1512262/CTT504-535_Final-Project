@@ -18,9 +18,13 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.huykhoahuy.finalproject.Class.Lottery;
 import com.example.huykhoahuy.finalproject.Class.LotteryCompany;
 import com.example.huykhoahuy.finalproject.Other.ParseHostFile;
+import com.example.huykhoahuy.finalproject.Other.RetrieveLotteryResult;
+import com.example.huykhoahuy.finalproject.Other.RetrieveLotteryResultAndRenderToATable;
 import com.example.huykhoahuy.finalproject.R;
 
 import java.util.ArrayList;
@@ -94,6 +98,29 @@ public class ResultTableFragment extends Fragment {
         mView =inflater.inflate(R.layout.fragment_result_table, container, false);
         final EditText etMyLotteryDate = (EditText)mView.findViewById(R.id.et_my_lottery_date);
         final AutoCompleteTextView tvMyLotteryCompany = (AutoCompleteTextView)mView.findViewById(R.id.tv_my_lottery_company);
+
+        final Button btnQuery = (Button)mView.findViewById(R.id.btn_query);
+        btnQuery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String lottery_date = etMyLotteryDate.getText().toString();
+                String lottery_company = tvMyLotteryCompany.getText().toString();
+
+                if(lottery_date.equals("") || lottery_company.equals(""))
+                {
+                    Toast.makeText(getActivity(),"Vui lòng nhập đầy đủ",Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    String lottery_province_id = map_name_id.get(lottery_company);
+                    RetrieveLotteryResultAndRenderToATable retrieveLotteryResultAndRenderToATable
+                            = new RetrieveLotteryResultAndRenderToATable(lottery_province_id, lottery_date, getView());
+
+                    retrieveLotteryResultAndRenderToATable.execute();
+                }
+                //
+            }
+        });
 
         etMyLotteryDate.setOnClickListener(new View.OnClickListener() {
             @Override

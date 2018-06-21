@@ -135,5 +135,6 @@ public class RetrieveLotteryResultAndRenderToATable extends AsyncTask<Void, Void
 
     private void renderToATable(ArrayList<String> listResults) {
         // Do nothing for now
+
     }
 }
