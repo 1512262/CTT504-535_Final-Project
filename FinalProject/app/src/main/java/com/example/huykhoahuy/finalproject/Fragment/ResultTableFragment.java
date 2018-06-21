@@ -3,6 +3,7 @@ package com.example.huykhoahuy.finalproject.Fragment;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -147,10 +148,13 @@ public class ResultTableFragment extends Fragment {
         btnQuery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                final TextView test = (TextView) mView.findViewById(R.id.tv_lottery_8th_prize);
-//                String text = "Hello world";
-//                test.setText(text);
-                btnQueryOnClick(v);
+                if (hasInternetConnection(v)) {
+                    btnQueryOnClick(v);
+                }
+                else {
+                    Toast.makeText(v.getContext(), "No internet connection!", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -182,6 +186,14 @@ public class ResultTableFragment extends Fragment {
 
         return mView;
 
+    }
+
+    private boolean hasInternetConnection(View v) {
+        ConnectivityManager cm = (ConnectivityManager) v.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm != null
+                && cm.getActiveNetworkInfo() != null
+                && cm.getActiveNetworkInfo().isAvailable()
+                && cm.getActiveNetworkInfo().isConnected();
     }
 
     // TODO: Rename method, update argument and hook method into UI event
