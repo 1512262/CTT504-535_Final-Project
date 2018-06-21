@@ -18,6 +18,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -108,6 +109,7 @@ public class ResultTableFragment extends Fragment {
     private void btnQueryOnClick(View v) {
         final EditText etMyLotteryDate = (EditText)mView.findViewById(R.id.et_my_lottery_date);
         final AutoCompleteTextView tvMyLotteryCompany = (AutoCompleteTextView)mView.findViewById(R.id.tv_my_lottery_company);
+        final ProgressBar progressBar = (ProgressBar)mView.findViewById(R.id.prb_loading);
         String lottery_date = etMyLotteryDate.getText().toString();
         String lottery_company = tvMyLotteryCompany.getText().toString();
 
@@ -121,7 +123,7 @@ public class ResultTableFragment extends Fragment {
             ArrayList<Integer> listOfRowViews = this.getListOfRow();
             RetrieveLotteryResultAndRenderToATable retrieveLotteryResultAndRenderToATable
                     = new RetrieveLotteryResultAndRenderToATable(lottery_province_id, lottery_date,
-                        getView(), listOfRowViews);
+                        getView(), listOfRowViews,progressBar);
 
             retrieveLotteryResultAndRenderToATable.execute();
         }
