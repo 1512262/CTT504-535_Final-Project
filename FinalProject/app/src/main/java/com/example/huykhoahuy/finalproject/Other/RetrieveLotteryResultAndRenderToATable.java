@@ -165,7 +165,7 @@ public class RetrieveLotteryResultAndRenderToATable extends AsyncTask<Void, Void
                     prizeContent.append("\n");
 
                 prizeContent.append(listResults.get(17-k));
-                prizeContent.append(" ");
+                prizeContent.append("     ");
             }
             prizeContent.deleteCharAt(prizeContent.length()-1);
             rowPrize.setText(prizeContent.toString());

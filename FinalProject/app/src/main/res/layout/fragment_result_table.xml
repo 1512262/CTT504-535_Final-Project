@@ -114,7 +114,6 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="999999"
                         android:textSize="25dp"
                         android:textColor="@color/colorAccent"
                         android:textStyle="bold"/>
@@ -152,7 +151,6 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="99999"
                         android:textSize="20dp"
                         android:textStyle="bold"/>
 
@@ -189,7 +187,6 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="99999"
                         android:textSize="18dp"
                         android:textStyle="bold"/>
 
@@ -226,7 +223,6 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="99999     99999"
                         android:textStyle="bold"/>
 
                 </LinearLayout>
@@ -262,7 +258,6 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="99999  99999  99999  99999  \n99999  99999  99999"
                         android:textStyle="bold"/>
 
                 </LinearLayout>
@@ -298,7 +293,6 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="99999"
                         android:textStyle="bold"/>
 
                 </LinearLayout>
@@ -334,7 +328,6 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="9999   9999   9999"
                         android:textStyle="bold"/>
 
                 </LinearLayout>
@@ -370,7 +363,6 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="999"
                         android:textStyle="bold"/>
 
                 </LinearLayout>
@@ -406,7 +398,6 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="99"
                         android:textStyle="bold"/>
 
                 </LinearLayout>

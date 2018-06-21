@@ -40,7 +40,7 @@ public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
     private static final String API_URL = "https://laythongtin.net/mini-content/lottery-all-api.php?type=json";
 
     public RetrieveLotteryResult(Lottery lottery, View view,ProgressBar progressBar) {
-        this.lottery_province_id = lottery.getLoterry_Province_ID();
+        this.lottery_province_id = lottery.getLottery_Province_ID();
         this.lottery_date = this.minorStringProcessing(lottery.getLottery_Date());
         this.lottery = lottery;
         this.progressBar=progressBar;

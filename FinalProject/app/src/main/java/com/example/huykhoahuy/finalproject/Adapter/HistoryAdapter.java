@@ -38,7 +38,7 @@ public class HistoryAdapter extends  RecyclerView.Adapter<HistoryAdapter.ViewHol
 //        holder.ivLotteryImage.setImageDrawable();
         holder.tvLotteryCode.setText(lottery.Lottery_Code);
         holder.tvLotteryDate.setText(lottery.getLottery_Date());
-        holder.tvLotteryProvinceID.setText(lottery.getLoterry_Province_ID());
+        holder.tvLotteryProvinceID.setText(lottery.getLottery_Check_Date());
         holder.tvLotteryPrize.setText(lottery.getLottery_Prize());
         holder.tvCheckDate.setText(lottery.getLottery_Check_Date());
         holder.tvCheckTime.setText(lottery.getLottery_Check_Time());
