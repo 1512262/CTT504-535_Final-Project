@@ -69,6 +69,15 @@
                 android:hint="@string/lottery_company_name"
                 android:textSize="20dp"
                 android:inputType="text"/>
+            <ProgressBar
+                android:id="@+id/prb_loading_form"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:indeterminateOnly="true"
+                android:indeterminateTintMode="src_atop"
+                android:indeterminateTint="@color/colorPrimary"/>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -34,7 +34,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/prb_loading"
-            android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:visibility="gone"
             android:gravity="center_horizontal|center"/>
