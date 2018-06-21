@@ -19,6 +19,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +48,7 @@ import java.util.Map;
 public class ResultTableFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     private View mView;
+    private LinearLayout linearLayout;
     private Map<String,String> map_name_id=new HashMap<String,String>();
     private ArrayList<LotteryCompany> lotteryCompanies;
     private ArrayList<String> lotterycompanynames = new ArrayList<String>();
@@ -112,6 +114,7 @@ public class ResultTableFragment extends Fragment {
     }
 
     private void btnQueryOnClick(View v) {
+        linearLayout = (LinearLayout)mView.findViewById(R.id.lyt_table);
         final EditText etMyLotteryDate = (EditText)mView.findViewById(R.id.et_my_lottery_date);
         final AutoCompleteTextView tvMyLotteryCompany = (AutoCompleteTextView)mView.findViewById(R.id.tv_my_lottery_company);
         final ProgressBar progressBar = (ProgressBar)mView.findViewById(R.id.prb_loading);
@@ -129,7 +132,7 @@ public class ResultTableFragment extends Fragment {
             int progressBarID = this.getProgressBarID();
             RetrieveLotteryResultAndRenderToATable retrieveLotteryResultAndRenderToATable
                     = new RetrieveLotteryResultAndRenderToATable(lottery_province_id, lottery_date,
-                        getView(), listOfRowViews, progressBar);
+                        getView(), listOfRowViews, progressBar,linearLayout);
 
             retrieveLotteryResultAndRenderToATable.execute();
         }
@@ -141,9 +144,12 @@ public class ResultTableFragment extends Fragment {
         // Inflate the layout for this fragment
         ArrayAdapter<String> adapter;
         mView =inflater.inflate(R.layout.fragment_result_table, container, false);
+        linearLayout = (LinearLayout)mView.findViewById(R.id.lyt_table);
         final EditText etMyLotteryDate = (EditText)mView.findViewById(R.id.et_my_lottery_date);
         final AutoCompleteTextView tvMyLotteryCompany = (AutoCompleteTextView)mView.findViewById(R.id.tv_my_lottery_company);
 
+        linearLayout.setVisibility(View.INVISIBLE);
+        
         final Button btnQuery = (Button)mView.findViewById(R.id.btn_query);
         btnQuery.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,6 +158,7 @@ public class ResultTableFragment extends Fragment {
                     btnQueryOnClick(v);
                 }
                 else {
+                    linearLayout.setVisibility(View.INVISIBLE);
                     Toast.makeText(v.getContext(), "Không có kết nối Internet!", Toast.LENGTH_SHORT).show();
                 }
 
