@@ -66,8 +66,8 @@ public class HistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mView= inflater.inflate(R.layout.fragment_history, container, false);
-        initList();
-        return mView;
+//        initList();
+        return  mView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -18,6 +18,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.huykhoahuy.finalproject.Class.Lottery;
@@ -133,16 +134,16 @@ public class ResultTableFragment extends Fragment {
         ArrayAdapter<String> adapter;
         mView =inflater.inflate(R.layout.fragment_result_table, container, false);
         final EditText etMyLotteryDate = (EditText)mView.findViewById(R.id.et_my_lottery_date);
-        final AutoCompleteTextView tvMyLotteryCompany = (AutoCompleteTextView       )mView.findViewById(R.id.tv_my_lottery_company);
+        final AutoCompleteTextView tvMyLotteryCompany = (AutoCompleteTextView)mView.findViewById(R.id.tv_my_lottery_company);
 
         final Button btnQuery = (Button)mView.findViewById(R.id.btn_query);
         btnQuery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final EditText test = (EditText) mView.findViewById(R.id.tv_lottery_8th_prize);
-                String text = "Hello world";
-                test.setText(text);
-                // btnQueryOnClick(v);
+//                final TextView test = (TextView) mView.findViewById(R.id.tv_lottery_8th_prize);
+//                String text = "Hello world";
+//                test.setText(text);
+                btnQueryOnClick(v);
             }
         });
 
