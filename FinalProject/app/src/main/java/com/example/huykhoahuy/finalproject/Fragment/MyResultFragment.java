@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -181,20 +182,25 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
         btnCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String lottery_date = etLotteryDate.getText().toString();
-                String lottery_company = tvLotteryCompany.getText().toString();
-                String lottery_code = etLotteryCode.getText().toString();
-                String lottery_province_id;
-                if(lottery_code.equals("") || lottery_date.equals("") || lottery_company.equals(""))
-                {
-                    Toast.makeText(getActivity(),"Vui lòng nhập đầy đủ",Toast.LENGTH_SHORT).show();
+                if (hasInternetConnection(v)) {
+                    String lottery_date = etLotteryDate.getText().toString();
+                    String lottery_company = tvLotteryCompany.getText().toString();
+                    String lottery_code = etLotteryCode.getText().toString();
+                    String lottery_province_id;
+                    if(lottery_code.equals("") || lottery_date.equals("") || lottery_company.equals(""))
+                    {
+                        Toast.makeText(getActivity(),"Vui lòng nhập đầy đủ",Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        lottery_province_id = map_name_id.get(lottery_company);
+                        lottery = new Lottery(lottery_company,lottery_date,lottery_province_id,lottery_code);
+                        retrieveLotteryResult = new RetrieveLotteryResult(lottery, getView(),progressBarForm);
+                        retrieveLotteryResult.execute();
+                    }
                 }
-                else
-                {
-                    lottery_province_id = map_name_id.get(lottery_company);
-                    lottery = new Lottery(lottery_company,lottery_date,lottery_province_id,lottery_code);
-                    retrieveLotteryResult = new RetrieveLotteryResult(lottery, getView(),progressBarForm);
-                    retrieveLotteryResult.execute();
+                else {
+                    Toast.makeText(v.getContext(), "No internet connection!", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -204,6 +210,15 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
         dialog.show();
         doKeepDialog(dialog);
     }
+
+    private boolean hasInternetConnection(View v) {
+        ConnectivityManager cm = (ConnectivityManager) v.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm != null
+                && cm.getActiveNetworkInfo() != null
+                && cm.getActiveNetworkInfo().isAvailable()
+                && cm.getActiveNetworkInfo().isConnected();
+    }
+
     private static void doKeepDialog(Dialog dialog){
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(dialog.getWindow().getAttributes());
