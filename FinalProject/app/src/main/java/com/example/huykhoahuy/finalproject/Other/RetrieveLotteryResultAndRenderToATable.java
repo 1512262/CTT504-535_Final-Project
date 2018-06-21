@@ -36,6 +36,7 @@ public class RetrieveLotteryResultAndRenderToATable extends AsyncTask<Void, Void
     private View view;
     private ArrayList<Integer> listOfRowViews;
     private ArrayList<Integer> numberOfLotteryCodeInAPrize;
+    private int progressBarID;
 
     private void initNumberOfLotteryCodeInAPrize() {
         numberOfLotteryCodeInAPrize = new ArrayList<Integer>();
@@ -55,12 +56,14 @@ public class RetrieveLotteryResultAndRenderToATable extends AsyncTask<Void, Void
     }
 
     public RetrieveLotteryResultAndRenderToATable(String lottery_province_id, String lottery_date,
-                                                  View view, ArrayList<Integer> listOfRowviews) {
+                                                  View view, ArrayList<Integer> listOfRowviews,
+                                                  int progressBarID) {
         this.lottery_province_id = lottery_province_id;
         this.lottery_date = minorStringProcessing(lottery_date);
         this.listOfRowViews = listOfRowviews;
         this.view = view;
         this.initNumberOfLotteryCodeInAPrize();
+        this.progressBarID = progressBarID;
     }
 
     private static final String API_KEY = "5b0cf5d828e03";
