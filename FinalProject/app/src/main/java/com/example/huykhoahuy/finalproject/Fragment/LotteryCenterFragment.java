@@ -107,7 +107,6 @@ public class LotteryCenterFragment extends Fragment{
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(mView.getContext(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
-        LotteryCompanyAdapter lotteryCompanyAdapter = new LotteryCompanyAdapter(lotteryCenters,mView.getContext());
         recyclerView.setAdapter(adapter);
 
         swipeController = new SwipeController(new SwipeControllerActions() {

@@ -123,7 +123,7 @@ public class ResultTableFragment extends Fragment {
 
         if(lottery_date.equals("") || lottery_company.equals(""))
         {
-            Toast.makeText(getActivity(),"Vui lòng nhập đầy đủ",Toast.LENGTH_SHORT).show();
+            Toast.makeText(v.getContext(),"Vui lòng nhập đầy đủ",Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -177,7 +177,7 @@ public class ResultTableFragment extends Fragment {
                     public void onDateSet(DatePicker view, int year, int month, int day) {
                         String strDay = null;
                         String strMonth = null;
-                        strMonth = (month<10)?"0"+String.valueOf(month+1):String.valueOf(month+1);
+                        strMonth = (month<9)?"0"+String.valueOf(month+1):String.valueOf(month+1);
                         strDay = (day<10)?"0"+String.valueOf(day):String.valueOf(day);
                         String date = strDay +"-"+strMonth +"-"+String.valueOf(year);
                         etMyLotteryDate.setText(date);

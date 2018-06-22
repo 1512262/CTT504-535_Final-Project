@@ -63,7 +63,6 @@ public class LotteryCompanyFragment extends Fragment implements ItemClickListene
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(mView.getContext(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
-        LotteryCompanyAdapter lotteryCompanyAdapter = new LotteryCompanyAdapter(lotteryCompanies,mView.getContext());
         recyclerView.setAdapter(adapter);
         adapter.setClickListener(this);
 

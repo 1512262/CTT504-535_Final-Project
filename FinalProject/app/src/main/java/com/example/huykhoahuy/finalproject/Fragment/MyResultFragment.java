@@ -162,7 +162,7 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
                     public void onDateSet(DatePicker view, int year, int month, int day) {
                         String strDay = null;
                         String strMonth = null;
-                        strMonth = (month<10)?"0"+String.valueOf(month+1):String.valueOf(month+1);
+                        strMonth = (month<9)?"0"+String.valueOf(month+1):String.valueOf(month+1);
                         strDay = (day<10)?"0"+String.valueOf(day):String.valueOf(day);
                         String date = strDay +"-"+strMonth +"-"+String.valueOf(year);
                         etLotteryDate.setText(date);
@@ -180,6 +180,12 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
 
         mBuilder.setView(mView);
 
+        btnAutoFill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(),"Tính năng này tạm thời chưa phát triển hoàn thiện",Toast.LENGTH_LONG).show();
+            }
+        });
         btnCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -190,7 +196,7 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
                     String lottery_province_id;
                     if(lottery_code.equals("") || lottery_date.equals("") || lottery_company.equals(""))
                     {
-                        Toast.makeText(getActivity(),"Vui lòng nhập đầy đủ",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(v.getContext(),"Vui lòng nhập đầy đủ",Toast.LENGTH_SHORT).show();
                     }
                     else
                     {
