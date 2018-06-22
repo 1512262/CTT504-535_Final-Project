@@ -5,6 +5,8 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,6 +21,8 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.huykhoahuy.finalproject.Class.Lottery;
@@ -136,10 +140,12 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
 
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(view.getContext());
         View mView = getLayoutInflater().inflate(R.layout.dialog_input_lottery_info,null);
+        final ProgressBar progressBarForm = (ProgressBar)mView.findViewById(R.id.prb_loading_form);
         final EditText etLotteryCode = (EditText)mView.findViewById(R.id.et_lottery_code);
         final EditText etLotteryDate = (EditText) mView.findViewById(R.id.et_lottery_date);
         final AutoCompleteTextView tvLotteryCompany = (AutoCompleteTextView)mView.findViewById(R.id.tv_lottery_company);
         ArrayAdapter<String> adapter;
+
 
         Button btnCheck = (Button)mView.findViewById(R.id.btn_check);
         Button btnAutoFill = (Button)mView.findViewById(R.id.btn_autofill);
@@ -177,20 +183,25 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
         btnCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String lottery_date = etLotteryDate.getText().toString();
-                String lottery_company = tvLotteryCompany.getText().toString();
-                String lottery_code = etLotteryCode.getText().toString();
-                String lottery_province_id;
-                if(lottery_code.equals("") || lottery_date.equals("") || lottery_company.equals(""))
-                {
-                    Toast.makeText(getActivity(),"Vui lòng nhập đầy đủ",Toast.LENGTH_SHORT).show();
+                if (hasInternetConnection(v)) {
+                    String lottery_date = etLotteryDate.getText().toString();
+                    String lottery_company = tvLotteryCompany.getText().toString();
+                    String lottery_code = etLotteryCode.getText().toString();
+                    String lottery_province_id;
+                    if(lottery_code.equals("") || lottery_date.equals("") || lottery_company.equals(""))
+                    {
+                        Toast.makeText(getActivity(),"Vui lòng nhập đầy đủ",Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        lottery_province_id = map_name_id.get(lottery_company);
+                        lottery = new Lottery(lottery_company,lottery_date,lottery_province_id,lottery_code);
+                        retrieveLotteryResult = new RetrieveLotteryResult(lottery, getView(),progressBarForm);
+                        retrieveLotteryResult.execute();
+                    }
                 }
-                else
-                {
-                    lottery_province_id = map_name_id.get(lottery_company);
-                    lottery = new Lottery(lottery_company,lottery_date,lottery_province_id,lottery_code);
-                    retrieveLotteryResult = new RetrieveLotteryResult(lottery, getView());
-                    retrieveLotteryResult.execute();
+                else {
+                    Toast.makeText(v.getContext(), "Không có kết nối Internet!", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -200,6 +211,15 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
         dialog.show();
         doKeepDialog(dialog);
     }
+
+    private boolean hasInternetConnection(View v) {
+        ConnectivityManager cm = (ConnectivityManager) v.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm != null
+                && cm.getActiveNetworkInfo() != null
+                && cm.getActiveNetworkInfo().isAvailable()
+                && cm.getActiveNetworkInfo().isConnected();
+    }
+
     private static void doKeepDialog(Dialog dialog){
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(dialog.getWindow().getAttributes());
@@ -207,16 +227,6 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         dialog.getWindow().setAttributes(lp);
     }
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

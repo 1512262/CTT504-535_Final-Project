@@ -22,6 +22,7 @@ public class Lottery {
     private String Loterry_Province_ID;
 
     @ColumnInfo(name = "lottery_code")
+
     public String Lottery_Code;
 
     @ColumnInfo(name = "lottery_check_date")
@@ -33,13 +34,15 @@ public class Lottery {
     @Ignore
     private String Lottery_Prize = "Chúc bạn may mắn lần sau";
 
+
     public Lottery(){}
 
     @Ignore
     public Lottery(String lottery_Company_Name, String lottery_Date, @NonNull String loterry_Province_ID, String lottery_Code) {
+   
         Lottery_Company_Name = lottery_Company_Name;
         Lottery_Date = lottery_Date;
-        Loterry_Province_ID = loterry_Province_ID;
+        Lottery_Province_ID = lottery_Province_ID;
         Lottery_Code = lottery_Code;
     }
 
@@ -123,13 +126,7 @@ public class Lottery {
 
 
 
-    public String getLoterry_Province_ID() {
-        return Loterry_Province_ID;
-    }
 
-    public void setLoterry_Province_ID(String loterry_Province_ID) {
-        Loterry_Province_ID = loterry_Province_ID;
-    }
 
     public String getLottery_Check_Date() {
         return Lottery_Check_Date;
@@ -153,5 +150,13 @@ public class Lottery {
 
     public void setLottery_Prize(String lottery_Prize) {
         Lottery_Prize = lottery_Prize;
+    }
+
+    public String getLottery_Province_ID() {
+        return Lottery_Province_ID;
+    }
+
+    public void setLottery_Province_ID(String lottery_Province_ID) {
+        Lottery_Province_ID = lottery_Province_ID;
     }
 }

@@ -3,6 +3,7 @@ package com.example.huykhoahuy.finalproject.Fragment;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +19,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +48,7 @@ import java.util.Map;
 public class ResultTableFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     private View mView;
+    private LinearLayout linearLayout;
     private Map<String,String> map_name_id=new HashMap<String,String>();
     private ArrayList<LotteryCompany> lotteryCompanies;
     private ArrayList<String> lotterycompanynames = new ArrayList<String>();
@@ -106,7 +109,12 @@ public class ResultTableFragment extends Fragment {
         return result;
     }
 
+    private int getProgressBarID() {
+        return R.id.prb_loading;
+    }
+
     private void btnQueryOnClick(View v) {
+        linearLayout = (LinearLayout)mView.findViewById(R.id.lyt_table);
         final EditText etMyLotteryDate = (EditText)mView.findViewById(R.id.et_my_lottery_date);
         final AutoCompleteTextView tvMyLotteryCompany = (AutoCompleteTextView)mView.findViewById(R.id.tv_my_lottery_company);
         final ProgressBar progressBar = (ProgressBar)mView.findViewById(R.id.prb_loading);
@@ -121,9 +129,10 @@ public class ResultTableFragment extends Fragment {
         {
             String lottery_province_id = map_name_id.get(lottery_company);
             ArrayList<Integer> listOfRowViews = this.getListOfRow();
+            int progressBarID = this.getProgressBarID();
             RetrieveLotteryResultAndRenderToATable retrieveLotteryResultAndRenderToATable
                     = new RetrieveLotteryResultAndRenderToATable(lottery_province_id, lottery_date,
-                        getView(), listOfRowViews,progressBar);
+                        getView(), listOfRowViews, progressBar,linearLayout);
 
             retrieveLotteryResultAndRenderToATable.execute();
         }
@@ -135,17 +144,24 @@ public class ResultTableFragment extends Fragment {
         // Inflate the layout for this fragment
         ArrayAdapter<String> adapter;
         mView =inflater.inflate(R.layout.fragment_result_table, container, false);
+        linearLayout = (LinearLayout)mView.findViewById(R.id.lyt_table);
         final EditText etMyLotteryDate = (EditText)mView.findViewById(R.id.et_my_lottery_date);
         final AutoCompleteTextView tvMyLotteryCompany = (AutoCompleteTextView)mView.findViewById(R.id.tv_my_lottery_company);
 
+        linearLayout.setVisibility(View.INVISIBLE);
+        
         final Button btnQuery = (Button)mView.findViewById(R.id.btn_query);
         btnQuery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                final TextView test = (TextView) mView.findViewById(R.id.tv_lottery_8th_prize);
-//                String text = "Hello world";
-//                test.setText(text);
-                btnQueryOnClick(v);
+                if (hasInternetConnection(v)) {
+                    btnQueryOnClick(v);
+                }
+                else {
+                    linearLayout.setVisibility(View.INVISIBLE);
+                    Toast.makeText(v.getContext(), "Không có kết nối Internet!", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -177,6 +193,14 @@ public class ResultTableFragment extends Fragment {
 
         return mView;
 
+    }
+
+    private boolean hasInternetConnection(View v) {
+        ConnectivityManager cm = (ConnectivityManager) v.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm != null
+                && cm.getActiveNetworkInfo() != null
+                && cm.getActiveNetworkInfo().isAvailable()
+                && cm.getActiveNetworkInfo().isConnected();
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -6,12 +6,14 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.huykhoahuy.finalproject.Class.Lottery;
 import com.example.huykhoahuy.finalproject.Class.LotteryResult;
+import com.example.huykhoahuy.finalproject.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,6 +36,7 @@ public class RetrieveLotteryResultAndRenderToATable extends AsyncTask<Void, Void
     private String lottery_province_id;
     private String lottery_date;
     private View view;
+    private LinearLayout linearLayout;
     private ArrayList<Integer> listOfRowViews;
     private ArrayList<Integer> numberOfLotteryCodeInAPrize;
 
@@ -55,22 +58,23 @@ public class RetrieveLotteryResultAndRenderToATable extends AsyncTask<Void, Void
     }
 
     public RetrieveLotteryResultAndRenderToATable(String lottery_province_id, String lottery_date,
-                                                  View view, ArrayList<Integer> listOfRowviews,ProgressBar progressBar) {
+                                                  View view, ArrayList<Integer> listOfRowviews,
+                                                    ProgressBar progressBar,LinearLayout linearLayout) {
         this.lottery_province_id = lottery_province_id;
         this.lottery_date = minorStringProcessing(lottery_date);
         this.progressBar = progressBar;
         this.listOfRowViews = listOfRowviews;
         this.view = view;
         this.initNumberOfLotteryCodeInAPrize();
+        this.linearLayout = linearLayout;
     }
 
     private static final String API_KEY = "5b0cf5d828e03";
     private static final String API_URL = "https://laythongtin.net/mini-content/lottery-all-api.php?type=json";
 
     public void onPreExecute() {
-//        progressBar = (ProgressBar)view.findViewById(R.id.prb_loading);
-        progressBar.setVisibility(View.VISIBLE);
-//        responseView.setText("");
+        this.progressBar.setVisibility(View.VISIBLE);
+        this.linearLayout.setVisibility(View.INVISIBLE);
     }
 
     public String doInBackground(Void... urls) {
@@ -109,10 +113,12 @@ public class RetrieveLotteryResultAndRenderToATable extends AsyncTask<Void, Void
 
     private JSONObject getTheIthJSON(JSONObject reader, int i) {
         JSONObject temp = null;
-        try {
-            temp = reader.getJSONObject(String.valueOf(i));
-        } catch (JSONException e) {
-            e.printStackTrace();
+        if (reader != null) {
+            try {
+                temp = reader.getJSONObject(String.valueOf(i));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
         return temp;
     }
@@ -120,10 +126,12 @@ public class RetrieveLotteryResultAndRenderToATable extends AsyncTask<Void, Void
     private String getTheIthResult(JSONObject reader, int i) {
         JSONObject jsonObject = getTheIthJSON(reader, i);
         String result = null;
-        try {
-            result = jsonObject.getString("result");
-        } catch (JSONException e) {
-            e.printStackTrace();
+        if (jsonObject != null) {
+            try {
+                result = jsonObject.getString("result");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
         return result;
     }
@@ -137,22 +145,40 @@ public class RetrieveLotteryResultAndRenderToATable extends AsyncTask<Void, Void
         int nPrizes = 18;
         for (int i = 0; i < nPrizes; i++) {
             String result = this.getTheIthResult(reader, i);
-            listResults.add(result);
+            if (result != null) {
+                listResults.add(result);
+            }
         }
         return listResults;
     }
 
     public void onPostExecute(String response) {
         progressBar.setVisibility(View.GONE);
+        linearLayout.setVisibility(View.VISIBLE);
         ArrayList<String> listResults = new ArrayList<String>();
         if (response == null) {
-            response = "THERE WAS AN ERROR";
+            response = "Có lỗi";
             Log.i("NOINFO", response);
+
+            Toast.makeText(this.view.getContext(), R.string.toast_error_info, Toast.LENGTH_SHORT).show();
         }
         else {
             Log.i("INFO", response);
             listResults = this.extractResultListFromJSON(response);
-            renderToATable(listResults);
+            if (listResults != null) {
+                if (listResults.size() == 18) {
+                    renderToATable(listResults);
+                } else {
+                    linearLayout.setVisibility(View.INVISIBLE);
+                    Toast.makeText(this.view.getContext(), R.string.toast_error_info, Toast.LENGTH_SHORT).show();
+                }
+            }
+            else{
+                linearLayout.setVisibility(View.INVISIBLE);
+                Toast.makeText(this.view.getContext(),R.string.toast_error_info, Toast.LENGTH_SHORT).show();
+            }
+
+
         }
     }
 
@@ -162,8 +188,13 @@ public class RetrieveLotteryResultAndRenderToATable extends AsyncTask<Void, Void
             final TextView rowPrize = (TextView)(this.view.findViewById(this.listOfRowViews.get(i)));
             StringBuilder prizeContent = new StringBuilder();
             for (int j = 0; j < this.numberOfLotteryCodeInAPrize.get(i); ++j, ++k) {
+                if (j > 0 && j%4 == 0)
+                    prizeContent.append("\n");
+
                 prizeContent.append(listResults.get(17-k));
+                prizeContent.append("     ");
             }
+            prizeContent.deleteCharAt(prizeContent.length()-1);
             rowPrize.setText(prizeContent.toString());
         }
     }
