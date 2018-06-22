@@ -1,11 +1,13 @@
 package com.example.huykhoahuy.finalproject.Fragment;
 
+import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,17 +19,18 @@ import android.view.ViewGroup;
 import com.example.huykhoahuy.finalproject.Adapter.HistoryAdapter;
 import com.example.huykhoahuy.finalproject.Adapter.LotteryCompanyAdapter;
 import com.example.huykhoahuy.finalproject.Class.Lottery;
+import com.example.huykhoahuy.finalproject.Class.LotteryViewModel;
 import com.example.huykhoahuy.finalproject.Other.ParseHostFile;
 import com.example.huykhoahuy.finalproject.Other.SwipeController;
 import com.example.huykhoahuy.finalproject.Other.SwipeControllerActions;
 import com.example.huykhoahuy.finalproject.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HistoryFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
-    private ArrayList<Lottery> lotteries;
     private View mView;
     private HistoryAdapter adapter;
     public HistoryFragment() {
@@ -54,19 +57,28 @@ public class HistoryFragment extends Fragment {
     }
     public void initList()
     {
-        adapter = new HistoryAdapter(lotteries,mView.getContext());
+        LotteryViewModel lotteryViewModel = LotteryViewModel.getInstance();
+        adapter = new HistoryAdapter(mView.getContext());
         RecyclerView recyclerView = (RecyclerView)mView.findViewById(R.id.history_list);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(mView.getContext(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
+        lotteryViewModel.getAllLotteries().observe(this, new Observer<List<Lottery>>() {
+            @Override
+            public void onChanged(@Nullable List<Lottery> lotteryList) {
+                ArrayList<Lottery> lotteryArrayList = new ArrayList<>(lotteryList);
+                adapter.setLotteries(lotteryArrayList);
+            }
+        });
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mView= inflater.inflate(R.layout.fragment_history, container, false);
-//        initList();
+        initList();
         return  mView;
     }
 

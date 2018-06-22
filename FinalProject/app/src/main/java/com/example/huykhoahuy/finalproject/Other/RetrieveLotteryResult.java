@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.huykhoahuy.finalproject.Class.Lottery;
 import com.example.huykhoahuy.finalproject.Class.LotteryResult;
+import com.example.huykhoahuy.finalproject.Class.LotteryViewModel;
 import com.example.huykhoahuy.finalproject.R;
 
 import org.json.JSONException;
@@ -22,7 +23,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 
 public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
 
@@ -155,7 +156,9 @@ public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
         String prize = lottery.getLottery_Prize();
         int duration = Toast.LENGTH_SHORT;
 
-
+        lottery.setLottery_Check_Date(new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime()));
+        lottery.setLottery_Check_Time(new SimpleDateFormat("hh:mm:ss").format(Calendar.getInstance().getTime()));
+        LotteryViewModel.getInstance().insertLottery(lottery);
 
         Toast toast = Toast.makeText(context, prize, duration);
         toast.show();

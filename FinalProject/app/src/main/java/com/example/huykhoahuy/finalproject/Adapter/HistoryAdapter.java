@@ -20,15 +20,15 @@ public class HistoryAdapter extends  RecyclerView.Adapter<HistoryAdapter.ViewHol
     ArrayList<Lottery>lotteries;
     Context context;
 
-    public HistoryAdapter(ArrayList<Lottery> lotteries, Context context) {
-        this.lotteries = lotteries;
+    public HistoryAdapter(Context context) {
+        this.lotteries = new ArrayList<>();
         this.context = context;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View itemView = layoutInflater.inflate(R.layout.item_list_lottery,parent,false);
+        View itemView = layoutInflater.inflate(R.layout.item_list_history,parent,false);
         return new ViewHolder(itemView);
     }
 
@@ -65,5 +65,10 @@ public class HistoryAdapter extends  RecyclerView.Adapter<HistoryAdapter.ViewHol
             tvCheckDate = (TextView)itemView.findViewById(R.id.tv_check_date);
             tvCheckTime = (TextView)itemView.findViewById(R.id.tv_check_time);
         }
+    }
+
+    public void setLotteries(ArrayList<Lottery> lotteryArrayList) {
+        this.lotteries = lotteryArrayList;
+        notifyDataSetChanged();
     }
 }
