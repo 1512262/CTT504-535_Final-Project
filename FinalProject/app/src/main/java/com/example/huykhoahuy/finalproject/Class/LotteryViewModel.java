@@ -8,6 +8,8 @@ import android.support.annotation.NonNull;
 import java.util.List;
 
 public class LotteryViewModel extends AndroidViewModel {
+    private static LotteryViewModel INSTANCE = null;
+
     private LotteryRepository mLotteryRepository;
     private LiveData<List<Lottery>> mAllLotteries;
 
@@ -15,6 +17,16 @@ public class LotteryViewModel extends AndroidViewModel {
         super(application);
         mLotteryRepository = LotteryRepository.getInstance(application);
         mAllLotteries = mLotteryRepository.getAllLotteries();
+    }
+
+    public static void setInstance(LotteryViewModel lotteryViewModel) {
+        if (lotteryViewModel != null && INSTANCE == null) {
+            INSTANCE = lotteryViewModel;
+        }
+    }
+
+    public static LotteryViewModel getInstance() {
+        return INSTANCE;
     }
 
     public LiveData<List<Lottery>> getAllLotteries() {return mAllLotteries;}

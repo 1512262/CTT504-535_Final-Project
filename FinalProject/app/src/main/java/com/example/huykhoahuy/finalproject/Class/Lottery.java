@@ -10,36 +10,36 @@ import java.util.ArrayList;
 
 @Entity(tableName = "lottery")
 public class Lottery {
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "lottery_id")
+    private int Lottery_ID = 0;
+
     @ColumnInfo(name = "lottery_company_name")
     private String Lottery_Company_Name;
 
     @ColumnInfo(name = "lottery_date")
     private String Lottery_Date;
 
-    @PrimaryKey
     @ColumnInfo(name = "lottery_province_id")
-    @NonNull
     private String Lottery_Province_ID;
 
     @ColumnInfo(name = "lottery_code")
-
     public String Lottery_Code;
 
     @ColumnInfo(name = "lottery_check_date")
-    private String Lottery_Check_Date;
+    private String Lottery_Check_Date = "";
 
     @ColumnInfo(name = "lottery_check_time")
-    private String Lottery_Check_Time;
+    private String Lottery_Check_Time = "";
 
-    @Ignore
+    @ColumnInfo(name = "lottery_prize")
     private String Lottery_Prize = "Chúc bạn may mắn lần sau";
 
 
     public Lottery(){}
 
     @Ignore
-    public Lottery(String lottery_Company_Name, String lottery_Date, @NonNull String lottery_Province_ID, String lottery_Code) {
-   
+    public Lottery(String lottery_Company_Name, String lottery_Date, String lottery_Province_ID, String lottery_Code) {
         Lottery_Company_Name = lottery_Company_Name;
         Lottery_Date = lottery_Date;
         Lottery_Province_ID = lottery_Province_ID;
@@ -158,5 +158,13 @@ public class Lottery {
 
     public void setLottery_Province_ID(String lottery_Province_ID) {
         Lottery_Province_ID = lottery_Province_ID;
+    }
+
+    public int getLottery_ID() {
+        return Lottery_ID;
+    }
+
+    public void setLottery_ID(int lottery_ID) {
+        Lottery_ID = lottery_ID;
     }
 }
