@@ -1,19 +1,42 @@
 package com.example.huykhoahuy.finalproject.Class;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
 
-// 1 tờ vé số
+@Entity(tableName = "lottery")
 public class Lottery {
+    @ColumnInfo(name = "lottery_company_name")
     private String Lottery_Company_Name;
+
+    @ColumnInfo(name = "lottery_date")
     private String Lottery_Date;
+
+    @PrimaryKey
+    @ColumnInfo(name = "lottery_province_id")
+    @NonNull
     private String Loterry_Province_ID;
+
+    @ColumnInfo(name = "lottery_code")
     public String Lottery_Code;
+
+    @ColumnInfo(name = "lottery_check_date")
     private String Lottery_Check_Date;
+
+    @ColumnInfo(name = "lottery_check_time")
     private String Lottery_Check_Time;
 
+    @Ignore
     private String Lottery_Prize = "Chúc bạn may mắn lần sau";
 
-    public Lottery(String lottery_Company_Name, String lottery_Date, String loterry_Province_ID, String lottery_Code) {
+    public Lottery(){}
+
+    @Ignore
+    public Lottery(String lottery_Company_Name, String lottery_Date, @NonNull String loterry_Province_ID, String lottery_Code) {
         Lottery_Company_Name = lottery_Company_Name;
         Lottery_Date = lottery_Date;
         Loterry_Province_ID = loterry_Province_ID;
