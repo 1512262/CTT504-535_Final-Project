@@ -149,7 +149,7 @@ public class ResultTableFragment extends Fragment {
         final AutoCompleteTextView tvMyLotteryCompany = (AutoCompleteTextView)mView.findViewById(R.id.tv_my_lottery_company);
 
         linearLayout.setVisibility(View.INVISIBLE);
-        
+
         final Button btnQuery = (Button)mView.findViewById(R.id.btn_query);
         btnQuery.setOnClickListener(new View.OnClickListener() {
             @Override
