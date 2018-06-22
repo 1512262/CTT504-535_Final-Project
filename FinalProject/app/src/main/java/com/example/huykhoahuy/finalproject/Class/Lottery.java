@@ -19,7 +19,7 @@ public class Lottery {
     @PrimaryKey
     @ColumnInfo(name = "lottery_province_id")
     @NonNull
-    private String Loterry_Province_ID;
+    private String Lottery_Province_ID;
 
     @ColumnInfo(name = "lottery_code")
 
@@ -38,7 +38,7 @@ public class Lottery {
     public Lottery(){}
 
     @Ignore
-    public Lottery(String lottery_Company_Name, String lottery_Date, @NonNull String loterry_Province_ID, String lottery_Code) {
+    public Lottery(String lottery_Company_Name, String lottery_Date, @NonNull String lottery_Province_ID, String lottery_Code) {
    
         Lottery_Company_Name = lottery_Company_Name;
         Lottery_Date = lottery_Date;

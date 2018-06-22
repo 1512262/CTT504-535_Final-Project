@@ -155,6 +155,8 @@ public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
         String prize = lottery.getLottery_Prize();
         int duration = Toast.LENGTH_SHORT;
 
+
+
         Toast toast = Toast.makeText(context, prize, duration);
         toast.show();
     }
