@@ -23,7 +23,7 @@ public interface LotteryDao {
     @Update
     public void updateLottery(Lottery lottery);
 
-    @Query("SELECT * FROM lottery ORDER BY lottery_province_id")
+    @Query("SELECT * FROM lottery ORDER BY lottery_id DESC")
     public LiveData<List<Lottery>> loadAllLotteries();
 
     @Query("DELETE FROM lottery")

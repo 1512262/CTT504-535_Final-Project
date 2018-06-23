@@ -3,6 +3,7 @@ package com.example.huykhoahuy.finalproject.Fragment;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -29,13 +30,17 @@ import android.widget.Toast;
 import com.example.huykhoahuy.finalproject.Class.Lottery;
 import com.example.huykhoahuy.finalproject.Class.LotteryCompany;
 import com.example.huykhoahuy.finalproject.Class.LotteryResult;
+import com.example.huykhoahuy.finalproject.Class.LotteryViewModel;
 import com.example.huykhoahuy.finalproject.Other.ParseHostFile;
 import com.example.huykhoahuy.finalproject.Other.RetrieveLotteryResult;
 import com.example.huykhoahuy.finalproject.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -77,10 +82,34 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         fabCreate = (FloatingActionButton)view.findViewById(R.id.floatingActionButton);
-        TextView tvMyResultLotteryComapany = (TextView)view.findViewById(R.id.tv__my_result_lottery_company);
-        TextView tvMyResultLotteryDate = (TextView)view.findViewById(R.id.tv_my_result_lottery_date);
-        TextView tvMyResultLotteryCode = (TextView)view.findViewById(R.id.tv_my_result_lottery_code);
-        TextView tvMyResultLotteryPrize = (TextView)view.findViewById(R.id.tv_my_result_lottery_prize);
+        final TextView tvMyResultLotteryComapany = (TextView)view.findViewById(R.id.tv__my_result_lottery_company);
+        final TextView tvMyResultLotteryDate = (TextView)view.findViewById(R.id.tv_my_result_lottery_date);
+        final TextView tvMyResultLotteryCode = (TextView)view.findViewById(R.id.tv_my_result_lottery_code);
+        final TextView tvMyResultLotteryPrize = (TextView)view.findViewById(R.id.tv_my_result_lottery_prize);
+
+        LotteryViewModel.getInstance().getAllLotteries().observe(this, new Observer<List<Lottery>>() {
+            @Override
+            public void onChanged(@Nullable List<Lottery> lotteries) {
+                if (lotteries.size() < 1) return;
+                Lottery bestLottery = lotteries.get(0);
+                for (int i = 1; i < lotteries.size(); i++) {
+                    Lottery tmpLottery = lotteries.get(i);
+                    try {
+                        if (new SimpleDateFormat("dd/MM/yyyy hh:mm:ss")
+                                .parse(tmpLottery.getLottery_Check_Date()+" "+tmpLottery.getLottery_Check_Time())
+                                .after(new SimpleDateFormat("dd/MM/yyyy hh:mm:ss")
+                                        .parse(bestLottery.getLottery_Check_Date()+" "+bestLottery.getLottery_Check_Time())))
+                            bestLottery = tmpLottery;
+                    } catch (ParseException e) {
+                        return;
+                    }
+                }
+                tvMyResultLotteryComapany.setText(bestLottery.getLottery_Company_Name());
+                tvMyResultLotteryDate.setText(bestLottery.getLottery_Date());
+                tvMyResultLotteryCode.setText(bestLottery.Lottery_Code);
+                tvMyResultLotteryPrize.setText(bestLottery.getLottery_Prize());
+            }
+        });
 
         fabCreate.setOnClickListener(this);
         initData();
