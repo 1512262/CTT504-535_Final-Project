@@ -5,6 +5,8 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
+import com.example.huykhoahuy.finalproject.Interface.LotteryDao;
+
 @Database(entities = Lottery.class, version = 1)
 public abstract class LotteryDatabase extends RoomDatabase{
     public abstract LotteryDao lotteryDao();

@@ -23,6 +23,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.huykhoahuy.finalproject.Class.Lottery;
@@ -76,6 +77,11 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         fabCreate = (FloatingActionButton)view.findViewById(R.id.floatingActionButton);
+        TextView tvMyResultLotteryComapany = (TextView)view.findViewById(R.id.tv__my_result_lottery_company);
+        TextView tvMyResultLotteryDate = (TextView)view.findViewById(R.id.tv_my_result_lottery_date);
+        TextView tvMyResultLotteryCode = (TextView)view.findViewById(R.id.tv_my_result_lottery_code);
+        TextView tvMyResultLotteryPrize = (TextView)view.findViewById(R.id.tv_my_result_lottery_prize);
+
         fabCreate.setOnClickListener(this);
         initData();
     }

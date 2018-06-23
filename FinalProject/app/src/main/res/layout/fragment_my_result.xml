@@ -95,7 +95,7 @@
                             android:text="326813"
                             android:textSize="25dp"
                             android:textStyle="bold"
-                            android:textColor="#FF0000"
+                            android:textColor="@color/colorAccent"
                             android:layout_marginBottom="2dp"/>
                     </LinearLayout>
 
@@ -108,12 +108,12 @@
                     android:gravity="center_vertical"
                     android:orientation="vertical">
                     <TextView
-                        android:id="@+id/tv_my_lottery_prize"
+                        android:id="@+id/tv_my_result_lottery_prize"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Giải Đặc Biệt"
-                        android:textColor="@color/colorAccent"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="40dp"
                         android:layout_gravity="center"
                         android:textStyle="bold"/>
