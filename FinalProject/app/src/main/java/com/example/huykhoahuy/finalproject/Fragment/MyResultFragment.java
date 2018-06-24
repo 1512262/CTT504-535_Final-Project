@@ -52,6 +52,7 @@ import java.util.Map;
 public class MyResultFragment extends Fragment implements View.OnClickListener {
     private OnFragmentInteractionListener mListener;
     private FloatingActionButton fabCreate;
+    private FloatingActionButton fabDelete;
     private View view;
     private ArrayList<LotteryCompany> lotteryCompanies;
     private Lottery lottery;
@@ -78,7 +79,8 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        fabCreate = (FloatingActionButton)view.findViewById(R.id.floatingActionButton);
+        fabCreate = (FloatingActionButton)view.findViewById(R.id.fab_new_checking);
+        fabDelete = (FloatingActionButton)view.findViewById(R.id.fab_delete);
         final TextView tvMyResultLotteryComapany = (TextView)view.findViewById(R.id.tv_my_result_lottery_company);
         final TextView tvMyResultLotteryDate = (TextView)view.findViewById(R.id.tv_my_result_lottery_date);
         final TextView tvMyResultLotteryCode = (TextView)view.findViewById(R.id.tv_my_result_lottery_code);
@@ -108,6 +110,7 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
             }
         });
 
+        fabDelete.setVisibility(View.INVISIBLE);
         fabCreate.setOnClickListener(this);
         initData();
     }
