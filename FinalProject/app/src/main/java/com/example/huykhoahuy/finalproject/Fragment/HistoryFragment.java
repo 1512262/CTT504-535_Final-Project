@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.example.huykhoahuy.finalproject.Adapter.HistoryAdapter;
 import com.example.huykhoahuy.finalproject.Adapter.LotteryCompanyAdapter;
@@ -37,6 +38,7 @@ public class HistoryFragment extends Fragment implements ItemClickListener {
 
     private OnFragmentInteractionListener mListener;
     private View mView;
+    ArrayList<Lottery> lotteryArrayList;
     private HistoryAdapter adapter;
     public HistoryFragment() {
     }
@@ -74,7 +76,7 @@ public class HistoryFragment extends Fragment implements ItemClickListener {
         lotteryViewModel.getAllLotteries().observe(this, new Observer<List<Lottery>>() {
             @Override
             public void onChanged(@Nullable List<Lottery> lotteryList) {
-                ArrayList<Lottery> lotteryArrayList = new ArrayList<>(lotteryList);
+                lotteryArrayList = new ArrayList<>(lotteryList);
                 adapter.setLotteries(lotteryArrayList);
             }
         });
@@ -130,7 +132,16 @@ public class HistoryFragment extends Fragment implements ItemClickListener {
         mBuilder.setView(mView);
         FloatingActionButton btn = (FloatingActionButton)mView.findViewById(R.id.floatingActionButton);
         btn.setVisibility(View.INVISIBLE);
-        
+        final TextView tvMyResultLotteryComapany =(TextView)mView.findViewById(R.id.tv_my_result_lottery_company);
+        final TextView tvMyResultLotteryDate =(TextView)mView.findViewById(R.id.tv_my_result_lottery_date);
+        final TextView tvMyResultLotteryCode =(TextView)mView.findViewById(R.id.tv_my_result_lottery_code);
+        final TextView tvMyResultLotteryPrize =(TextView)mView.findViewById(R.id.tv_my_result_lottery_prize);
+
+        tvMyResultLotteryComapany.setText(lotteryArrayList.get(position).getLottery_Company_Name());
+        tvMyResultLotteryDate.setText(lotteryArrayList.get(position).getLottery_Date());
+        tvMyResultLotteryCode.setText(lotteryArrayList.get(position).Lottery_Code);
+        tvMyResultLotteryPrize.setText(lotteryArrayList.get(position).getLottery_Prize());
+
         AlertDialog dialog = mBuilder.create();
         dialog.show();
         doKeepDialog(dialog);
@@ -141,3 +152,4 @@ public class HistoryFragment extends Fragment implements ItemClickListener {
         void onFragmentInteraction(Uri uri);
     }
 }
+

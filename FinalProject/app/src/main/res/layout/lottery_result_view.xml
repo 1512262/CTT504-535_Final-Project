@@ -47,7 +47,7 @@
                         android:text="Tên công ty Xổ số Kiến Thiết"
                         android:textStyle="bold"/>
                     <TextView
-                        android:id="@+id/tv__my_result_lottery_company"
+                        android:id="@+id/tv_my_result_lottery_company"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Công Ty TNHH MTV Xổ Số Kiến Thiết Tỉnh Bến Tre"
