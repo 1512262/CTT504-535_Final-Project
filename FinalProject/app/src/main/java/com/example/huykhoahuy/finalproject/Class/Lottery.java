@@ -72,7 +72,7 @@ public class Lottery {
                 if(iCode%100000==iResult%100000)
                     Lottery_Prize="Giải Tư";
             }
-            if(i==13&&i==14){
+            if(i==13||i==14){
                 if(iCode%100000==iResult%100000)
                     Lottery_Prize="Giải Ba";
             }
