@@ -1,5 +1,7 @@
 package com.example.huykhoahuy.finalproject.Fragment;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +10,7 @@ import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,11 +18,13 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.example.huykhoahuy.finalproject.Adapter.HistoryAdapter;
 import com.example.huykhoahuy.finalproject.Adapter.LotteryCompanyAdapter;
 import com.example.huykhoahuy.finalproject.Class.Lottery;
 import com.example.huykhoahuy.finalproject.Class.LotteryViewModel;
+import com.example.huykhoahuy.finalproject.Interface.ItemClickListener;
 import com.example.huykhoahuy.finalproject.Other.ParseHostFile;
 import com.example.huykhoahuy.finalproject.Other.SwipeController;
 import com.example.huykhoahuy.finalproject.Other.SwipeControllerActions;
@@ -28,7 +33,7 @@ import com.example.huykhoahuy.finalproject.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HistoryFragment extends Fragment {
+public class HistoryFragment extends Fragment implements ItemClickListener {
 
     private OnFragmentInteractionListener mListener;
     private View mView;
@@ -64,6 +69,7 @@ public class HistoryFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(mView.getContext(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+        adapter.setClickListener(this);
 
         lotteryViewModel.getAllLotteries().observe(this, new Observer<List<Lottery>>() {
             @Override
@@ -100,12 +106,35 @@ public class HistoryFragment extends Fragment {
         }
     }
 
+
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
 
+
+
+    private static void doKeepDialog(Dialog dialog){
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        dialog.getWindow().setAttributes(lp);
+    }
+
+    @Override
+    public void onClick(View view, int position) {
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(view.getContext());
+        View mView = getLayoutInflater().inflate(R.layout.lottery_result_view,null);
+        mBuilder.setView(mView);
+        FloatingActionButton btn = (FloatingActionButton)mView.findViewById(R.id.floatingActionButton);
+        btn.setVisibility(View.INVISIBLE);
+        
+        AlertDialog dialog = mBuilder.create();
+        dialog.show();
+        doKeepDialog(dialog);
+    }
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name

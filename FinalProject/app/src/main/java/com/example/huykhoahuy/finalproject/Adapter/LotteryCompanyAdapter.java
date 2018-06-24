@@ -21,16 +21,11 @@ public class LotteryCompanyAdapter extends RecyclerView.Adapter<LotteryCompanyAd
 
     private ArrayList<LotteryCompany>lotteryCompanies;
     private ArrayList<LotteryCompany>lotteryCompaniesFiltered;
-    private LotteryCompanyAdapterListener listener;
-
     private ItemClickListener clickListener;
-
-
-
-    public interface LotteryCompanyAdapterListener {
-        void onLotteryCompanySelected(LotteryCompany company);
-    }
     Context context;
+
+
+
 
     public LotteryCompanyAdapter(ArrayList<LotteryCompany> lotteryCompanies, Context context) {
         this.lotteryCompanies = lotteryCompanies;

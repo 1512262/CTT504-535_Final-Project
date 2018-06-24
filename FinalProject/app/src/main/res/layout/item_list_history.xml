@@ -107,7 +107,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:id="@+id/tv_lottery_province_id"
-                            android:text="XSHCM"
+                            android:text="XSBTR"
                             android:textAlignment="center"/>
 
                     </LinearLayout>

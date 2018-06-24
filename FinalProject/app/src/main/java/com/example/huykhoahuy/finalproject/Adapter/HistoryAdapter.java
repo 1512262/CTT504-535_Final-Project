@@ -11,14 +11,22 @@ import android.widget.TextView;
 
 import com.example.huykhoahuy.finalproject.Class.Lottery;
 import com.example.huykhoahuy.finalproject.Class.LotteryCompany;
+import com.example.huykhoahuy.finalproject.Interface.ItemClickListener;
 import com.example.huykhoahuy.finalproject.R;
 
 import java.util.ArrayList;
 
 public class HistoryAdapter extends  RecyclerView.Adapter<HistoryAdapter.ViewHolder>{
 
-    ArrayList<Lottery>lotteries;
+    private ArrayList<Lottery>lotteries;
     Context context;
+    private HistoryAdapterListener listener;
+    private ItemClickListener clickListener;
+
+    public interface HistoryAdapterListener{
+        void onLotterySelected(Lottery lottery);
+
+    }
 
     public HistoryAdapter(Context context) {
         this.lotteries = new ArrayList<>();
@@ -50,7 +58,7 @@ public class HistoryAdapter extends  RecyclerView.Adapter<HistoryAdapter.ViewHol
         return lotteries.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
         ImageView ivLotteryImage;
         TextView tvLotteryCode,tvLotteryDate,tvLotteryProvinceID,tvLotteryPrize;
@@ -64,9 +72,18 @@ public class HistoryAdapter extends  RecyclerView.Adapter<HistoryAdapter.ViewHol
             tvLotteryPrize = (TextView)itemView.findViewById(R.id.tv_lottery_prize);
             tvCheckDate = (TextView)itemView.findViewById(R.id.tv_check_date);
             tvCheckTime = (TextView)itemView.findViewById(R.id.tv_check_time);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (clickListener != null) clickListener.onClick(v, getAdapterPosition());
         }
     }
 
+    public void setClickListener(ItemClickListener itemClickListener) {
+        this.clickListener = itemClickListener;
+    }
     public void setLotteries(ArrayList<Lottery> lotteryArrayList) {
         this.lotteries = lotteryArrayList;
         notifyDataSetChanged();
