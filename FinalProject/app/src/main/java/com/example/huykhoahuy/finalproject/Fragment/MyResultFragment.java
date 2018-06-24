@@ -94,9 +94,9 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
                 for (int i = 1; i < lotteries.size(); i++) {
                     Lottery tmpLottery = lotteries.get(i);
                     try {
-                        if (new SimpleDateFormat("dd/MM/yyyy hh:mm:ss")
+                        if (new SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
                                 .parse(tmpLottery.getLottery_Check_Date()+" "+tmpLottery.getLottery_Check_Time())
-                                .after(new SimpleDateFormat("dd/MM/yyyy hh:mm:ss")
+                                .after(new SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
                                         .parse(bestLottery.getLottery_Check_Date()+" "+bestLottery.getLottery_Check_Time())))
                             bestLottery = tmpLottery;
                     } catch (ParseException e) {
