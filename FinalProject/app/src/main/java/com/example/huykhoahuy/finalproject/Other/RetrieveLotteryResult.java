@@ -157,7 +157,7 @@ public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
         int duration = Toast.LENGTH_SHORT;
 
         lottery.setLottery_Check_Date(new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime()));
-        lottery.setLottery_Check_Time(new SimpleDateFormat("hh:mm:ss").format(Calendar.getInstance().getTime()));
+        lottery.setLottery_Check_Time(new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()));
         LotteryViewModel.getInstance().insertLottery(lottery);
 
         Toast toast = Toast.makeText(context, prize, duration);

@@ -152,7 +152,7 @@ public class HistoryFragment extends Fragment implements ItemClickListener {
     }
 
     @Override
-    public void onClick(View view, int position) {
+    public void onClick(View view, final int position) {
 
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(view.getContext());
         View mView = getLayoutInflater().inflate(R.layout.lottery_result_view,null);
@@ -173,7 +173,7 @@ public class HistoryFragment extends Fragment implements ItemClickListener {
         fabDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDeleteDialog();
+                showDeleteDialog(position);
                 dialog.dismiss();
             }
         });
@@ -182,7 +182,7 @@ public class HistoryFragment extends Fragment implements ItemClickListener {
         doKeepDialog(dialog);
     }
 
-    public void showDeleteDialog(){
+    public void showDeleteDialog(final int position){
         AlertDialog.Builder builder = new AlertDialog.Builder(mView.getContext());
         builder.setTitle("Xóa tìm kiếm");
         builder.setMessage("Bạn có thật sự muốn xóa không");
@@ -196,7 +196,7 @@ public class HistoryFragment extends Fragment implements ItemClickListener {
         builder.setNegativeButton("Xóa đi", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
+                LotteryViewModel.getInstance().deleteLottery(lotteryArrayList.get(position));
                 Toast.makeText(mView.getContext(), "OK. Đã xóa", Toast.LENGTH_SHORT).show();
             }
         });
@@ -218,7 +218,7 @@ public class HistoryFragment extends Fragment implements ItemClickListener {
         builder.setNegativeButton("Xóa hết đi", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
+                LotteryViewModel.getInstance().deleteAllLotteries();
                 Toast.makeText(mView.getContext(), "OK. Đã xóa toàn bộ", Toast.LENGTH_SHORT).show();
             }
         });
