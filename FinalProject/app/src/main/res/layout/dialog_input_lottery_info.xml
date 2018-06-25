@@ -62,13 +62,17 @@
                 </LinearLayout>
 
             </LinearLayout>
-            <AutoCompleteTextView
+            <TextView
                 android:id="@+id/tv_lottery_company"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:textColor="#000000"
                 android:hint="@string/lottery_company_name"
-                android:textSize="20dp"
-                android:inputType="text"/>
+                android:textSize="20dp"/>
             <ProgressBar
                 android:id="@+id/prb_loading_form"
                 style="?android:attr/progressBarStyleHorizontal"

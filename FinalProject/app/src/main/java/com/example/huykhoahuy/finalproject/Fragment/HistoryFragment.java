@@ -35,6 +35,7 @@ import com.example.huykhoahuy.finalproject.Other.ParseHostFile;
 import com.example.huykhoahuy.finalproject.Other.SwipeController;
 import com.example.huykhoahuy.finalproject.Other.SwipeControllerActions;
 import com.example.huykhoahuy.finalproject.R;
+import com.github.clans.fab.FloatingActionMenu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -157,9 +158,9 @@ public class HistoryFragment extends Fragment implements ItemClickListener {
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(view.getContext());
         View mView = getLayoutInflater().inflate(R.layout.lottery_result_view,null);
         mBuilder.setView(mView);
-        FloatingActionButton fabCreate = (FloatingActionButton)mView.findViewById(R.id.fab_new_checking);
+        FloatingActionMenu fabMore = (FloatingActionMenu) mView.findViewById(R.id.fab_more);
         FloatingActionButton fabDelete = (FloatingActionButton)mView.findViewById(R.id.fab_delete);
-        fabCreate.setVisibility(View.INVISIBLE);
+        fabMore.setVisibility(View.INVISIBLE);
         final TextView tvMyResultLotteryComapany =(TextView)mView.findViewById(R.id.tv_my_result_lottery_company);
         final TextView tvMyResultLotteryDate =(TextView)mView.findViewById(R.id.tv_my_result_lottery_date);
         final TextView tvMyResultLotteryCode =(TextView)mView.findViewById(R.id.tv_my_result_lottery_code);

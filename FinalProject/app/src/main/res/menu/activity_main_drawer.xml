@@ -17,10 +17,18 @@
             android:icon="@drawable/ic_list_black_24dp"
             android:title="@string/list" />
 
-        <item
-            android:id="@+id/nav_about"
-            android:icon="@drawable/ic_help_black_24dp"
-            android:title="@string/aboutus" />
+
     </group>
+
+    <item android:title="Thông tin về Đồ án"
+        android:checkableBehavior="single">
+        <menu>
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@drawable/ic_help_black_24dp"
+                android:title="@string/aboutus" />
+
+        </menu>
+    </item>
 
 </menu>

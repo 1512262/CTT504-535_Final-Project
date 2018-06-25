@@ -36,6 +36,9 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
+import in.galaxyofandroid.spinerdialog.SpinnerDialog;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -116,7 +119,7 @@ public class ResultTableFragment extends Fragment {
     private void btnQueryOnClick(View v) {
         linearLayout = (LinearLayout)mView.findViewById(R.id.lyt_table);
         final EditText etMyLotteryDate = (EditText)mView.findViewById(R.id.et_my_lottery_date);
-        final AutoCompleteTextView tvMyLotteryCompany = (AutoCompleteTextView)mView.findViewById(R.id.tv_my_lottery_company);
+        final TextView tvMyLotteryCompany = (TextView)mView.findViewById(R.id.tv_my_lottery_company);
         final ProgressBar progressBar = (ProgressBar)mView.findViewById(R.id.prb_loading);
         String lottery_date = etMyLotteryDate.getText().toString();
         String lottery_company = tvMyLotteryCompany.getText().toString();
@@ -146,7 +149,7 @@ public class ResultTableFragment extends Fragment {
         mView =inflater.inflate(R.layout.fragment_result_table, container, false);
         linearLayout = (LinearLayout)mView.findViewById(R.id.lyt_table);
         final EditText etMyLotteryDate = (EditText)mView.findViewById(R.id.et_my_lottery_date);
-        final AutoCompleteTextView tvMyLotteryCompany = (AutoCompleteTextView)mView.findViewById(R.id.tv_my_lottery_company);
+        final TextView tvMyLotteryCompany = (TextView)mView.findViewById(R.id.tv_my_lottery_company);
 
         linearLayout.setVisibility(View.INVISIBLE);
 
@@ -187,9 +190,21 @@ public class ResultTableFragment extends Fragment {
             }
         });
 
-        adapter = new ArrayAdapter<String>(mView.getContext(),android.R.layout.simple_list_item_1,lotterycompanynames);
-        tvMyLotteryCompany.setAdapter(adapter);
-        tvMyLotteryCompany.setThreshold(1);
+        final SpinnerDialog spinnerDialog = new SpinnerDialog(getActivity(),lotterycompanynames,"Chọn Công ty Xổ số Kiến thiết",R.style.DialogAnimations_SmileWindow,"Đóng");
+        spinnerDialog.bindOnSpinerListener(new OnSpinerItemClick() {
+            @Override
+            public void onClick(String s, int i) {
+                tvMyLotteryCompany.setText(s);
+            }
+        });
+//        ArrayAdapter<String> adapter;
+
+        tvMyLotteryCompany.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                spinnerDialog.showSpinerDialog();
+            }
+        });
 
         return mView;
 

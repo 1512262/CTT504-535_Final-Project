@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/my_background"
     android:orientation="vertical"
     tools:context=".Fragment.ResultTableFragment">
 
@@ -11,9 +12,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <AutoCompleteTextView
+        <TextView
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:textSize="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#000000"
             android:id="@+id/tv_my_lottery_company"
             android:hint="@string/input_lottery_company_name"
             />
@@ -21,7 +28,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="date"
+            android:textSize="20dp"
             android:id="@+id/et_my_lottery_date"
+            android:textColor="#000000"
             android:hint="@string/input_check_date"/>
         <Button
             android:id="@+id/btn_query"

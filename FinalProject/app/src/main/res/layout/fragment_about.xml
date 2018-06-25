@@ -3,46 +3,71 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/my_background"
     android:orientation="vertical"
     tools:context=".Fragment.AboutFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Thông tin đồ án"
-        android:textStyle="bold"
-        android:textColor="@color/colorAccent"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nhóm thực hiện: Simple Men"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Đồ án sử dụng cho 2 môn học
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Thông tin đồ án"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nhóm thực hiện: Simple Men"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Đồ án sử dụng cho 2 môn học
         \n      - Phân tích thiết kế phần mềm
         \n      - Phát triển phần mềm cho thiết bị di động"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="\n\n\n Các thành viên trong trong nhóm\n"
-        android:textStyle="bold"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Võ Anh Khoa - 15122262 \nThiết kế giao diện và lập trình chính\n"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nguyễn Văn Quang Huy - 15122205 \nThiết kế class, database và lập trình lấy dữ liệu\n"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nguyễn Quốc Huy - 15122203 \nKiểm lỗi và lập trình lấy dữ liệu"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\n\n\n Các thành viên trong trong nhóm\n"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Võ Anh Khoa - 15122262 \nThiết kế giao diện và lập trình chính\n"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nguyễn Văn Quang Huy - 15122205 \nThiết kế class, database và lập trình lấy dữ liệu\n"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nguyễn Quốc Huy - 15122203 \nKiểm lỗi và lập trình lấy dữ liệu"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\n\n\n Địa chỉ github\n"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:autoLink="web"
+            android:text="https://github.com/1512262/CTT504-535_Final-Project"/>
+
+    </LinearLayout>
+
 
 
 </LinearLayout>

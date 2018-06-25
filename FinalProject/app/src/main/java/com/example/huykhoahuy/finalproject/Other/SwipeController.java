@@ -158,12 +158,12 @@ public class SwipeController extends Callback {
         Paint p = new Paint();
 
         RectF leftButton = new RectF(itemView.getLeft()+2, itemView.getTop()+2, itemView.getLeft() + buttonWidthWithoutPadding, itemView.getBottom()-2);
-        p.setColor(Color.BLUE);
+        p.setColor(Color.parseColor("#6200ee"));
         c.drawRoundRect(leftButton, corners, corners, p);
         drawText("Gọi", c, leftButton, p);
 
         RectF rightButton = new RectF(itemView.getRight() - buttonWidthWithoutPadding, itemView.getTop()+2, itemView.getRight()-2, itemView.getBottom()-2);
-        p.setColor(Color.RED);
+        p.setColor(Color.parseColor("#FF4081"));
         c.drawRoundRect(rightButton, corners, corners, p);
         drawText("Chỉ đường", c, rightButton, p);
 
