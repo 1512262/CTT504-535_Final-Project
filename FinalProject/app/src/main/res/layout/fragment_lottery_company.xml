@@ -12,6 +12,10 @@
         android:id="@+id/searchView_LotteryCompany"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp">
     </SearchView>
     <android.support.v7.widget.RecyclerView

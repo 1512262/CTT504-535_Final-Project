@@ -9,7 +9,7 @@
         android:id="@+id/card_view_history"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        card_view:cardCornerRadius="4dp"
+        card_view:cardCornerRadius="0dp"
         android:layout_gravity="center"
         android:layout_margin="@dimen/card_margin"
         android:elevation="3dp">

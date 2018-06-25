@@ -36,6 +36,7 @@
             <android.support.design.widget.BottomNavigationView
                 android:id="@+id/navigation_list"
                 android:layout_width="match_parent"
+                android:background="#FFFFFF"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="0dp"
                 android:layout_marginStart="0dp"

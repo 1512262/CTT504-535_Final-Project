@@ -152,17 +152,17 @@ public class SwipeController extends Callback {
 
     private void drawButtons(Canvas c, RecyclerView.ViewHolder viewHolder) {
         float buttonWidthWithoutPadding = buttonWidth - 20;
-        float corners = 5;
+        float corners = 0;
 
         View itemView = viewHolder.itemView;
         Paint p = new Paint();
 
-        RectF leftButton = new RectF(itemView.getLeft()+5, itemView.getTop()+5, itemView.getLeft() + buttonWidthWithoutPadding, itemView.getBottom()-5);
+        RectF leftButton = new RectF(itemView.getLeft()+2, itemView.getTop()+2, itemView.getLeft() + buttonWidthWithoutPadding, itemView.getBottom()-2);
         p.setColor(Color.BLUE);
         c.drawRoundRect(leftButton, corners, corners, p);
         drawText("Gọi", c, leftButton, p);
 
-        RectF rightButton = new RectF(itemView.getRight() - buttonWidthWithoutPadding, itemView.getTop()+5, itemView.getRight()-5, itemView.getBottom()-5);
+        RectF rightButton = new RectF(itemView.getRight() - buttonWidthWithoutPadding, itemView.getTop()+2, itemView.getRight()-2, itemView.getBottom()-2);
         p.setColor(Color.RED);
         c.drawRoundRect(rightButton, corners, corners, p);
         drawText("Chỉ đường", c, rightButton, p);
