@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -56,6 +58,7 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
     private OnFragmentInteractionListener mListener;
     private com.github.clans.fab.FloatingActionButton fabCreate;
     private FloatingActionButton fabDelete;
+    private FloatingActionButton fabLookupinHistory;
     private com.github.clans.fab.FloatingActionButton fabLookup;
     private View view;
     private ArrayList<LotteryCompany> lotteryCompanies;
@@ -85,6 +88,7 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
         fabCreate = (com.github.clans.fab.FloatingActionButton) view.findViewById(R.id.fab_new_checking);
         fabLookup = (com.github.clans.fab.FloatingActionButton) view.findViewById(R.id.fab_lookup);
+        fabLookupinHistory = (FloatingActionButton)view.findViewById(R.id.fab_lookup_in_history);
         fabDelete = (FloatingActionButton)view.findViewById(R.id.fab_delete);
         final TextView tvMyResultLotteryComapany = (TextView)view.findViewById(R.id.tv_my_result_lottery_company);
         final TextView tvMyResultLotteryDate = (TextView)view.findViewById(R.id.tv_my_result_lottery_date);
@@ -116,6 +120,7 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
         });
 
         fabDelete.setVisibility(View.INVISIBLE);
+        fabLookupinHistory.setVisibility(View.INVISIBLE);
         fabCreate.setOnClickListener(this);
         fabLookup.setOnClickListener(this);
         initData();
@@ -225,7 +230,11 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
         btnAutoFill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(),"Tính năng này tạm thời chưa phát triển hoàn thiện",Toast.LENGTH_LONG).show();
+                AlertDialog.Builder importBuilder = new AlertDialog.Builder(view.getContext());
+                View importView = getLayoutInflater().inflate(R.layout.dialog_get_info_from_image,null);
+                importBuilder.setView(importView);
+                AlertDialog importdialog = importBuilder.create();
+                importdialog.show();
             }
         });
         btnCheck.setOnClickListener(new View.OnClickListener() {
