@@ -3,8 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_delete_all"
-        android:icon="@android:drawable/ic_delete"
         android:visible="true"
-        android:title="Xóa hết"/>
+        android:title="@string/delete_all"/>
+    <item
+        android:id="@+id/action_sort"
+        android:visible="true"
+        android:title="@string/action_sort"/>
 
 </menu>

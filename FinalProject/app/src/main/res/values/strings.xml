@@ -59,6 +59,15 @@
     <string name="take_image">Chụp ảnh</string>
     <string name="load_image">Chọn ảnh có sẳn</string>
     <string name="use_info">Sử dụng</string>
+    <string name="delete_all">Xóa hết</string>
+    <string name="action_descending">Sắp xếp theo chiều giảm dần</string>
+    <string name="action_ascending">Sắp xếp theo chiều tăng dần</string>
+    <string name="action_sort">Sắp xếp</string>
+    <string name="input_sorting_config">Chọn thông số sắp xếp</string>
+    <string name="according_to_check_date">Theo ngày kiểm tra</string>
+    <string name="according_to_lottery_date">Theo ngày phát hành</string>
+    <string name="according_to_lottery_prize">Theo giải thưởng</string>
+    <string name="according_to_province">Theo tỉnh</string>
 
 
 </resources>

@@ -46,10 +46,22 @@ public class HistoryAdapter extends  RecyclerView.Adapter<HistoryAdapter.ViewHol
 //        holder.ivLotteryImage.setImageDrawable();
         holder.tvLotteryCode.setText(lottery.Lottery_Code);
         holder.tvLotteryDate.setText(lottery.getLottery_Date());
-        holder.tvLotteryProvinceID.setText(lottery.getLottery_Province_ID());
         holder.tvLotteryPrize.setText(lottery.getLottery_Prize());
         holder.tvCheckDate.setText(lottery.getLottery_Check_Date());
         holder.tvCheckTime.setText(lottery.getLottery_Check_Time());
+
+        String lotterycompanyname = lottery.getLottery_Company_Name();
+        String[] splits = lotterycompanyname.split(" ");
+        String province = null;
+        int length = splits.length;
+        if(lotterycompanyname.contains("Hồ Chí Minh"))
+        {
+            province = splits[length-3]+" "+splits[length-2]+" "+splits[length-1];
+        }
+        else {
+            province = splits[length-2]+" "+splits[length-1];
+        }
+        holder.tvLotteryProvince.setText(province);
 
     }
 
@@ -61,14 +73,14 @@ public class HistoryAdapter extends  RecyclerView.Adapter<HistoryAdapter.ViewHol
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
         ImageView ivLotteryImage;
-        TextView tvLotteryCode,tvLotteryDate,tvLotteryProvinceID,tvLotteryPrize;
+        TextView tvLotteryCode,tvLotteryDate,tvLotteryProvince,tvLotteryPrize;
         TextView tvCheckDate,tvCheckTime;
         public ViewHolder(View itemView) {
             super(itemView);
             ivLotteryImage = (ImageView)itemView.findViewById(R.id.iv_lottery_image);
             tvLotteryCode = (TextView)itemView.findViewById(R.id.tv_lottery_code);
             tvLotteryDate = (TextView)itemView.findViewById(R.id.tv_lottery_date);
-            tvLotteryProvinceID = (TextView)itemView.findViewById(R.id.tv_lottery_province_id);
+            tvLotteryProvince = (TextView)itemView.findViewById(R.id.tv_lottery_province);
             tvLotteryPrize = (TextView)itemView.findViewById(R.id.tv_lottery_prize);
             tvCheckDate = (TextView)itemView.findViewById(R.id.tv_check_date);
             tvCheckTime = (TextView)itemView.findViewById(R.id.tv_check_time);

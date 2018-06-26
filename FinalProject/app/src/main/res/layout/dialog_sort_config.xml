@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/my_card_margin">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/input_sorting_config"
+                android:textAlignment="center"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:textSize="25dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+
+                   <RadioGroup
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:orientation="vertical">
+
+                       <RadioButton
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:text="@string/according_to_check_date"/>
+                       <RadioButton
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:text="@string/according_to_lottery_date"/>
+                       <RadioButton
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:text="@string/according_to_lottery_prize"/>
+                       <RadioButton
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:text="@string/according_to_province"/>
+                   </RadioGroup>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Tăng dần"/>
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Giảm dần"/>
+                    </RadioGroup>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:text="@string/action_sort"
+                android:textColor="#ffffff"
+                android:textSize="20dp"
+                android:id="@+id/btn_check"/>
+
+        </LinearLayout>
+
+
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

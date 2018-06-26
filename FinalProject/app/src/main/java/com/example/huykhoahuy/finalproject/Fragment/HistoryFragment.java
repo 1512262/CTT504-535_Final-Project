@@ -66,7 +66,7 @@ public class HistoryFragment extends Fragment implements ItemClickListener {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
-        inflater.inflate(R.menu.menu_delete, menu);
+        inflater.inflate(R.menu.menu_in_history, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -75,6 +75,14 @@ public class HistoryFragment extends Fragment implements ItemClickListener {
         switch (item.getItemId()) {
             case R.id.action_delete_all:
                 showDeleteAllDialog();
+                return true;
+            case R.id.action_sort:
+                AlertDialog sortdialog;
+                AlertDialog.Builder sortBuilder = new AlertDialog.Builder(mView.getContext());
+                View sortView = getLayoutInflater().inflate(R.layout.dialog_sort_config,null);
+                sortBuilder.setView(sortView);
+                sortdialog = sortBuilder.create();
+                sortdialog.show();
                 return true;
             default:
                 break;
