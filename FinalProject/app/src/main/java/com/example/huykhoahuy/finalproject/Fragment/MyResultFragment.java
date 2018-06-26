@@ -178,95 +178,107 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.fab_new_checking){
-            AlertDialog.Builder mBuilder = new AlertDialog.Builder(view.getContext());
-            View mView = getLayoutInflater().inflate(R.layout.dialog_input_lottery_info,null);
-            final ProgressBar progressBarForm = (ProgressBar)mView.findViewById(R.id.prb_loading_form);
-            final EditText etLotteryCode = (EditText)mView.findViewById(R.id.et_lottery_code);
-            final EditText etLotteryDate = (EditText) mView.findViewById(R.id.et_lottery_date);
-            final TextView tvLotteryCompany = (TextView)mView.findViewById(R.id.tv_lottery_company);
-            final SpinnerDialog spinnerDialog = new SpinnerDialog(getActivity(),lotterycompanynames,"Chọn Công ty Xổ số Kiến thiết",R.style.DialogAnimations_SmileWindow,"Đóng");
-            spinnerDialog.bindOnSpinerListener(new OnSpinerItemClick() {
-                @Override
-                public void onClick(String s, int i) {
-                    tvLotteryCompany.setText(s);
-                }
-            });
-
-            tvLotteryCompany.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    spinnerDialog.showSpinerDialog();
-                }
-            });
-            Button btnCheck = (Button)mView.findViewById(R.id.btn_check);
-            Button btnAutoFill = (Button)mView.findViewById(R.id.btn_autofill);
-
-            etLotteryDate.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    final Calendar calendar = Calendar.getInstance();
-                    int yy = calendar.get(Calendar.YEAR);
-                    int mm = calendar.get(Calendar.MONTH);
-                    int dd = calendar.get(Calendar.DAY_OF_MONTH);
-                    DatePickerDialog datePicker = new DatePickerDialog(view.getContext(),new DatePickerDialog.OnDateSetListener() {
-                        @Override
-                        public void onDateSet(DatePicker view, int year, int month, int day) {
-                            String strDay = null;
-                            String strMonth = null;
-                            strMonth = (month<9)?"0"+String.valueOf(month+1):String.valueOf(month+1);
-                            strDay = (day<10)?"0"+String.valueOf(day):String.valueOf(day);
-                            String date = strDay +"-"+strMonth +"-"+String.valueOf(year);
-                            etLotteryDate.setText(date);
-                        }
-                    }, yy, mm, dd);
-                    datePicker.show();
-                }
-            });
-
-            mBuilder.setView(mView);
-
-            btnAutoFill.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(v.getContext(),"Tính năng này tạm thời chưa phát triển hoàn thiện",Toast.LENGTH_LONG).show();
-                }
-            });
-            btnCheck.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (hasInternetConnection(v)) {
-                        String lottery_date = etLotteryDate.getText().toString();
-                        String lottery_company = tvLotteryCompany.getText().toString();
-                        String lottery_code = etLotteryCode.getText().toString();
-                        String lottery_province_id;
-                        if(lottery_code.equals("") || lottery_date.equals("") || lottery_company.equals(""))
-                        {
-                            Toast.makeText(v.getContext(),"Vui lòng nhập đầy đủ",Toast.LENGTH_SHORT).show();
-                        }
-                        else
-                        {
-                            lottery_province_id = map_name_id.get(lottery_company);
-                            lottery = new Lottery(lottery_company,lottery_date,lottery_province_id,lottery_code);
-                            retrieveLotteryResult = new RetrieveLotteryResult(lottery, getView(),progressBarForm);
-                            retrieveLotteryResult.execute();
-                        }
-                    }
-                    else {
-                        Toast.makeText(v.getContext(), "Không có kết nối Internet!", Toast.LENGTH_SHORT).show();
-                    }
-
-                }
-            });
-
-            AlertDialog dialog = mBuilder.create();
-            dialog.show();
-            doKeepDialog(dialog);
+            Checking();
         }
         else if(v.getId()==R.id.fab_lookup){
 
 
         }
 
+    }
+
+    private void Checking() {
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(view.getContext());
+        View mView = getLayoutInflater().inflate(R.layout.dialog_input_lottery_info,null);
+        final ProgressBar progressBarForm = (ProgressBar)mView.findViewById(R.id.prb_loading_form);
+        final EditText etLotteryCode = (EditText)mView.findViewById(R.id.et_lottery_code);
+        final EditText etLotteryDate = (EditText) mView.findViewById(R.id.et_lottery_date);
+        final TextView tvLotteryCompany = (TextView)mView.findViewById(R.id.tv_lottery_company);
+        final SpinnerDialog spinnerDialog = new SpinnerDialog(getActivity(),lotterycompanynames,"Chọn Công ty Xổ số Kiến thiết",R.style.DialogAnimations_SmileWindow,"Đóng");
+        spinnerDialog.bindOnSpinerListener(new OnSpinerItemClick() {
+            @Override
+            public void onClick(String s, int i) {
+                tvLotteryCompany.setText(s);
+            }
+        });
+
+        tvLotteryCompany.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                spinnerDialog.showSpinerDialog();
+            }
+        });
+        Button btnCheck = (Button)mView.findViewById(R.id.btn_check);
+        Button btnAutoFill = (Button)mView.findViewById(R.id.btn_autofill);
+
+        etLotteryDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePicker(etLotteryDate);
+            }
+        });
+
+        mBuilder.setView(mView);
+
+        btnAutoFill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(),"Tính năng này tạm thời chưa phát triển hoàn thiện",Toast.LENGTH_LONG).show();
+            }
+        });
+        btnCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CheckLotteryResult(v, etLotteryDate, tvLotteryCompany, etLotteryCode, progressBarForm);
+
+            }
+        });
+
+        AlertDialog dialog = mBuilder.create();
+        dialog.show();
+        doKeepDialog(dialog);
+    }
+
+    private void CheckLotteryResult(View v, EditText etLotteryDate, TextView tvLotteryCompany, EditText etLotteryCode, ProgressBar progressBarForm) {
+        if (hasInternetConnection(v)) {
+            String lottery_date = etLotteryDate.getText().toString();
+            String lottery_company = tvLotteryCompany.getText().toString();
+            String lottery_code = etLotteryCode.getText().toString();
+            String lottery_province_id;
+            if(lottery_code.equals("") || lottery_date.equals("") || lottery_company.equals(""))
+            {
+                Toast.makeText(v.getContext(),"Vui lòng nhập đầy đủ",Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                lottery_province_id = map_name_id.get(lottery_company);
+                lottery = new Lottery(lottery_company,lottery_date,lottery_province_id,lottery_code);
+                retrieveLotteryResult = new RetrieveLotteryResult(lottery, getView(),progressBarForm);
+                retrieveLotteryResult.execute();
+            }
+        }
+        else {
+            Toast.makeText(v.getContext(), "Không có kết nối Internet!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void DatePicker(final EditText etLotteryDate) {
+        final Calendar calendar = Calendar.getInstance();
+        int yy = calendar.get(Calendar.YEAR);
+        int mm = calendar.get(Calendar.MONTH);
+        int dd = calendar.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog datePicker = new DatePickerDialog(view.getContext(),new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                String strDay = null;
+                String strMonth = null;
+                strMonth = (month<9)?"0"+String.valueOf(month+1):String.valueOf(month+1);
+                strDay = (day<10)?"0"+String.valueOf(day):String.valueOf(day);
+                String date = strDay +"-"+strMonth +"-"+String.valueOf(year);
+                etLotteryDate.setText(date);
+            }
+        }, yy, mm, dd);
+        datePicker.show();
     }
 
     private boolean hasInternetConnection(View v) {

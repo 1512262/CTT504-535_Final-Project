@@ -161,13 +161,7 @@ public class ResultTableFragment extends Fragment {
         btnMoreInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder mBuilder = new AlertDialog.Builder(mView.getContext());
-                View view = getLayoutInflater().inflate(R.layout.dialog_more_info,null);
-                mBuilder.setView(view);
-
-                AlertDialog dialog = mBuilder.create();
-                dialog.show();
-                doKeepDialog(dialog);
+                MoreInfo();
             }
         });
         btnQuery.setOnClickListener(new View.OnClickListener() {
@@ -188,22 +182,7 @@ public class ResultTableFragment extends Fragment {
         etMyLotteryDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Calendar calendar = Calendar.getInstance();
-                int yy = calendar.get(Calendar.YEAR);
-                int mm = calendar.get(Calendar.MONTH);
-                int dd = calendar.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog datePicker = new DatePickerDialog(mView.getContext(),new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int day) {
-                        String strDay = null;
-                        String strMonth = null;
-                        strMonth = (month<9)?"0"+String.valueOf(month+1):String.valueOf(month+1);
-                        strDay = (day<10)?"0"+String.valueOf(day):String.valueOf(day);
-                        String date = strDay +"-"+strMonth +"-"+String.valueOf(year);
-                        etMyLotteryDate.setText(date);
-                    }
-                }, yy, mm, dd);
-                datePicker.show();
+                DatePicker(etMyLotteryDate);
             }
         });
 
@@ -225,6 +204,34 @@ public class ResultTableFragment extends Fragment {
 
         return mView;
 
+    }
+
+    private void DatePicker(final EditText etMyLotteryDate) {
+        final Calendar calendar = Calendar.getInstance();
+        int yy = calendar.get(Calendar.YEAR);
+        int mm = calendar.get(Calendar.MONTH);
+        int dd = calendar.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog datePicker = new DatePickerDialog(mView.getContext(),new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                String strDay = null;
+                String strMonth = null;
+                strMonth = (month<9)?"0"+String.valueOf(month+1):String.valueOf(month+1);
+                strDay = (day<10)?"0"+String.valueOf(day):String.valueOf(day);
+                String date = strDay +"-"+strMonth +"-"+String.valueOf(year);
+                etMyLotteryDate.setText(date);
+            }
+        }, yy, mm, dd);
+        datePicker.show();
+    }
+
+    private void MoreInfo() {
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(mView.getContext());
+        View view = getLayoutInflater().inflate(R.layout.dialog_more_info,null);
+        mBuilder.setView(view);
+        AlertDialog dialog = mBuilder.create();
+        dialog.show();
+        doKeepDialog(dialog);
     }
 
     private boolean hasInternetConnection(View v) {
