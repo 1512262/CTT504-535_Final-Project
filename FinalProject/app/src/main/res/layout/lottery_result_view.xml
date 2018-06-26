@@ -138,7 +138,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:layout_gravity="center|bottom"
+            android:layout_gravity="end|bottom"
             app:srcCompat="@drawable/ic_delete_black_24dp" />
 
 
@@ -165,7 +165,7 @@
                 fab:fab_colorNormal="#FF4081"
                 fab:fab_colorPressed="#FF4090"
                 fab:fab_colorRipple="#FFFFFF"
-                fab:fab_label="Thêm"
+                fab:fab_label="Kiểm tra mới"
                 android:src="@drawable/ic_add_black_24dp" />
 
             <com.github.clans.fab.FloatingActionButton

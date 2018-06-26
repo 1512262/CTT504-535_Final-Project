@@ -55,6 +55,7 @@
     <string name="input_check_date">Nhập ngày cần tra cứu</string>
     <string name="info_KK_prize">Giải Khuyến Khích khi bạn chỉ sai 1 chữ số so với Mã số vé Giải Đặc biệt</string>
     <string name="toast_error_info">Thông tin bạn tra cứu hay kiểm tra bị sai</string>
+    <string name="info_lottery_company_date">Thông tin về các Công ty Xổ số Kiến Thiết</string>
 
 
 </resources>

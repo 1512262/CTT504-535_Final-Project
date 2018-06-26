@@ -1,6 +1,8 @@
 package com.example.huykhoahuy.finalproject.Fragment;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
@@ -11,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -154,6 +157,19 @@ public class ResultTableFragment extends Fragment {
         linearLayout.setVisibility(View.INVISIBLE);
 
         final Button btnQuery = (Button)mView.findViewById(R.id.btn_query);
+        final Button btnMoreInfo = (Button)mView.findViewById(R.id.btn_moreinfo);
+        btnMoreInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(mView.getContext());
+                View view = getLayoutInflater().inflate(R.layout.dialog_more_info,null);
+                mBuilder.setView(view);
+
+                AlertDialog dialog = mBuilder.create();
+                dialog.show();
+                doKeepDialog(dialog);
+            }
+        });
         btnQuery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,6 +183,7 @@ public class ResultTableFragment extends Fragment {
 
             }
         });
+
 
         etMyLotteryDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -240,6 +257,13 @@ public class ResultTableFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+    private static void doKeepDialog(Dialog dialog){
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        dialog.getWindow().setAttributes(lp);
     }
 
     public interface OnFragmentInteractionListener {
