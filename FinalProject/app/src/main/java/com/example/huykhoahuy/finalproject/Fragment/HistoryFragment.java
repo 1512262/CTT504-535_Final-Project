@@ -142,16 +142,7 @@ public class HistoryFragment extends Fragment implements ItemClickListener {
         mListener = null;
     }
 
-
-
-    private static void doKeepDialog(Dialog dialog){
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        lp.copyFrom(dialog.getWindow().getAttributes());
-        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        dialog.getWindow().setAttributes(lp);
-    }
-
+    
     @Override
     public void onClick(View view, final int position) {
 
@@ -160,6 +151,7 @@ public class HistoryFragment extends Fragment implements ItemClickListener {
         mBuilder.setView(mView);
         FloatingActionMenu fabMore = (FloatingActionMenu) mView.findViewById(R.id.fab_more);
         FloatingActionButton fabDelete = (FloatingActionButton)mView.findViewById(R.id.fab_delete);
+        FloatingActionButton fabLookupinHistory = (FloatingActionButton)mView.findViewById(R.id.fab_lookup_in_history);
         fabMore.setVisibility(View.INVISIBLE);
         final TextView tvMyResultLotteryComapany =(TextView)mView.findViewById(R.id.tv_my_result_lottery_company);
         final TextView tvMyResultLotteryDate =(TextView)mView.findViewById(R.id.tv_my_result_lottery_date);
@@ -176,6 +168,13 @@ public class HistoryFragment extends Fragment implements ItemClickListener {
             public void onClick(View v) {
                 showDeleteDialog(position);
                 dialog.dismiss();
+            }
+        });
+        fabLookupinHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
             }
         });
         dialog = mBuilder.create();
