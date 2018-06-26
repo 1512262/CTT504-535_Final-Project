@@ -142,7 +142,7 @@ public class HistoryFragment extends Fragment implements ItemClickListener {
         mListener = null;
     }
 
-    
+
     @Override
     public void onClick(View view, final int position) {
 
@@ -179,7 +179,6 @@ public class HistoryFragment extends Fragment implements ItemClickListener {
         });
         dialog = mBuilder.create();
         dialog.show();
-        doKeepDialog(dialog);
     }
 
     public void showDeleteDialog(final int position){
