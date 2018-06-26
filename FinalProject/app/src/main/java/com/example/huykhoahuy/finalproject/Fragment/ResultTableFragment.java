@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -202,6 +203,20 @@ public class ResultTableFragment extends Fragment {
             }
         });
 
+        // Tra cuu them
+        if (latestLottery != null) {
+            tvMyLotteryCompany.setText(latestLottery.first);
+            etMyLotteryDate.setText(latestLottery.second);
+            btnQuery.post(new Runnable() {
+                @Override
+                public void run() {
+                    btnQuery.performClick();
+                }
+            });
+            latestLottery = null;
+        }
+        // Ket thuc tra cuu them
+
         return mView;
 
     }
@@ -277,4 +292,9 @@ public class ResultTableFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    // Tra cuu them
+    Pair<String, String> latestLottery = null;
+    public void LookUpMore(Pair<String, String> latest) { latestLottery = latest; }
+    // Ket thuc tra cuu them
 }
