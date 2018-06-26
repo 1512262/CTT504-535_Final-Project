@@ -238,7 +238,6 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
 
         AlertDialog dialog = mBuilder.create();
         dialog.show();
-        doKeepDialog(dialog);
     }
 
     private void CheckLotteryResult(View v, EditText etLotteryDate, TextView tvLotteryCompany, EditText etLotteryCode, ProgressBar progressBarForm) {
@@ -291,13 +290,7 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
                 && cm.getActiveNetworkInfo().isConnected();
     }
 
-    private static void doKeepDialog(Dialog dialog){
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        lp.copyFrom(dialog.getWindow().getAttributes());
-        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        dialog.getWindow().setAttributes(lp);
-    }
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
