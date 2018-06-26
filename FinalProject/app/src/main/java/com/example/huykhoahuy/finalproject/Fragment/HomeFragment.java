@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -113,6 +114,12 @@ public class HomeFragment extends Fragment implements
             ResultTableFragment resultTableFragment = new ResultTableFragment();
             transaction.replace(R.id.flContent_home,resultTableFragment).commit();
             getActivity().setTitle(getString(R.string.moreinfo));
+            // tra cuu them
+            if (latestLottery != null) {
+                resultTableFragment.LookUpMore(latestLottery);
+                latestLottery = null;
+            }
+            //ket thuc tra cuu them
         }
 
         return true;
@@ -137,4 +144,15 @@ public class HomeFragment extends Fragment implements
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    // Cai dat tra cuu them
+    Pair<String,String> latestLottery = null;
+    public void LookUpMore(String company_Name, String date) {
+        if (company_Name != "" && date != "") {
+            latestLottery = new Pair<>(company_Name,date);
+            BottomNavigationView bottomNavigationView = (BottomNavigationView)getView().findViewById(R.id.navigation_list);
+            bottomNavigationView.setSelectedItemId(R.id.navigation_more);
+        }
+    }
+    // Ket thuc cai dat tra cuu them
 }

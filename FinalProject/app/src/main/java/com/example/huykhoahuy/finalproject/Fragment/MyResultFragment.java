@@ -181,8 +181,10 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
             Checking();
         }
         else if(v.getId()==R.id.fab_lookup){
-
-
+            TextView tvMyResultLotteryComapany = (TextView)view.findViewById(R.id.tv_my_result_lottery_company);
+            TextView tvMyResultLotteryDate = (TextView)view.findViewById(R.id.tv_my_result_lottery_date);
+            HomeFragment homeFragment = (HomeFragment)getParentFragment();
+            homeFragment.LookUpMore(tvMyResultLotteryComapany.getText().toString(), tvMyResultLotteryDate.getText().toString());
         }
 
     }
