@@ -170,11 +170,15 @@ public class HistoryFragment extends Fragment implements ItemClickListener {
         final TextView tvMyResultLotteryDate =(TextView)mView.findViewById(R.id.tv_my_result_lottery_date);
         final TextView tvMyResultLotteryCode =(TextView)mView.findViewById(R.id.tv_my_result_lottery_code);
         final TextView tvMyResultLotteryPrize =(TextView)mView.findViewById(R.id.tv_my_result_lottery_prize);
+        final TextView tvMyResultLotteryProvinceID =(TextView)mView.findViewById(R.id.tv_my_result_lottery_province_id);
+        final TextView tvMyResultLotteryCheckDate =(TextView)mView.findViewById(R.id.tv_my_result_lottery_check_date);
 
         tvMyResultLotteryComapany.setText(lotteryArrayList.get(position).getLottery_Company_Name());
         tvMyResultLotteryDate.setText(lotteryArrayList.get(position).getLottery_Date());
         tvMyResultLotteryCode.setText(lotteryArrayList.get(position).Lottery_Code);
         tvMyResultLotteryPrize.setText(lotteryArrayList.get(position).getLottery_Prize());
+        tvMyResultLotteryProvinceID.setText(lotteryArrayList.get(position).getLottery_Province_ID().toUpperCase());
+        tvMyResultLotteryCheckDate.setText(lotteryArrayList.get(position).getLottery_Check_Date()+" "+lotteryArrayList.get(position).getLottery_Check_Time());
 
         fabDelete.setOnClickListener(new View.OnClickListener() {
             @Override

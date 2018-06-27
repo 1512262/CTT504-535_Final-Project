@@ -94,6 +94,8 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
         final TextView tvMyResultLotteryDate = (TextView)view.findViewById(R.id.tv_my_result_lottery_date);
         final TextView tvMyResultLotteryCode = (TextView)view.findViewById(R.id.tv_my_result_lottery_code);
         final TextView tvMyResultLotteryPrize = (TextView)view.findViewById(R.id.tv_my_result_lottery_prize);
+        final TextView tvMyResultLotteryProvinceID =(TextView)view.findViewById(R.id.tv_my_result_lottery_province_id);
+        final TextView tvMyResultLotteryCheckDate =(TextView)view.findViewById(R.id.tv_my_result_lottery_check_date);
 
         LotteryViewModel.getInstance().getAllLotteries().observe(this, new Observer<List<Lottery>>() {
             @Override
@@ -116,6 +118,8 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
                 tvMyResultLotteryDate.setText(bestLottery.getLottery_Date());
                 tvMyResultLotteryCode.setText(bestLottery.Lottery_Code);
                 tvMyResultLotteryPrize.setText(bestLottery.getLottery_Prize());
+                tvMyResultLotteryProvinceID.setText(bestLottery.getLottery_Province_ID().toUpperCase());
+                tvMyResultLotteryCheckDate.setText(bestLottery.getLottery_Check_Date()+" "+bestLottery.getLottery_Check_Time());
             }
         });
 
