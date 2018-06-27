@@ -26,6 +26,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.huykhoahuy.finalproject.Activity.MainActivity;
 import com.example.huykhoahuy.finalproject.Adapter.HistoryAdapter;
 import com.example.huykhoahuy.finalproject.Adapter.LotteryCompanyAdapter;
 import com.example.huykhoahuy.finalproject.Class.Lottery;
@@ -181,8 +182,9 @@ public class HistoryFragment extends Fragment implements ItemClickListener {
         fabLookupinHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
+                dialog.hide();
+                MainActivity mainActivity = (MainActivity)getActivity();
+                mainActivity.historyLookUpMoreObservable.historyLookUpMore(tvMyResultLotteryComapany.getText().toString(), tvMyResultLotteryDate.getText().toString());
             }
         });
         dialog = mBuilder.create();

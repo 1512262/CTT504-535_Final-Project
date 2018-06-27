@@ -17,6 +17,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Pair;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -32,6 +33,9 @@ import com.example.huykhoahuy.finalproject.Fragment.MyResultFragment;
 import com.example.huykhoahuy.finalproject.R;
 import com.example.huykhoahuy.finalproject.Fragment.ResultTableFragment;
 
+import java.util.Observable;
+import java.util.Observer;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         HomeFragment.OnFragmentInteractionListener,
@@ -42,7 +46,7 @@ public class MainActivity extends AppCompatActivity
         LotteryCenterFragment.OnFragmentInteractionListener,
         MapFragment.OnFragmentInteractionListener,
         MyResultFragment.OnFragmentInteractionListener,
-        ResultTableFragment.OnFragmentInteractionListener {
+        ResultTableFragment.OnFragmentInteractionListener, Observer {
 
     private FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -116,6 +120,11 @@ public class MainActivity extends AppCompatActivity
 
 
         LotteryViewModel.setInstance(ViewModelProviders.of(this).get(LotteryViewModel.class));
+
+        // thêm history look up more
+        historyLookUpMoreObservable = new HistoryLookUpMoreObservable();
+        historyLookUpMoreObservable.addObserver(this);
+        // kết thúc thêm history look up more
     }
 
     @Override
@@ -162,6 +171,16 @@ public class MainActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
+        // thêm history look up more
+        if (id == R.id.nav_home && lookUpLottery != null) {
+            HomeFragment homeFragment = (HomeFragment)fragment;
+            homeFragment.callType = 1;
+            homeFragment.LookUpMore(lookUpLottery.first, lookUpLottery.second);
+            lookUpLottery = null;
+        }
+        // kết thúc thêm history look up more
+
         return true;
 
     }
@@ -171,4 +190,24 @@ public class MainActivity extends AppCompatActivity
     public void onFragmentInteraction(Uri uri) {
     }
 
+    // thêm history look up more
+    private Pair<String,String> lookUpLottery = null;
+    public HistoryLookUpMoreObservable historyLookUpMoreObservable = null;
+    @Override
+    public void update(Observable o, Object arg) {
+        lookUpLottery = (Pair<String,String>)arg;
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setCheckedItem(R.id.nav_home);
+        onNavigationItemSelected(navigationView.getMenu().findItem(R.id.nav_home));
+    }
+    public class HistoryLookUpMoreObservable extends Observable {
+        public void historyLookUpMore(String company_Name, String date) {
+            if (company_Name != "" && date != "") {
+                Pair<String,String> data = new Pair<>(company_Name,date);
+                setChanged();
+                notifyObservers(data);
+            }
+        }
+    }
+    // kết thúc thêm history look up more
 }
