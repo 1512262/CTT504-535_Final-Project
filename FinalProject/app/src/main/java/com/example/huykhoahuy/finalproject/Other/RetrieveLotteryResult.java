@@ -1,6 +1,7 @@
 package com.example.huykhoahuy.finalproject.Other;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.example.huykhoahuy.finalproject.Class.Lottery;
 import com.example.huykhoahuy.finalproject.Class.LotteryResult;
 import com.example.huykhoahuy.finalproject.Class.LotteryViewModel;
 import com.example.huykhoahuy.finalproject.R;
+import com.github.javiersantos.bottomdialogs.BottomDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -160,7 +162,31 @@ public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
         lottery.setLottery_Check_Time(new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()));
         LotteryViewModel.getInstance().insertLottery(lottery);
 
-        Toast toast = Toast.makeText(context, prize, duration);
-        toast.show();
+//        Toast toast = Toast.makeText(context, prize, duration);
+        if(prize.equals("Chúc bạn may mắn lần sau")){
+            BottomDialog bottomDialog =new BottomDialog.Builder(view.getContext())
+                    .setTitle("Không sao cả!")
+                    .setIcon(R.drawable.red_dice_128)
+                    .setContent(prize)
+                    .build();
+
+            bottomDialog.show();
+        }
+        else if (!prize.equals("Giải Đặc biệt")){
+            BottomDialog bottomDialog =new BottomDialog.Builder(view.getContext())
+                    .setTitle("Xin chúc mừng. Bạn đã nhận được")
+                    .setIcon(R.drawable.red_dice_128)
+                    .setContent(prize)
+                    .build();
+            bottomDialog.show();
+        }else {
+            BottomDialog bottomDialog =new BottomDialog.Builder(view.getContext())
+                    .setTitle("Hết sức tuyệt vời!. Bạn đã nhận được")
+                    .setIcon(R.drawable.red_dice_128)
+                    .setContent(prize)
+                    .build();
+            bottomDialog.show();
+        }
+
     }
 }

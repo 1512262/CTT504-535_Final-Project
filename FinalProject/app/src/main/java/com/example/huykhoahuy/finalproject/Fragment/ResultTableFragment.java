@@ -4,10 +4,12 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Pair;
@@ -34,6 +36,7 @@ import com.example.huykhoahuy.finalproject.Other.ParseHostFile;
 import com.example.huykhoahuy.finalproject.Other.RetrieveLotteryResult;
 import com.example.huykhoahuy.finalproject.Other.RetrieveLotteryResultAndRenderToATable;
 import com.example.huykhoahuy.finalproject.R;
+import com.github.javiersantos.bottomdialogs.BottomDialog;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -173,7 +176,20 @@ public class ResultTableFragment extends Fragment {
                 }
                 else {
                     linearLayout.setVisibility(View.INVISIBLE);
-                    Toast.makeText(v.getContext(), "Không có kết nối Internet!", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(v.getContext(), "Không có kết nối Internet!", Toast.LENGTH_SHORT).show();
+                    BottomDialog bottomDialog =new BottomDialog.Builder(v.getContext())
+                            .setTitle("Thông báo")
+                            .setIcon(R.drawable.red_dice_128)
+                            .setContent("Không có kết nối Internet!")
+                            .setNegativeText("Vào Cài Đặt")
+                            .onNegative(new BottomDialog.ButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull BottomDialog bottomDialog) {
+                                    startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
+                                }
+                            })
+                            .build();
+                    bottomDialog.show();
                 }
 
             }
