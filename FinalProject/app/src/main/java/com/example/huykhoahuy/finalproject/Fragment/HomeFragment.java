@@ -59,6 +59,10 @@ public class HomeFragment extends Fragment implements
         getActivity().setTitle(getString(R.string.mynewresult));
         BottomNavigationView bottomNavigationView = (BottomNavigationView)getView().findViewById(R.id.navigation_list);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        if (callType != 0) {
+            bottomNavigationView.setSelectedItemId(R.id.navigation_more);
+            callType = 0;
+        }
     }
 
     @Override
@@ -147,11 +151,14 @@ public class HomeFragment extends Fragment implements
 
     // Cai dat tra cuu them
     Pair<String,String> latestLottery = null;
+    public int callType = 0;
     public void LookUpMore(String company_Name, String date) {
         if (company_Name != "" && date != "") {
             latestLottery = new Pair<>(company_Name,date);
-            BottomNavigationView bottomNavigationView = (BottomNavigationView)getView().findViewById(R.id.navigation_list);
-            bottomNavigationView.setSelectedItemId(R.id.navigation_more);
+            if (callType == 0) {
+                BottomNavigationView bottomNavigationView = (BottomNavigationView) getView().findViewById(R.id.navigation_list);
+                bottomNavigationView.setSelectedItemId(R.id.navigation_more);
+            }
         }
     }
     // Ket thuc cai dat tra cuu them
