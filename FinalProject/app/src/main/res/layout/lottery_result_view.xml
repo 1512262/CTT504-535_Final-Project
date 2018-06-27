@@ -68,40 +68,69 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="200dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="Ngày phát hành:"
-                            android:textStyle="bold"/>
-                        <TextView
-                            android:id="@+id/tv_my_result_lottery_date"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:textColor="#000000"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="Ngày phát hành:"
+                                android:textStyle="bold"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/tv_my_result_lottery_date"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:textColor="#000000"/>
+
+                        </LinearLayout>
+
+
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:orientation="horizontal">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
 
-                        <TextView
-                            android:layout_width="200dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="Mã số vé:"
-                            android:textStyle="bold" />
-                        <TextView
-                            android:id="@+id/tv_my_result_lottery_code"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:textSize="30dp"
-                            android:textStyle="bold"
-                            android:textColor="@color/colorAccent"
-                            android:layout_marginBottom="2dp"/>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="Mã số vé:"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/tv_my_result_lottery_code"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:textSize="30dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/colorAccent"
+                                android:layout_marginBottom="2dp"/>
+
+                        </LinearLayout>
+
+
+
                     </LinearLayout>
 
                 </LinearLayout>
@@ -149,43 +178,42 @@
             app:srcCompat="@drawable/ic_search_black_24dp" />
 
 
-
         <com.github.clans.fab.FloatingActionMenu
             android:id="@+id/fab_more"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="171dp"
+            android:layout_gravity="end|bottom"
             fab:menu_colorNormal="#6200ee"
             fab:menu_colorPressed="#3700b3"
             fab:menu_colorRipple="#FFFFFF"
-            fab:menu_labels_position="left"
-            android:layout_gravity="end|bottom"
+            fab:menu_icon="@drawable/ic_more_vert_black_24dp"
             fab:menu_labels_colorNormal="#333333"
             fab:menu_labels_colorPressed="#444444"
             fab:menu_labels_colorRipple="#66FFFFFF"
 
-            fab:menu_icon="@drawable/ic_more_vert_black_24dp">
+            fab:menu_labels_position="left">
 
             <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/fab_new_checking"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/fab_new_checking"
                 android:clickable="true"
+                android:src="@drawable/ic_add_black_24dp"
                 fab:fab_colorNormal="#FF4081"
                 fab:fab_colorPressed="#FF4090"
                 fab:fab_colorRipple="#FFFFFF"
-                fab:fab_label="Kiểm tra mới"
-                android:src="@drawable/ic_add_black_24dp" />
+                fab:fab_label="Kiểm tra mới" />
 
             <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/fab_lookup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/fab_lookup"
                 android:clickable="true"
+                android:src="@drawable/ic_search_black_24dp"
                 fab:fab_colorNormal="#FFC305"
                 fab:fab_colorPressed="#FFC30F"
                 fab:fab_colorRipple="#FFFFFF"
-                fab:fab_label="Tra cứu thêm"
-                android:src="@drawable/ic_search_black_24dp" />
+                fab:fab_label="Tra cứu thêm" />
 
         </com.github.clans.fab.FloatingActionMenu>
 

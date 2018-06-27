@@ -77,18 +77,23 @@ public class HistoryFragment extends Fragment implements ItemClickListener {
                 showDeleteAllDialog();
                 return true;
             case R.id.action_sort:
-                AlertDialog sortdialog;
-                AlertDialog.Builder sortBuilder = new AlertDialog.Builder(mView.getContext());
-                View sortView = getLayoutInflater().inflate(R.layout.dialog_sort_config,null);
-                sortBuilder.setView(sortView);
-                sortdialog = sortBuilder.create();
-                sortdialog.show();
+                Sorting();
                 return true;
             default:
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private void Sorting() {
+        AlertDialog sortdialog;
+        AlertDialog.Builder sortBuilder = new AlertDialog.Builder(mView.getContext());
+        View sortView = getLayoutInflater().inflate(R.layout.dialog_sort_config,null);
+        sortBuilder.setView(sortView);
+        sortdialog = sortBuilder.create();
+        sortdialog.show();
+    }
+
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
