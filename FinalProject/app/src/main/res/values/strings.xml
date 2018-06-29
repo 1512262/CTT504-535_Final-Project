@@ -71,6 +71,7 @@
     <string name="ascending_order">Tăng dần</string>
     <string name="descending">Giảm dần</string>
     <string name="back_home">Trở về màn hình chính</string>
+    <string name="warning">Chức năng có khả năng trả kết quả sai, Vui lòng chỉnh sửa lại thông tin vé số cho đúng trước khi sử dụng</string>
 
 
 </resources>

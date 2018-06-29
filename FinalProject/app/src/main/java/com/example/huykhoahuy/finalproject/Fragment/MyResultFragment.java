@@ -287,7 +287,7 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
             String lottery_company = tvLotteryCompany.getText().toString();
             String lottery_code = etLotteryCode.getText().toString();
             String lottery_province_id;
-            if(lottery_code.equals("") || lottery_date.equals("") || lottery_company.equals(""))
+            if(lottery_code.length()!=6 || lottery_date.equals("") || lottery_company.equals(""))
             {
                 Toast.makeText(v.getContext(),"Vui lòng nhập đầy đủ",Toast.LENGTH_SHORT).show();
             }

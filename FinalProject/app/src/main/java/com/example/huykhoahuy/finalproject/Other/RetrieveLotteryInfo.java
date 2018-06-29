@@ -2,48 +2,41 @@ package com.example.huykhoahuy.finalproject.Other;
 
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
+import android.os.AsyncTask;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.huykhoahuy.finalproject.Class.Lottery;
+import com.example.huykhoahuy.finalproject.R;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RetrieveLotteryInfo {
+public class RetrieveLotteryInfo extends AsyncTask<Void,Void,StringBuilder>{
+
     private View view;
     private Bitmap bitmap;
-    private Lottery lottery;
-    private List<Bitmap> bitmapList;
-    private StringBuilder sb = new StringBuilder();
+    private TextView textView;
+    private ProgressBar progressBar;
 
-    public RetrieveLotteryInfo(Bitmap bitmap,View view) {
-        this.bitmap = bitmap;
+    public RetrieveLotteryInfo(View view, Bitmap bitmap,TextView textView,ProgressBar progressBar) {
         this.view = view;
-    }
-
-    public Bitmap getBitmap() {
-        return bitmap;
-    }
-
-    public void setBitmap(Bitmap bitmap) {
         this.bitmap = bitmap;
+        this.textView = textView;
+        this.progressBar = progressBar;
     }
 
-    public Lottery getLottery() {
-        return lottery;
-    }
+    private ArrayList<Bitmap> CropImage(Bitmap bitmap) {
 
-    public void setLottery(Lottery lottery) {
-        this.lottery = lottery;
-    }
-
-    private void CropImage() {
-
+        ArrayList<Bitmap> bitmapList = new ArrayList<>();
         int w = bitmap.getWidth();
         int h = bitmap.getHeight();
 
@@ -78,12 +71,14 @@ public class RetrieveLotteryInfo {
         bitmapList.add(bmp9);
         Bitmap bmp10 = Bitmap.createBitmap(bitmap,0,h-h1,w,h1);
         bitmapList.add(bmp10);
+        return bitmapList;
     }
 
-    private void getRawInfo()
+    public StringBuilder getRawInfo(Bitmap bitmap)
     {
+        StringBuilder sb = new StringBuilder();
+        ArrayList<Bitmap> bitmapList = CropImage(bitmap);
         TextRecognizer textRecognizer = new TextRecognizer.Builder(view.getContext()).build();
-        sb = new StringBuilder();
         for(int i=0;i<bitmapList.size();i++) {
             Bitmap bmp = bitmapList.get(i);
 
@@ -105,12 +100,38 @@ public class RetrieveLotteryInfo {
                     sb.append("          ");
                 }
             }
+
         }
+        return sb;
     }
 
 
+    @Override
+    protected StringBuilder doInBackground(Void... voids) {
+        progressBar.setVisibility(View.VISIBLE);
+        try{
+            return getRawInfo(bitmap);
 
+        }catch (Exception e){
+            Log.e("ERROR", e.getMessage(), e);
+            return null;
+        }
+    }
 
+    public void onPreExecute() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
 
+    public void onPostExecute(StringBuilder sb)
+    {
+        progressBar.setVisibility(View.GONE);
+//        textView.setText(sb);
+        Toast.makeText(view.getContext(), R.string.warning,Toast.LENGTH_LONG).show();
+    }
 
+    public void setTextView(TextView textView) {
+
+        this.textView = textView;
+
+    }
 }

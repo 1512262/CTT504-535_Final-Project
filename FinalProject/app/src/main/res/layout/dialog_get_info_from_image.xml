@@ -68,6 +68,15 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical">
+                    <ProgressBar
+                        android:id="@+id/prb_loading_form_1"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:indeterminateOnly="true"
+                        android:indeterminateTintMode="src_atop"
+                        android:indeterminateTint="@color/colorPrimary"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -136,6 +145,21 @@
                             android:textSize="15sp"/>
 
                     </LinearLayout>
+                    <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:layout_margin="@dimen/my_card_margin"-->
+                    <!--android:orientation="horizontal">-->
+
+                        <!--<TextView-->
+                            <!--android:id="@+id/tv_test_sb"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:textColor="#000000"-->
+                            <!--android:textSize="10sp"/>-->
+
+                    <!--</LinearLayout>-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

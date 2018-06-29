@@ -2,13 +2,16 @@ package com.example.huykhoahuy.finalproject.Activity;
 
 import android.app.DatePickerDialog;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,13 +20,18 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.huykhoahuy.finalproject.BuildConfig;
+import com.example.huykhoahuy.finalproject.Class.Lottery;
 import com.example.huykhoahuy.finalproject.Class.LotteryCompany;
 import com.example.huykhoahuy.finalproject.Other.ParseHostFile;
+import com.example.huykhoahuy.finalproject.Other.RetrieveLotteryInfo;
+import com.example.huykhoahuy.finalproject.Other.RetrieveLotteryResult;
 import com.example.huykhoahuy.finalproject.R;
+import com.github.javiersantos.bottomdialogs.BottomDialog;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -44,8 +52,11 @@ public class OCR_Activity extends AppCompatActivity implements View.OnClickListe
     Uri mImageUri = null;
     StringBuilder sb = new StringBuilder();
     File photo = null;
+    private EditText etLotteryCode;
     private EditText etLotteryDate;
     private TextView tvLotteryCompany;
+    private TextView tvTestSB;
+    private ProgressBar progressBar;
     private Map<String,String> map_name_id=new HashMap<String,String>();
     private ArrayList<LotteryCompany> lotteryCompanies;
     private ArrayList<String> lotterycompanynames = new ArrayList<String>();
@@ -60,9 +71,13 @@ public class OCR_Activity extends AppCompatActivity implements View.OnClickListe
         Button btnLoadImage = (Button)findViewById(R.id.btn_load_image);
         Button btnUseInfo = (Button)findViewById(R.id.btn_use_info);
         Button btnBackHome = (Button)findViewById(R.id.btn_back_home);
-        final EditText etLotteryCode = (EditText)findViewById(R.id.et_lottery_code);
+
+
+        etLotteryCode = (EditText)findViewById(R.id.et_lottery_code);
         etLotteryDate = (EditText) findViewById(R.id.et_lottery_date);
         tvLotteryCompany = (TextView)findViewById(R.id.tv_lottery_company);
+        progressBar = (ProgressBar)findViewById(R.id.prb_loading_form_1);
+//        tvTestSB = (TextView)findViewById(R.id.tv_test_sb);
 
         btnTakeImage.setOnClickListener(this);
         btnLoadImage.setOnClickListener(this);
@@ -96,6 +111,11 @@ public class OCR_Activity extends AppCompatActivity implements View.OnClickListe
                 bitmap = android.provider.MediaStore.Images.Media.getBitmap(cr, mImageUri);
                 ImageView imgView = (ImageView) findViewById(R.id.iv_my_lottery_image);
                 imgView.setImageBitmap(bitmap);
+                RetrieveLotteryInfo lotteryInfo = new RetrieveLotteryInfo(getWindow().getDecorView().getRootView(),
+                        bitmap,
+                        tvTestSB,
+                        progressBar);
+                lotteryInfo.execute();
                 photo.delete();
             } catch (Exception e) {
                 Toast.makeText(getApplicationContext(),"Failed to load",Toast.LENGTH_SHORT).show();
@@ -120,6 +140,12 @@ public class OCR_Activity extends AppCompatActivity implements View.OnClickListe
                 // Set the Image in ImageView after decoding the String
                 bitmap = BitmapFactory.decodeFile(imgDecodableString);
                 imgView.setImageBitmap(bitmap);
+                RetrieveLotteryInfo lotteryInfo = new RetrieveLotteryInfo(getWindow().getDecorView().getRootView(),
+                        bitmap,
+                        tvTestSB,
+                        progressBar);
+                lotteryInfo.execute();
+
 
             }
         } catch (Exception e) {
@@ -151,15 +177,48 @@ public class OCR_Activity extends AppCompatActivity implements View.OnClickListe
             mImageUri = FileProvider.getUriForFile(OCR_Activity.this, BuildConfig.APPLICATION_ID + ".provider",photo);
             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
             startActivityForResult(cameraIntent, CAMERA_REQUEST);
+
         }
         if(v.getId()==R.id.btn_load_image)
         {
             Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
 
+
         }
         if(v.getId()==R.id.btn_use_info)
         {
+            if (hasInternetConnection(v)) {
+                String lottery_date = etLotteryDate.getText().toString();
+                String lottery_company = tvLotteryCompany.getText().toString();
+                String lottery_code = etLotteryCode.getText().toString();
+                String lottery_province_id;
+                if(lottery_code.length()!=6 || lottery_date.equals("") || lottery_company.equals(""))
+                {
+                    Toast.makeText(v.getContext(),"Vui lòng nhập đầy đủ",Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    lottery_province_id = map_name_id.get(lottery_company);
+                    //...................................................
+                }
+            }
+            else {
+//            Toast.makeText(v.getContext(), "Không có kết nối Internet!", Toast.LENGTH_SHORT).show();
+                BottomDialog bottomDialog =new BottomDialog.Builder(v.getContext())
+                        .setTitle("Thông báo")
+                        .setIcon(R.drawable.red_dice_128)
+                        .setContent("Không có kết nối Internet!")
+                        .setNegativeText("Vào Cài Đặt")
+                        .onNegative(new BottomDialog.ButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull BottomDialog bottomDialog) {
+                                startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
+                            }
+                        })
+                        .build();
+                bottomDialog.show();
+            }
 
         }
         if(v.getId()==R.id.btn_back_home)
@@ -201,5 +260,12 @@ public class OCR_Activity extends AppCompatActivity implements View.OnClickListe
             }
         }, yy, mm, dd);
         datePicker.show();
+    }
+    private boolean hasInternetConnection(View v) {
+        ConnectivityManager cm = (ConnectivityManager) v.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm != null
+                && cm.getActiveNetworkInfo() != null
+                && cm.getActiveNetworkInfo().isAvailable()
+                && cm.getActiveNetworkInfo().isConnected();
     }
 }
