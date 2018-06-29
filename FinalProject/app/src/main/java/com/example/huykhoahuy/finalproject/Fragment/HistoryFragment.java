@@ -23,6 +23,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -77,23 +80,13 @@ public class HistoryFragment extends Fragment implements ItemClickListener {
             case R.id.action_delete_all:
                 showDeleteAllDialog();
                 return true;
-            case R.id.action_sort:
-                Sorting();
-                return true;
             default:
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void Sorting() {
-        AlertDialog sortdialog;
-        AlertDialog.Builder sortBuilder = new AlertDialog.Builder(mView.getContext());
-        View sortView = getLayoutInflater().inflate(R.layout.dialog_sort_config,null);
-        sortBuilder.setView(sortView);
-        sortdialog = sortBuilder.create();
-        sortdialog.show();
-    }
+
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {

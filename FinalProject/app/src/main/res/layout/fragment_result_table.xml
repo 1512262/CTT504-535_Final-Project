@@ -13,25 +13,28 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:textSize="20dp"
+            android:layout_margin="@dimen/my_card_margin"
+            android:textSize="15sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#000000"
             android:id="@+id/tv_my_lottery_company"
             android:hint="@string/input_lottery_company_name"
             />
-        <EditText
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="date"
-            android:textSize="20dp"
-            android:id="@+id/et_my_lottery_date"
-            android:textColor="#000000"
-            android:hint="@string/input_check_date"/>
+            android:id="@+id/til_my_lottery_date">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:textSize="15sp"
+                android:id="@+id/et_my_lottery_date"
+                android:textColor="#000000"
+                android:hint="@string/input_check_date"/>
+        </android.support.design.widget.TextInputLayout>
+
         <Button
             android:id="@+id/btn_query"
             android:layout_width="wrap_content"
@@ -51,10 +54,10 @@
         android:id="@+id/lyt_table"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5sp"
+        android:layout_marginLeft="5sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginBottom="5sp"
         android:orientation="vertical">
         <TableLayout
             android:layout_width="match_parent"
@@ -124,9 +127,9 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:textSize="30dp"
                         android:textColor="@color/colorAccent"
-                        android:textStyle="bold"/>
+                        android:textSize="25sp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
             </TableRow>
@@ -161,7 +164,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:textSize="28dp"
+                        android:textSize="22sp"
                         android:textStyle="bold"/>
 
                 </LinearLayout>
@@ -197,7 +200,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:textSize="25dp"
+                        android:textSize="20sp"
                         android:textStyle="bold"/>
 
                 </LinearLayout>
@@ -230,7 +233,7 @@
 
                     <TextView
                         android:id="@+id/tv_lottery_3rd_prize"
-                        android:textSize="20dp"
+                        android:textSize="15sp"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -266,7 +269,7 @@
 
                     <TextView
                         android:id="@+id/tv_lottery_4th_prize"
-                        android:textSize="20dp"
+                        android:textSize="15sp"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -302,7 +305,7 @@
 
                     <TextView
                         android:id="@+id/tv_lottery_5th_prize"
-                        android:textSize="20dp"
+                        android:textSize="15sp"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -338,7 +341,7 @@
 
                     <TextView
                         android:id="@+id/tv_lottery_6th_prize"
-                        android:textSize="20dp"
+                        android:textSize="15sp"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -374,7 +377,7 @@
 
                     <TextView
                         android:id="@+id/tv_lottery_7th_prize"
-                        android:textSize="20dp"
+                        android:textSize="15sp"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -410,7 +413,7 @@
 
                     <TextView
                         android:id="@+id/tv_lottery_8th_prize"
-                        android:textSize="20dp"
+                        android:textSize="15sp"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -437,7 +440,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:textSize="20dp"
+                        android:textSize="15sp"
                         android:text="@string/info_KK_prize"
                         android:textStyle="bold" />
                 </LinearLayout>

@@ -11,16 +11,16 @@
         android:id="@+id/card_view_history"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        card_view:cardCornerRadius="0dp"
+        card_view:cardCornerRadius="0sp"
         android:layout_gravity="center"
         android:layout_margin="@dimen/card_margin"
-        android:elevation="3dp">
+        android:elevation="3sp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5sp"
+            android:layout_marginRight="5sp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -30,7 +30,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="5sp"
                     android:src= "@drawable/noimage"
                     android:id="@+id/iv_lottery_image_result"/>
 
@@ -60,7 +60,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="#000000"
-                            android:layout_marginBottom="2dp"/>
+                            android:layout_marginBottom="2sp"/>
 
                     </LinearLayout>
                     <LinearLayout
@@ -122,7 +122,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:textSize="30dp"
+                                android:textSize="30sp"
                                 android:textStyle="bold"
                                 android:textColor="@color/colorAccent"/>
 
@@ -191,7 +191,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:textColor="#000000"
-                                android:layout_marginBottom="2dp"/>
+                                android:layout_marginBottom="2sp"/>
 
                         </LinearLayout>
 
@@ -213,7 +213,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="45dp"
+                        android:textSize="30sp"
                         android:layout_gravity="center"
                         android:textStyle="bold"/>
 
@@ -248,7 +248,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#FFC305"
-            app:borderWidth="0dp"
+            app:borderWidth="0sp"
             android:clickable="true"
             android:layout_gravity="left|bottom"
             app:srcCompat="@drawable/ic_search_black_24dp" />
@@ -257,7 +257,7 @@
         <com.github.clans.fab.FloatingActionMenu
             android:id="@+id/fab_more"
             android:layout_width="wrap_content"
-            android:layout_height="171dp"
+            android:layout_height="171sp"
             android:layout_gravity="end|bottom"
             fab:menu_colorNormal="#6200ee"
             fab:menu_colorPressed="#3700b3"

@@ -7,15 +7,19 @@ import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.text.Layout;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -29,6 +33,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.huykhoahuy.finalproject.Activity.OCR_Activity;
 import com.example.huykhoahuy.finalproject.Class.Lottery;
 import com.example.huykhoahuy.finalproject.Class.LotteryCompany;
 import com.example.huykhoahuy.finalproject.Class.LotteryViewModel;
@@ -37,6 +42,7 @@ import com.example.huykhoahuy.finalproject.Other.RetrieveLotteryResult;
 import com.example.huykhoahuy.finalproject.R;
 import com.github.javiersantos.bottomdialogs.BottomDialog;
 
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -59,10 +65,13 @@ import in.galaxyofandroid.spinerdialog.SpinnerDialog;
  */
 public class MyResultFragment extends Fragment implements View.OnClickListener {
     private OnFragmentInteractionListener mListener;
+
+    private com.github.clans.fab.FloatingActionMenu fabMore;
     private com.github.clans.fab.FloatingActionButton fabCreate;
+    private com.github.clans.fab.FloatingActionButton fabLookup;
     private FloatingActionButton fabDelete;
     private FloatingActionButton fabLookupinHistory;
-    private com.github.clans.fab.FloatingActionButton fabLookup;
+
     private View view;
     private ArrayList<LotteryCompany> lotteryCompanies;
     private Lottery lottery;
@@ -89,6 +98,7 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        fabMore = (com.github.clans.fab.FloatingActionMenu)view.findViewById(R.id.fab_more);
         fabCreate = (com.github.clans.fab.FloatingActionButton) view.findViewById(R.id.fab_new_checking);
         fabLookup = (com.github.clans.fab.FloatingActionButton) view.findViewById(R.id.fab_lookup);
         fabLookupinHistory = (FloatingActionButton)view.findViewById(R.id.fab_lookup_in_history);
@@ -100,6 +110,17 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
         final TextView tvMyResultLotteryProvinceID =(TextView)view.findViewById(R.id.tv_my_result_lottery_province_id);
         final TextView tvMyResultLotteryCheckDate =(TextView)view.findViewById(R.id.tv_my_result_lottery_check_date);
 
+        view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(fabMore.isOpened())
+                {
+                    fabMore.close(true);
+                    return true;
+                }
+                return false;
+            }
+        });
         LotteryViewModel.getInstance().getAllLotteries().observe(this, new Observer<List<Lottery>>() {
             @Override
             public void onChanged(@Nullable List<Lottery> lotteries) {
@@ -203,7 +224,7 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
 
     private void Checking() {
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(view.getContext());
-        View mView = getLayoutInflater().inflate(R.layout.dialog_input_lottery_info,null);
+        final View mView = getLayoutInflater().inflate(R.layout.dialog_input_lottery_info,null);
         final ProgressBar progressBarForm = (ProgressBar)mView.findViewById(R.id.prb_loading_form);
         final EditText etLotteryCode = (EditText)mView.findViewById(R.id.et_lottery_code);
         final EditText etLotteryDate = (EditText) mView.findViewById(R.id.et_lottery_date);
@@ -237,11 +258,8 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
         btnAutoFill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder importBuilder = new AlertDialog.Builder(view.getContext());
-                View importView = getLayoutInflater().inflate(R.layout.dialog_get_info_from_image,null);
-                importBuilder.setView(importView);
-                AlertDialog importdialog = importBuilder.create();
-                importdialog.show();
+                Intent OCR_Intent = new Intent(mView.getContext(), OCR_Activity.class);
+                startActivity(OCR_Intent);
             }
         });
         btnCheck.setOnClickListener(new View.OnClickListener() {
@@ -254,6 +272,13 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
 
         AlertDialog dialog = mBuilder.create();
         dialog.show();
+    }
+
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
     }
 
     private void CheckLotteryResult(View v, EditText etLotteryDate, TextView tvLotteryCompany, EditText etLotteryCode, ProgressBar progressBarForm) {

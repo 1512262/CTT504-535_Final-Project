@@ -52,7 +52,7 @@
     <string name="lotterycenterlist">Danh sách Trung tâm đổi vé số 3 miền</string>
     <string name="mapfragment">Bản đồ</string>
     <string name="input_lottery_company_name">Nhập Công ty Xổ số Kiến Thiết</string>
-    <string name="input_check_date">Nhập ngày cần tra cứu</string>
+    <string name="input_check_date">Ngày cần tra cứu</string>
     <string name="info_KK_prize">Giải Khuyến Khích khi bạn chỉ sai 1 chữ số so với Mã số vé Giải Đặc biệt</string>
     <string name="toast_error_info">Thông tin bạn tra cứu hay kiểm tra bị sai</string>
     <string name="info_lottery_company_date">Thông tin về các Công ty Xổ số Kiến Thiết</string>
@@ -68,6 +68,9 @@
     <string name="according_to_lottery_date">Theo ngày phát hành</string>
     <string name="according_to_lottery_prize">Theo giải thưởng</string>
     <string name="according_to_province">Theo tỉnh</string>
+    <string name="ascending_order">Tăng dần</string>
+    <string name="descending">Giảm dần</string>
+    <string name="back_home">Trở về màn hình chính</string>
 
 
 </resources>

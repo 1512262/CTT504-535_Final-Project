@@ -15,11 +15,12 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:layout_weight="1">
+                android:layout_weight="1.5">
                 <ImageView
+                    android:id="@+id/iv_my_lottery_image"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/bt_01_05_2018"/>
+                    android:src="@drawable/noimage"/>
             </LinearLayout>
 
             <LinearLayout
@@ -31,11 +32,11 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="3">
+                    android:layout_weight="4">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1">
                         <Button
                             android:layout_width="match_parent"
@@ -54,7 +55,7 @@
 
                         <Button
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:background="@color/colorPrimary"
                             android:id="@+id/btn_load_image"
                             android:textColor="#FFFFFF"
@@ -67,81 +68,108 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:layout_margin="@dimen/my_card_margin"
-                        android:orientation="vertical">
-                        <TextView
+                        android:orientation="horizontal">
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Tên công ty Xổ số Kiến Thiết"
-                            android:textStyle="bold"/>
-                        <TextView
-                            android:id="@+id/tv_my_image_result_lottery_company"
-                            android:layout_width="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_weight="1">
+
+                            <android.support.design.widget.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <EditText
+                                    android:id="@+id/et_lottery_code"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:hint="@string/lottery_code"
+                                    android:inputType="number"
+                                    android:gravity="bottom|center"
+                                    android:textSize="15sp"
+                                    android:maxLength="6" />
+                            </android.support.design.widget.TextInputLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_weight="1">
+
+                            <android.support.design.widget.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <EditText
+                                    android:id="@+id/et_lottery_date"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/lottery_date"
+                                    android:inputType="date"
+                                    android:gravity="bottom|center"
+                                    android:textSize="15sp" />
+                            </android.support.design.widget.TextInputLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_margin="@dimen/my_card_margin"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/tv_lottery_company"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="#000000"
-                            android:layout_marginBottom="2dp"/>
+                            android:hint="@string/lottery_company_name"
+                            android:textSize="15sp"/>
 
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:layout_margin="@dimen/my_card_margin"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="200dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="Ngày phát hành:"
-                            android:textStyle="bold"/>
-                        <TextView
-                            android:id="@+id/tv_my_image_result_lottery_date"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:textColor="#000000"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:layout_margin="@dimen/my_card_margin"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="200dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="Mã số vé:"
-                            android:textStyle="bold" />
-                        <TextView
-                            android:id="@+id/tv_my_image_result_lottery_code"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:textSize="30dp"
-                            android:textStyle="bold"
-                            android:textColor="@color/colorAccent"
-                            android:layout_marginBottom="2dp"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <Button
-                            android:id="@+id/btn_use_info"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="#FF0000"
-                            android:textColor="#FFFFFF"
-                            android:text="@string/use_info"/>
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <Button
+                                android:id="@+id/btn_use_info"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="#FF0000"
+                                android:textColor="#FFFFFF"
+                                android:text="@string/use_info"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <Button
+                                android:id="@+id/btn_back_home"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="#00FF00"
+                                android:textColor="#FFFFFF"
+                                android:text="@string/back_home"/>
+                        </LinearLayout>
+
                     </LinearLayout>
 
                 </LinearLayout>
