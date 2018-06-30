@@ -26,6 +26,7 @@ public class RetrieveLotteryInfo extends AsyncTask<Void,Void,StringBuilder>{
     private Bitmap bitmap;
     private TextView textView;
     private ProgressBar progressBar;
+    private ArrayList<String> listResult =new ArrayList<>();
 
     public RetrieveLotteryInfo(View view, Bitmap bitmap,TextView textView,ProgressBar progressBar) {
         this.view = view;
@@ -82,8 +83,8 @@ public class RetrieveLotteryInfo extends AsyncTask<Void,Void,StringBuilder>{
         for(int i=0;i<bitmapList.size();i++) {
             Bitmap bmp = bitmapList.get(i);
 
-            sb.append("["+String.valueOf(i+1)+"]");
-            sb.append("          ");
+            sb.append("["+String.valueOf(i)+"]");
+            sb.append("\n");
             if(!textRecognizer.isOperational() || bmp == null)
             {
                 Toast.makeText(view.getContext(),"No Text",Toast.LENGTH_SHORT).show();
@@ -92,13 +93,18 @@ public class RetrieveLotteryInfo extends AsyncTask<Void,Void,StringBuilder>{
             {
                 Frame frame = new Frame.Builder().setBitmap(bmp).build();
                 SparseArray<TextBlock> items = textRecognizer.detect(frame);
-
+                StringBuilder temp = new StringBuilder();
                 for(int j= 0;j<items.size();++j)
                 {
                     TextBlock myItems = items.valueAt(j);
+
                     sb.append(myItems.getValue());
-                    sb.append("          ");
+                    temp.append(myItems.getValue());
+
+                    sb.append("\n");
+                    temp.append("\n");
                 }
+                listResult.add(temp.toString());
             }
 
         }
