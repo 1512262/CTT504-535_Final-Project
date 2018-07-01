@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.OCR_Activity">
+    tools:context=".OCR_Task.OCR_Activity">
 
     <include layout="@layout/dialog_get_info_from_image"></include>
     </LinearLayout>

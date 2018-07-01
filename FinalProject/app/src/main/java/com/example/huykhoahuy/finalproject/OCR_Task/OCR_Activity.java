@@ -1,4 +1,4 @@
-package com.example.huykhoahuy.finalproject.Activity;
+package com.example.huykhoahuy.finalproject.OCR_Task;
 
 import android.app.DatePickerDialog;
 import android.content.ContentResolver;
@@ -24,11 +24,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.huykhoahuy.finalproject.Activity.MainActivity;
 import com.example.huykhoahuy.finalproject.BuildConfig;
 import com.example.huykhoahuy.finalproject.Class.Lottery;
 import com.example.huykhoahuy.finalproject.Class.LotteryCompany;
+import com.example.huykhoahuy.finalproject.OCR_Task.OCR_Pre_Processing.RetrieveLotteryInfo;
 import com.example.huykhoahuy.finalproject.Other.ParseHostFile;
-import com.example.huykhoahuy.finalproject.Other.RetrieveLotteryInfo;
 import com.example.huykhoahuy.finalproject.Other.RetrieveLotteryResult;
 import com.example.huykhoahuy.finalproject.R;
 import com.github.javiersantos.bottomdialogs.BottomDialog;
@@ -52,6 +53,8 @@ public class OCR_Activity extends AppCompatActivity implements View.OnClickListe
     Uri mImageUri = null;
     StringBuilder sb = new StringBuilder();
     File photo = null;
+    private Lottery lottery;
+    private RetrieveLotteryResult retrieveLotteryResult;
     private EditText etLotteryCode;
     private EditText etLotteryDate;
     private TextView tvLotteryCompany;
@@ -113,7 +116,7 @@ public class OCR_Activity extends AppCompatActivity implements View.OnClickListe
                 imgView.setImageBitmap(bitmap);
                 RetrieveLotteryInfo lotteryInfo = new RetrieveLotteryInfo(getWindow().getDecorView().getRootView(),
                         bitmap,
-                        tvTestSB,
+                        etLotteryCode,etLotteryDate,tvLotteryCompany,
                         progressBar);
                 lotteryInfo.execute();
                 photo.delete();
@@ -142,7 +145,7 @@ public class OCR_Activity extends AppCompatActivity implements View.OnClickListe
                 imgView.setImageBitmap(bitmap);
                 RetrieveLotteryInfo lotteryInfo = new RetrieveLotteryInfo(getWindow().getDecorView().getRootView(),
                         bitmap,
-                        tvTestSB,
+                        etLotteryCode,etLotteryDate,tvLotteryCompany,
                         progressBar);
                 lotteryInfo.execute();
 
@@ -200,7 +203,10 @@ public class OCR_Activity extends AppCompatActivity implements View.OnClickListe
                 else
                 {
                     lottery_province_id = map_name_id.get(lottery_company);
-                    //...................................................
+                    lottery_province_id = map_name_id.get(lottery_company);
+                    lottery = new Lottery(lottery_company,lottery_date,lottery_province_id,lottery_code);
+                    retrieveLotteryResult = new RetrieveLotteryResult(lottery, getWindow().getDecorView().getRootView(),progressBar);
+                    retrieveLotteryResult.execute();
                 }
             }
             else {

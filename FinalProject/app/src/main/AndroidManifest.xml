@@ -56,7 +56,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".Activity.OCR_Activity"
+        <activity android:name=".OCR_Task.OCR_Activity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
