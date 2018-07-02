@@ -1,6 +1,7 @@
 package com.example.huykhoahuy.finalproject.OCR_Task;
 
 import android.app.DatePickerDialog;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +29,7 @@ import com.example.huykhoahuy.finalproject.Activity.MainActivity;
 import com.example.huykhoahuy.finalproject.BuildConfig;
 import com.example.huykhoahuy.finalproject.Class.Lottery;
 import com.example.huykhoahuy.finalproject.Class.LotteryCompany;
+import com.example.huykhoahuy.finalproject.Class.LotteryViewModel;
 import com.example.huykhoahuy.finalproject.OCR_Task.OCR_Pre_Processing.RetrieveLotteryInfo;
 import com.example.huykhoahuy.finalproject.Other.ParseHostFile;
 import com.example.huykhoahuy.finalproject.Other.RetrieveLotteryResult;
@@ -102,7 +104,8 @@ public class OCR_Activity extends AppCompatActivity implements View.OnClickListe
             map_name_id.put(company.getName(),company.getProvince_id());
         }
 
-
+        // khởi tạo instance cho lotteryviewmodel
+        LotteryViewModel.setInstance(ViewModelProviders.of(this).get(LotteryViewModel.class));
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -205,7 +208,8 @@ public class OCR_Activity extends AppCompatActivity implements View.OnClickListe
                     lottery_province_id = map_name_id.get(lottery_company);
                     lottery_province_id = map_name_id.get(lottery_company);
                     lottery = new Lottery(lottery_company,lottery_date,lottery_province_id,lottery_code);
-                    retrieveLotteryResult = new RetrieveLotteryResult(lottery, getWindow().getDecorView().getRootView(),progressBar);
+                    //dòng này bị lỗi, thay bằng dòng dưới --> retrieveLotteryResult = new RetrieveLotteryResult(lottery, getWindow().getDecorView().getRootView(),progressBar);
+                    retrieveLotteryResult = new RetrieveLotteryResult(lottery, getWindow().getDecorView().findViewById(android.R.id.content),progressBar);
                     retrieveLotteryResult.execute();
                 }
             }
