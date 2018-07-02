@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -173,6 +175,12 @@ public class HistoryFragment extends Fragment implements ItemClickListener {
         tvMyResultLotteryPrize.setText(lotteryArrayList.get(position).getLottery_Prize());
         tvMyResultLotteryProvinceID.setText(lotteryArrayList.get(position).getLottery_Province_ID().toUpperCase());
         tvMyResultLotteryCheckDate.setText(lotteryArrayList.get(position).getLottery_Check_Date()+" "+lotteryArrayList.get(position).getLottery_Check_Time());
+
+        Bitmap bitmap = lotteryArrayList.get(position).get_Lottery_Image();
+        ImageView ivLotteryImageResult = (ImageView)view.findViewById(R.id.iv_lottery_image_result);
+        if (bitmap != null) {
+            ivLotteryImageResult.setImageBitmap(bitmap);
+        } else ivLotteryImageResult.setImageResource(R.drawable.noimage);
 
         fabDelete.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -208,6 +208,7 @@ public class OCR_Activity extends AppCompatActivity implements View.OnClickListe
                     lottery_province_id = map_name_id.get(lottery_company);
                     lottery_province_id = map_name_id.get(lottery_company);
                     lottery = new Lottery(lottery_company,lottery_date,lottery_province_id,lottery_code);
+                    lottery.set_Lottery_Image(bitmap);
                     //dòng này bị lỗi, thay bằng dòng dưới --> retrieveLotteryResult = new RetrieveLotteryResult(lottery, getWindow().getDecorView().getRootView(),progressBar);
                     retrieveLotteryResult = new RetrieveLotteryResult(lottery, getWindow().getDecorView().findViewById(android.R.id.content),progressBar);
                     retrieveLotteryResult.execute();
