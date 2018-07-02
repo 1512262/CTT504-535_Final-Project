@@ -6,6 +6,7 @@ import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -86,7 +88,7 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         fabMore = (com.github.clans.fab.FloatingActionMenu)view.findViewById(R.id.fab_more);
         fabCreate = (com.github.clans.fab.FloatingActionButton) view.findViewById(R.id.fab_new_checking);
@@ -134,6 +136,12 @@ public class MyResultFragment extends Fragment implements View.OnClickListener {
                 tvMyResultLotteryPrize.setText(bestLottery.getLottery_Prize());
                 tvMyResultLotteryProvinceID.setText(bestLottery.getLottery_Province_ID().toUpperCase());
                 tvMyResultLotteryCheckDate.setText(bestLottery.getLottery_Check_Date()+" "+bestLottery.getLottery_Check_Time());
+
+                Bitmap bitmap = bestLottery.get_Lottery_Image();
+                ImageView ivLotteryImageResult = (ImageView)view.findViewById(R.id.iv_lottery_image_result);
+                if (bitmap != null) {
+                    ivLotteryImageResult.setImageBitmap(bitmap);
+                } else ivLotteryImageResult.setImageResource(R.drawable.noimage);
             }
         });
 

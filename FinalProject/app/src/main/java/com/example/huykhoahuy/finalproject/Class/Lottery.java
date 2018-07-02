@@ -4,8 +4,11 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 @Entity(tableName = "lottery")
@@ -35,6 +38,17 @@ public class Lottery {
     @ColumnInfo(name = "lottery_prize")
     private String Lottery_Prize = "Chúc bạn may mắn lần sau";
 
+    public byte[] getLottery_Image() {
+        return Lottery_Image;
+    }
+
+    public void setLottery_Image(byte[] lottery_Image) {
+        Lottery_Image = lottery_Image;
+    }
+
+    @ColumnInfo(name = "lottery_image", typeAffinity = ColumnInfo.BLOB)
+    private byte[] Lottery_Image;
+
 
     public Lottery(){}
 
@@ -44,6 +58,7 @@ public class Lottery {
         Lottery_Date = lottery_Date;
         Lottery_Province_ID = lottery_Province_ID;
         Lottery_Code = lottery_Code;
+        Lottery_Image = new byte[0];
     }
 
     public void checkResult(ArrayList<String> list_result) {
@@ -166,5 +181,18 @@ public class Lottery {
 
     public void setLottery_ID(int lottery_ID) {
         Lottery_ID = lottery_ID;
+    }
+
+    public void set_Lottery_Image(Bitmap bitmap) {
+        if (bitmap != null) {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            Lottery_Image = stream.toByteArray();
+        }
+    }
+
+    public Bitmap get_Lottery_Image() {
+        if (Lottery_Image.length == 0) return null;
+        else return BitmapFactory.decodeByteArray(Lottery_Image, 0, Lottery_Image.length);
     }
 }

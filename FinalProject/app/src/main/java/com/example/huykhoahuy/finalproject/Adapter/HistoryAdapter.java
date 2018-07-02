@@ -1,6 +1,7 @@
 package com.example.huykhoahuy.finalproject.Adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +50,11 @@ public class HistoryAdapter extends  RecyclerView.Adapter<HistoryAdapter.ViewHol
         holder.tvLotteryPrize.setText(lottery.getLottery_Prize());
         holder.tvCheckDate.setText(lottery.getLottery_Check_Date());
         holder.tvCheckTime.setText(lottery.getLottery_Check_Time());
+
+        Bitmap bitmap = lottery.get_Lottery_Image();
+        if (bitmap != null) {
+            holder.ivLotteryImage.setImageBitmap(bitmap);
+        } else holder.ivLotteryImage.setImageResource(R.drawable.noimage);
 
         String lotterycompanyname = lottery.getLottery_Company_Name();
         String[] splits = lotterycompanyname.split(" ");
