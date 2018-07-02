@@ -75,24 +75,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-                boolean isFirstStart = getPrefs.getBoolean("firstStart",true);
 
-                if(isFirstStart)
-                {
-                    startActivity(new Intent(MainActivity.this, Intro.class));
-                    SharedPreferences.Editor e = getPrefs.edit();
-                    e.putBoolean("firstStart",false);
-                    e.apply();
-
-                }
-            }
-        });
-
-        thread.start();
 
         Fragment fragment = null;
         Class fragmentClass = null;

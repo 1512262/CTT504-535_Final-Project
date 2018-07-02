@@ -160,6 +160,7 @@ public class RetrieveLotteryResult extends AsyncTask<Void, Void, String> {
 
         lottery.setLottery_Check_Date(new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime()));
         lottery.setLottery_Check_Time(new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()));
+
         //something error hear
         LotteryViewModel.getInstance().insertLottery(lottery);
         //end of error

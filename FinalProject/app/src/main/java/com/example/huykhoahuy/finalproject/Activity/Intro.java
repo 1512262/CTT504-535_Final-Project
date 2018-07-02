@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.huykhoahuy.finalproject.OCR_Task.OCR_Activity;
 import com.example.huykhoahuy.finalproject.R;
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
@@ -14,13 +15,13 @@ public class Intro extends AppIntro {
 
     @Override
     public void onDonePressed() {
-        startActivity(new Intent(this,MainActivity.class));
+        startActivity(new Intent(this,OCR_Activity.class));
         finish();
     }
 
     @Override
     public void onSkipPressed(Fragment currentFragment) {
-        startActivity(new Intent(this,MainActivity.class));
+        startActivity(new Intent(this,OCR_Activity.class));
         finish();
     }
 

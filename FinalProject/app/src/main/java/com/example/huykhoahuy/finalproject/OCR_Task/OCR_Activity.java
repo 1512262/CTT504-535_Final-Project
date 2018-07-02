@@ -5,12 +5,14 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
@@ -25,6 +27,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.huykhoahuy.finalproject.Activity.Intro;
 import com.example.huykhoahuy.finalproject.Activity.MainActivity;
 import com.example.huykhoahuy.finalproject.BuildConfig;
 import com.example.huykhoahuy.finalproject.Class.Lottery;
@@ -71,6 +74,26 @@ public class OCR_Activity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initData();
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                boolean isFirstStart = getPrefs.getBoolean("firstStart",true);
+
+                if(isFirstStart)
+                {
+                    startActivity(new Intent(OCR_Activity.this, Intro.class));
+                    SharedPreferences.Editor e = getPrefs.edit();
+                    e.putBoolean("firstStart",false);
+                    e.apply();
+
+                }
+            }
+        });
+
+        thread.start();
+
         setContentView(R.layout.activity_ocr);
         Button btnTakeImage = (Button)findViewById(R.id.btn_take_image);
         Button btnLoadImage = (Button)findViewById(R.id.btn_load_image);
