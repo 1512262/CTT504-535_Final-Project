@@ -177,7 +177,7 @@ public class HistoryFragment extends Fragment implements ItemClickListener {
         tvMyResultLotteryCheckDate.setText(lotteryArrayList.get(position).getLottery_Check_Date()+" "+lotteryArrayList.get(position).getLottery_Check_Time());
 
         Bitmap bitmap = lotteryArrayList.get(position).get_Lottery_Image();
-        ImageView ivLotteryImageResult = (ImageView)view.findViewById(R.id.iv_lottery_image_result);
+        ImageView ivLotteryImageResult = (ImageView)mView.findViewById(R.id.iv_lottery_image_result);
         if (bitmap != null) {
             ivLotteryImageResult.setImageBitmap(bitmap);
         } else ivLotteryImageResult.setImageResource(R.drawable.noimage);
